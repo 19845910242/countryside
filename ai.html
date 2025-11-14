@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI助手 - 智能问答（API接入）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4a7c59;
+            --primary-dark: #3a6b49;
+            --primary-light: #c8e6c9;
+            --accent-color: #e6b450;
+            --text-dark: #2c3e2d;
+            --text-light: #6b8e6b;
+            --bg-light: #f9fffa;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --error-color: #ff4757;
+            --success-color: #2ed573;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f2e6, #c8e6c9);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background: var(--primary-light);
+            color: var(--text-dark);
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background: var(--primary-color);
+            color: var(--white);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .error-message {
+            align-self: flex-start;
+            background: var(--error-color);
+            color: var(--white);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: var(--gray-light);
+            border-top: 1px solid #ddd;
+        }
+        
+        .input-field {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .send-button {
+            margin-left: 10px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .send-button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .send-button:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+        }
+        
+        .typing-indicator {
+            align-self: flex-start;
+            background: var(--gray-light);
+            color: var(--text-light);
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-style: italic;
+            display: none;
+        }
+        
+        .api-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .api-status.connected {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .api-status.disconnected {
+            background: var(--error-color);
+            color: white;
+        }
+        
+        @media (max-width: 600px) {
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+            
+            .api-status {
+                top: 5px;
+                right: 5px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="api-status connected" id="apiStatus">API已连接</div>
+    
+    <div class="chat-container">
+        <div class="chat-header">
+            🌿 AI助手 - 乡村文化问答（API版）
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                您好！我是乡村文化AI助手，现在通过API提供实时回答。我可以回答关于传统手工艺、农耕技术、民间艺术等方面的问题。请问有什么可以帮您的？
+            </div>
+        </div>
+        
+        <div class="chat-input">
+            <input type="text" class="input-field" id="userInput" placeholder="请输入您的问题..." autocomplete="off">
+            <button class="send-button" id="sendButton">发送</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        const apiStatus = document.getElementById('apiStatus');
+        
+        // API配置
+        const API_CONFIG = {
+            // 模拟API端点 - 在实际应用中替换为真实的AI服务API
+            endpoint: 'https://jsonplaceholder.typicode.com/posts',
+            timeout: 10000, // 10秒超时
+            retryCount: 3
+        };
+        
+        // 添加消息到聊天界面
+        function addMessage(text, isUser = false, isError = false) {
+            const messageDiv = document.createElement('div');
+            if (isError) {
+                messageDiv.className = 'message error-message';
+            } else {
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            }
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollTop + messageDiv.offsetHeight + 30;
+        }
+        
+        // 显示输入中指示器
+        function showTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.id = 'typingIndicator';
+            indicator.textContent = 'AI正在思考...';
+            chatMessages.appendChild(indicator);
+            indicator.style.display = 'block';
+            
+            chatMessages.scrollTop = chatMessages.scrollTop + indicator.offsetHeight;
+        }
+        
+        // 隐藏输入中指示器
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+        
+        // 模拟AI API调用
+        async function callAIAPI(userMessage) {
+            try {
+                // 在实际应用中，这里应该调用真实的AI服务API
+                // 以下为模拟实现
+                
+                // 模拟API延迟
+                await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 1200));
+                
+                // 模拟API响应
+                const mockResponses = [
+                    "这是一个很好的问题！关于乡村文化，我可以告诉您...",
+                    "根据我的知识库，这个问题的答案是...",
+                    "乡村文化博大精深，您提到的内容让我想到...",
+                    "这个问题很有深度，让我为您详细解释...",
+                    "在乡村文化中，这个主题非常重要..."
+                ];
+                
+                const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+                
+                return {
+                    success: true,
+                    data: {
+                        answer: randomResponse + " " + generateDetailedResponse(userMessage),
+                        confidence: 0.85 + Math.random() * 0.14
+                    }
+                };
+                
+            } catch (error) {
+                return {
+                    success: false,
+                    error: 'API调用失败: ' + error.message
+                };
+            }
+        }
+        
+        // 生成详细回答（模拟）
+        function generateDetailedResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            let detailedContent = "";
+            
+            if (lowerMessage.includes('手工艺') || lowerMessage.includes('手工')) {
+                detailedContent = "传统手工艺如竹编、剪纸等，不仅体现了民间智慧，更是文化传承的重要方式。学习这些技艺需要耐心和专注，每一件作品都承载着匠人的心血。";
+            } else if (lowerMessage.includes('农耕') || lowerMessage.includes('农业')) {
+                detailedContent = "生态农业强调可持续发展，传统农耕智慧与现代科技结合，可以实现高效环保的农业生产。轮作制度、有机肥料等都是重要的实践方法。";
+            } else if (lowerMessage.includes('美食') || lowerMessage.includes('食物')) {
+                detailedContent = "乡村美食注重食材的本味，传统制作方法如发酵、腌制等不仅延长了食物的保存时间，更创造了独特的风味体验。";
+            } else if (lowerMessage.includes('文化') || lowerMessage.includes('传统')) {
+                detailedContent = "乡村文化是中华民族的根基，包含了丰富的民俗、艺术和生活方式。保护和传承这些文化对于维护文化多样性至关重要。";
+            } else {
+                detailedContent = "乡村文化涵盖面很广，包括建筑、饮食、服饰、节日等多个方面。每个地区都有其独特的文化特色，值得深入探索。";
+            }
+            
+            return detailedContent;
+        }
+        
+        // 获取AI回复（通过API）
+        async function getAIResponse(userMessage) {
+            showTypingIndicator();
+            
+            try {
+                const apiResponse = await callAIAPI(userMessage);
+                
+                if (apiResponse.success) {
+                    updateAPIStatus(true);
+                    return apiResponse.data.answer;
+                } else {
+                    updateAPIStatus(false);
+                    throw new Error(apiResponse.error);
+                }
+                
+            } catch (error) {
+                updateAPIStatus(false);
+                throw error;
+            } finally {
+                hideTypingIndicator();
+            }
+        }
+        
+        // 更新API状态显示
+        function updateAPIStatus(isConnected) {
+            if (isConnected) {
+                apiStatus.textContent = 'API已连接';
+                apiStatus.className = 'api-status connected';
+            } else {
+                apiStatus.textContent = 'API连接失败';
+                apiStatus.className = 'api-status disconnected';
+            }
+        }
+        
+        // 处理用户发送消息
+        async function handleSendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+            
+            // 添加用户消息
+            addMessage(message, true);
+            userInput.value = '';
+            
+            // 禁用发送按钮
+            sendButton.disabled = true;
+            
+            try {
+                // 通过API获取AI回复
+                const response = await getAIResponse(message);
+                addMessage(response);
+                
+            } catch (error) {
+                // 显示错误信息
+                addMessage('抱歉，暂时无法获取回答。请检查网络连接或稍后重试。错误: ' + error.message, false, true);
+            } finally {
+                // 重新启用发送按钮
+                sendButton.disabled = false;
+            }
+        }
+        
+        // 事件监听
+        sendButton.addEventListener('click', handleSendMessage);
+        
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+        
+        // 初始化焦点
+        userInput.focus();
+        
+        // 测试API连接
+        async function testAPIConnection() {
+            try {
+                const response = await fetch(API_CONFIG.endpoint, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    updateAPIStatus(true);
+                } else {
+                    updateAPIStatus(false);
+                }
+            } catch (error) {
+                updateAPIStatus(false);
+            }
+        }
+        
+        // 页面加载时测试连接
+        window.addEventListener('load', testAPIConnection);
+    </script>
+</body>
+</html>
