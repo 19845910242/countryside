@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基地申报 - 乡村韵学</title>
+    <style>
+        /* 使用您提供的样式作为基础 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary-color: #4a7c59;
+            --primary-dark: #3a6b49;
+            --primary-light: #c8e6c9;
+            --accent-color: #e6b450;
+            --text-dark: #2c3e2d;
+            --text-light: #6b8e6b;
+            --bg-light: #f9fffa;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e6f2e6, #c8e6c9);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .user-actions a:hover {
+            color: var(--primary-color);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-left: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+        }
+
+        .user-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .user-menu a:hover {
+            background: #f9f9f9;
+            color: var(--primary-color);
+        }
+
+        .user-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 5%;
+        }
+
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* 核心价值展示 */
+        .values-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .value-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .value-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .value-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* 申报流程 */
+        .process-section {
+            margin-bottom: 60px;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: var(--primary-light);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* 立即申报按钮 */
+        .cta-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 124, 89, 0.3);
+        }
+
+        /* 表单样式 */
+        .form-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--primary-light);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input, .radio-item input {
+            margin-right: 8px;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--primary-light);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-light);
+        }
+
+        .file-upload-icon {
+            font-size: 48px;
+            color: var(--primary-light);
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-button {
+            padding: 15px 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 124, 89, 0.3);
+        }
+
+        /* 成功页面样式 */
+        .success-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .success-title {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .success-description {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reference-number {
+            background: var(--primary-light);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .secondary-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .secondary-button:hover {
+            background: var(--primary-light);
+        }
+
+        /* 页面切换 */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .nav-links {
+                margin: 20px 0;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .process-step {
+                margin-bottom: 30px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">🌿</span>
+        乡村韵学
+    </div>
+    <ul class="nav-links">
+        <li><a href="./index.html">首页</a></li>
+        <li><a href="./courses.html">课程中心</a></li>
+        <li><a href="./vr.html">VR体验</a></li>
+        <li><a href="./ai.html">AI助手</a></li>
+        <li><a href="./base-application.html" class="active">基地申报</a></li>
+    </ul>
+    <div class="user-actions">
+        <a href="profile.html">个人中心</a>
+        <div class="user-avatar" id="userAvatar">用</div>
+        <div class="user-menu" id="userMenu">
+            <a href="profile.html">个人资料</a>
+            <a href="my-courses.html">我的课程</a>
+            <a href="favorites.html">我的收藏</a>
+            <a href="settings.html">设置</a>
+            <a href="logout.html">退出登录</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 主内容区 -->
+<main class="main-content">
+    <!-- 申报主页 -->
+    <div id="homepage" class="page active">
+        <!-- 页面标题 -->
+        <header class="page-header">
+            <h1 class="page-title">成为"乡韵智学"合作基地</h1>
+            <p class="page-subtitle">携手共建乡村教育新生态，共享发展机遇</p>
+        </header>
+
+        <!-- 核心价值展示 -->
+        <section class="values-section">
+            <h2 class="section-title">合作基地核心价值</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">👥</div>
+                    <h3 class="value-title">稳定客源</h3>
+                    <p class="value-description">接入"乡韵智学"平台，获得全国范围内的稳定学生客源，提升基地利用率。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌟</div>
+                    <h3 class="value-title">品牌曝光</h3>
+                    <p class="value-description">借助平台影响力，提升基地知名度，扩大品牌影响力。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📚</div>
+                    <h3 class="value-title">课程赋能</h3>
+                    <p class="value-description">获得专业课程设计支持，提升教育内容质量与吸引力。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💰</div>
+                    <h3 class="value-title">收入分成</h3>
+                    <p class="value-description">享受平台带来的课程收入分成，创造额外收益。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 申报流程 -->
+        <section class="process-section">
+            <h2 class="section-title">申报流程</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">填写信息</h3>
+                    <p class="step-description">在线提交基地基本信息与资源情况</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">审核评估</h3>
+                    <p class="step-description">专家团队实地考察与资质评估</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">签约合作</h3>
+                    <p class="step-description">签订合作协议，明确双方权利义务</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">课程上线</h3>
+                    <p class="step-description">课程设计与上线，开启合作运营</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 立即申报按钮 -->
+        <section class="cta-section">
+            <a href="#" class="cta-button" id="startApplication">立即申报</a>
+        </section>
+    </div>
+
+    <!-- 基地信息在线填报页 -->
+    <div id="form-page" class="page">
+        <header class="page-header">
+            <h1 class="page-title">基地信息申报表</h1>
+            <p class="page-subtitle">请填写您的基地信息，我们将尽快与您联系</p>
+        </header>
+
+        <form id="base-application-form">
+            <!-- 第一部分：基地基本信息 -->
+            <section class="form-section">
+                <h2 class="form-title">第一部分：基地基本信息</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="base-name">基地名称</label>
+                    <input type="text" id="base-name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="base-location">所在地（精确到村）</label>
+                    <input type="text" id="base-location" class="form-control" placeholder="例如：浙江省杭州市余杭区青山村" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contact-person">联系人</label>
+                    <input type="text" id="contact-person" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="contact-phone">联系方式</label>
+                    <input type="tel" id="contact-phone" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">基地类型</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="type-agriculture" name="base-type" value="现代农业园" required>
+                            <label for="type-agriculture">现代农业园</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="type-craft" name="base-type" value="非遗工坊">
+                            <label for="type-craft">非遗工坊</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="type-red" name="base-type" value="红色教育基地">
+                            <label for="type-red">红色教育基地</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="type-eco" name="base-type" value="生态农场">
+                            <label for="type-eco">生态农场</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="type-village" name="base-type" value="古村落">
+                            <label for="type-village">古村落</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="type-other" name="base-type" value="其他">
+                            <label for="type-other">其他</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">核心特色标签（可多选）</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="feature-drone" name="base-features" value="无人机巡田">
+                            <label for="feature-drone">无人机巡田</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="feature-paper" name="base-features" value="古法造纸">
+                            <label for="feature-paper">古法造纸</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="feature-rice" name="base-features" value="稻渔共生">
+                            <label for="feature-rice">稻渔共生</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="feature-red" name="base-features" value="红色遗址">
+                            <label for="feature-red">红色遗址</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="feature-minority" name="base-features" value="少数民族风情">
+                            <label for="feature-minority">少数民族风情</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="feature-other" name="base-features" value="其他">
+                            <label for="feature-other">其他</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部分：硬件设施与承载力 -->
+            <section class="form-section">
+                <h2 class="form-title">第二部分：硬件设施与承载力</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="student-capacity">可同时接待学生人数</label>
+                    <input type="number" id="student-capacity" class="form-control" min="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">餐饮条件</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dining-own" name="dining-conditions" value="自有食堂">
+                            <label for="dining-own">自有食堂</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dining-coop" name="dining-conditions" value="合作农家乐">
+                            <label for="dining-coop">合作农家乐</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dining-none" name="dining-conditions" value="无">
+                            <label for="dining-none">无</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">住宿条件</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accommodation-dorm" name="accommodation-conditions" value="学生宿舍">
+                            <label for="accommodation-dorm">学生宿舍</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accommodation-homestay" name="accommodation-conditions" value="民宿">
+                            <label for="accommodation-homestay">民宿</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="accommodation-none" name="accommodation-conditions" value="无">
+                            <label for="accommodation-none">无</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">室内活动场地</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="indoor-yes" name="indoor-space" value="有" required>
+                            <label for="indoor-yes">有</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="indoor-no" name="indoor-space" value="无">
+                            <label for="indoor-no">无</label>
+                        </div>
+                    </div>
+                    <div id="indoor-size-group" style="display: none; margin-top: 10px;">
+                        <input type="text" id="indoor-size" class="form-control" placeholder="场地大小（㎡）">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">安全保障措施（可多选）</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="safety-officer" name="safety-measures" value="专职安全员">
+                            <label for="safety-officer">专职安全员</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="safety-clinic" name="safety-measures" value="医务室">
+                            <label for="safety-clinic">医务室</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="safety-plan" name="safety-measures" value="应急预案">
+                            <label for="safety-plan">应急预案</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="safety-insurance" name="safety-measures" value="保险">
+                            <label for="safety-insurance">保险</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三部分：现有课程/资源描述 -->
+            <section class="form-section">
+                <h2 class="form-title">第三部分：现有课程/资源描述</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="activity-1">体验活动1</label>
+                    <textarea id="activity-1" class="form-control form-textarea" placeholder="请简要描述您目前可以为学生提供的体验活动"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="activity-2">体验活动2（可选）</label>
+                    <textarea id="activity-2" class="form-control form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="activity-3">体验活动3（可选）</label>
+                    <textarea id="activity-3" class="form-control form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">上传图片/视频</label>
+                    <div class="file-upload" id="file-upload-area">
+                        <div class="file-upload-icon">📁</div>
+                        <p>点击或拖拽文件到此处上传</p>
+                        <p style="font-size: 14px; color: var(--text-light); margin-top: 10px;">支持 JPG, PNG, MP4 格式，单个文件不超过 20MB</p>
+                        <input type="file" id="file-input" class="file-input" multiple accept=".jpg,.jpeg,.png,.mp4,.mov">
+                    </div>
+                    <div id="file-list" style="margin-top: 15px;"></div>
+                </div>
+            </section>
+
+            <!-- 第四部分：课程设计意向与合作需求 -->
+            <section class="form-section">
+                <h2 class="form-title">第四部分：课程设计意向与合作需求</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="course-direction">我们希望开发____方向的课程</label>
+                    <input type="text" id="course-direction" class="form-control" placeholder="请填写您希望开发的课程方向">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">我们希望得到"乡韵智学"团队在哪些方面的支持？（可多选）</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support-course" name="support-needs" value="课程设计">
+                            <label for="support-course">课程设计</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support-training" name="support-needs" value="导师培训">
+                            <label for="support-training">导师培训</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support-marketing" name="support-needs" value="市场推广">
+                            <label for="support-marketing">市场推广</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support-tech" name="support-needs" value="技术支持">
+                            <label for="support-tech">技术支持</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="support-other" name="support-needs" value="其他">
+                            <label for="support-other">其他</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="additional-info">其他需求或说明（可选）</label>
+                    <textarea id="additional-info" class="form-control form-textarea"></textarea>
+                </div>
+            </section>
+
+            <div class="form-submit">
+                <button type="submit" class="submit-button">提交申请</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 提交成功页 -->
+    <div id="success-page" class="page">
+        <section class="success-section">
+            <div class="success-icon">✅</div>
+            <h1 class="success-title">感谢您的申报！</h1>
+            <p class="success-description">我们已收到您的基地申报信息，将在3-5个工作日内与您联系，请保持电话畅通。</p>
+            
+            <div class="reference-number">
+                申报编号：<span id="reference-id">XY20230521001</span>
+            </div>
+            
+            <p style="color: var(--text-light); margin-bottom: 40px;">您可以使用此编号查询申报状态</p>
+            
+            <div class="action-buttons">
+                <a href="#" class="cta-button" id="back-to-home">返回首页</a>
+                <a href="#" class="secondary-button" id="query-status">查询申报状态</a>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="logo" style="color: white; justify-content: center; margin-bottom: 20px;">
+            <span class="logo-icon">🌿</span>
+            乡村韵学
+        </div>
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">联系我们</a>
+            <a href="#">隐私政策</a>
+            <a href="#">用户协议</a>
+            <a href="#">帮助中心</a>
+        </div>
+        <p class="copyright">© 2025 乡村韵学 版权所有</p>
+    </div>
+</footer>
+
+<script>
+    // 页面切换功能
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取所有页面
+        const homepage = document.getElementById('homepage');
+        const formPage = document.getElementById('form-page');
+        const successPage = document.getElementById('success-page');
+        
+        // 获取按钮
+        const startApplicationBtn = document.getElementById('startApplication');
+        const backToHomeBtn = document.getElementById('back-to-home');
+        const queryStatusBtn = document.getElementById('query-status');
+        
+        // 立即申报按钮点击事件
+        startApplicationBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            homepage.classList.remove('active');
+            formPage.classList.add('active');
+            window.scrollTo(0, 0);
+        });
+        
+        // 返回首页按钮点击事件
+        backToHomeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            successPage.classList.remove('active');
+            homepage.classList.add('active');
+            window.scrollTo(0, 0);
+        });
+        
+        // 查询申报状态按钮点击事件
+        queryStatusBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('查询功能开发中，请稍后访问');
+        });
+        
+        // 表单提交事件
+        const applicationForm = document.getElementById('base-application-form');
+        applicationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 这里可以添加表单验证逻辑
+            // 验证通过后跳转到成功页面
+            
+            formPage.classList.remove('active');
+            successPage.classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // 在实际应用中，这里应该发送表单数据到服务器
+            // 并生成唯一的申报编号
+        });
+        
+        // 文件上传功能
+        const fileUploadArea = document.getElementById('file-upload-area');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+        
+        fileUploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+        
+        fileUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--primary-color)';
+            fileUploadArea.style.background = 'var(--bg-light)';
+        });
+        
+        fileUploadArea.addEventListener('dragleave', function() {
+            fileUploadArea.style.borderColor = 'var(--primary-light)';
+            fileUploadArea.style.background = 'var(--white)';
+        });
+        
+        fileUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--primary-light)';
+            fileUploadArea.style.background = 'var(--white)';
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+        
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileItem = document.createElement('div');
+                fileItem.style.cssText = 'padding: 8px 12px; background: var(--gray-light); border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;';
+                fileItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <button type="button" style="background: none; border: none; color: var(--text-light); cursor: pointer;">×</button>
+                `;
+                
+                const removeBtn = fileItem.querySelector('button');
+                removeBtn.addEventListener('click', function() {
+                    fileItem.remove();
+                });
+                
+                fileList.appendChild(fileItem);
+            }
+        }
+        
+        // 室内场地大小显示/隐藏
+        const indoorYes = document.getElementById('indoor-yes');
+        const indoorNo = document.getElementById('indoor-no');
+        const indoorSizeGroup = document.getElementById('indoor-size-group');
+        
+        indoorYes.addEventListener('change', function() {
+            if (this.checked) {
+                indoorSizeGroup.style.display = 'block';
+            }
+        });
+        
+        indoorNo.addEventListener('change', function() {
+            if (this.checked) {
+                indoorSizeGroup.style.display = 'none';
+            }
+        });
+        
+        // 用户菜单功能
+        const userAvatar = document.getElementById('userAvatar');
+        const userMenu = document.getElementById('userMenu');
+        userAvatar.addEventListener('click', function() {
+            userMenu.classList.toggle('active');
+        });
+        
+        // 点击其他地方关闭用户菜单
+        document.addEventListener('click', function(e) {
+            if (!userAvatar.contains(e.target) && !userMenu.contains(e.target)) {
+                userMenu.classList.remove('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
