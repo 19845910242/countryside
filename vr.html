@@ -14,7 +14,7 @@
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', sans-serif;
         }
-        
+
         :root {
             --primary-color: #4a7c59;
             --primary-dark: #3a6b49;
@@ -29,13 +29,13 @@
             --shadow-medium: 0 10px 30px rgba(0,0,0,0.12);
             --shadow-heavy: 0 15px 40px rgba(0,0,0,0.15);
         }
-        
+
         body {
             background: linear-gradient(135deg, #e6f2e6, #c8e6c9);
             min-height: 100vh;
             overflow-x: hidden;
         }
-        
+
         /* 导航栏 */
         .navbar {
             position: fixed;
@@ -50,7 +50,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             font-size: 24px;
             font-weight: bold;
@@ -58,21 +58,21 @@
             display: flex;
             align-items: center;
         }
-        
+
         .logo-icon {
             margin-right: 10px;
             font-size: 28px;
         }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
         }
-        
+
         .nav-links li {
             margin-left: 30px;
         }
-        
+
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
@@ -81,15 +81,15 @@
             position: relative;
             padding: 5px 0;
         }
-        
+
         .nav-links a:hover {
             color: var(--primary-color);
         }
-        
+
         .nav-links a.active {
             color: var(--primary-color);
         }
-        
+
         .nav-links a.active::after {
             content: '';
             position: absolute;
@@ -100,23 +100,23 @@
             background: var(--primary-color);
             border-radius: 2px;
         }
-        
+
         .user-actions {
             display: flex;
             align-items: center;
         }
-        
+
         .user-actions a {
             text-decoration: none;
             color: var(--text-dark);
             margin-left: 20px;
             transition: color 0.3s;
         }
-        
+
         .user-actions a:hover {
             color: var(--primary-color);
         }
-        
+
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -129,13 +129,13 @@
             font-weight: bold;
             margin-left: 20px;
         }
-        
+
         /* 主内容区 */
         .main-content {
             margin-top: 80px;
             padding: 0;
         }
-        
+
         /* VR控制面板 */
         .vr-controls {
             position: fixed;
@@ -149,11 +149,11 @@
             box-shadow: var(--shadow-medium);
             min-width: 200px;
         }
-        
+
         .control-section {
             margin-bottom: 20px;
         }
-        
+
         .control-title {
             font-size: 16px;
             font-weight: 600;
@@ -162,18 +162,18 @@
             display: flex;
             align-items: center;
         }
-        
+
         .control-title i {
             margin-right: 8px;
             font-size: 18px;
         }
-        
+
         .control-buttons {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-        
+
         .control-btn {
             padding: 10px 15px;
             background: var(--primary-light);
@@ -187,23 +187,23 @@
             display: flex;
             align-items: center;
         }
-        
+
         .control-btn i {
             margin-right: 8px;
             font-size: 16px;
         }
-        
+
         .control-btn:hover {
             background: var(--primary-color);
             color: white;
             transform: translateX(5px);
         }
-        
+
         .control-btn.active {
             background: var(--primary-color);
             color: white;
         }
-        
+
         /* VR场景容器 */
         #vr-container {
             width: 100%;
@@ -211,7 +211,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         /* 信息面板 */
         .info-panel {
             position: fixed;
@@ -228,25 +228,25 @@
             overflow-y: auto;
             display: none;
         }
-        
+
         .info-panel.active {
             display: block;
             animation: slideInRight 0.3s ease;
         }
-        
+
         .info-header {
             display: flex;
             justify-content: between;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .info-title {
             font-size: 18px;
             font-weight: 600;
             color: var(--primary-color);
         }
-        
+
         .close-info {
             background: none;
             border: none;
@@ -254,12 +254,12 @@
             cursor: pointer;
             color: var(--text-light);
         }
-        
+
         .info-content {
             line-height: 1.6;
             color: var(--text-dark);
         }
-        
+
         .info-image {
             width: 100%;
             height: 150px;
@@ -272,7 +272,7 @@
             font-size: 48px;
             color: var(--primary-color);
         }
-        
+
         /* 加载界面 */
         .loading-screen {
             position: fixed;
@@ -289,12 +289,12 @@
             color: white;
             transition: opacity 0.5s ease;
         }
-        
+
         .loading-screen.fade-out {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .loading-spinner {
             width: 60px;
             height: 60px;
@@ -304,12 +304,12 @@
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
         }
-        
+
         .loading-text {
             font-size: 18px;
             font-weight: 600;
         }
-        
+
         /* 场景切换加载器 */
         .scene-loading {
             position: fixed;
@@ -323,7 +323,7 @@
             z-index: 999;
             display: none;
         }
-        
+
         /* 提示信息 */
         .hint {
             position: fixed;
@@ -337,13 +337,13 @@
             font-size: 14px;
             z-index: 100;
         }
-        
+
         /* 动画 */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         @keyframes slideInRight {
             from {
                 opacity: 0;
@@ -354,12 +354,12 @@
                 transform: translateX(0);
             }
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             .vr-controls {
@@ -368,19 +368,19 @@
                 right: 10px;
                 width: auto;
             }
-            
+
             .info-panel {
                 top: 80px;
                 left: 10px;
                 right: 10px;
                 width: auto;
             }
-            
+
             .control-buttons {
                 flex-direction: row;
                 flex-wrap: wrap;
             }
-            
+
             .control-btn {
                 flex: 1;
                 min-width: 120px;
@@ -389,803 +389,803 @@
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="logo">
-            <span class="logo-icon">🌿</span>
-            乡村韵学
-        </div>
-        <ul class="nav-links">
-            <li><a href="login.html" >首页</a></li>
-            <li><a href="./courses.html">课程中心</a></li>
-            <li><a href="./vr.html" class="active">VR体验</a></li>
-            <li><a href="./ai.html">AI助手</a></li>
-        </ul>
-        <div class="user-actions">
-            <a href="profile.html">个人中心</a>
-            <div class="user-avatar">用</div>
-        </div>
-    </nav>
-    
-    <!-- 加载界面 -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">正在加载VR场景...</div>
+<!-- 导航栏 -->
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-icon">🌿</span>
+        乡村韵学
     </div>
-    
-    <!-- 场景切换加载器 -->
-    <div class="scene-loading" id="sceneLoading">
-        <div>正在切换场景...</div>
+    <ul class="nav-links">
+        <li><a href="login.html" >首页</a></li>
+        <li><a href="./courses.html">课程中心</a></li>
+        <li><a href="./vr.html" class="active">VR体验</a></li>
+        <li><a href="./ai.html">AI助手</a></li>
+    </ul>
+    <div class="user-actions">
+        <a href="profile.html">个人中心</a>
+        <div class="user-avatar">用</div>
     </div>
-    
-    <!-- 主内容区 -->
-    <main class="main-content">
-        <!-- VR控制面板 -->
-        <div class="vr-controls">
-            <div class="control-section">
-                <div class="control-title">
-                    <i>🌾</i> 场景选择
-                </div>
-                <div class="control-buttons">
-                 <button class="control-btn active" data-scene="classroom">
-                        <i>🏫</i> 乡村教室
-                    </button>
-                    <button class="control-btn" data-scene="village">
-                        <i>🏡</i> 传统村落
-                    </button>
-                    <button class="control-btn" data-scene="market">
-                        <i>🛒</i> 乡村市集
-                    </button>
-                </div>
-            </div>
+</nav>
 
-        </div>
-        
-        <!-- 信息面板 -->
-        <div class="info-panel" id="infoPanel">
-            <div class="info-header">
-                <h3 class="info-title" id="infoTitle">场景信息</h3>
-                <button class="close-info" id="closeInfo">×</button>
+<!-- 加载界面 -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">正在加载VR场景...</div>
+</div>
+
+<!-- 场景切换加载器 -->
+<div class="scene-loading" id="sceneLoading">
+    <div>正在切换场景...</div>
+</div>
+
+<!-- 主内容区 -->
+<main class="main-content">
+    <!-- VR控制面板 -->
+    <div class="vr-controls">
+        <div class="control-section">
+            <div class="control-title">
+                <i>🌾</i> 场景选择
             </div>
-            <div class="info-content">
-                <div class="info-image" id="infoImage">🌾</div>
-                <p id="infoDescription">选择场景以查看详细信息</p>
+            <div class="control-buttons">
+                <button class="control-btn active" data-scene="classroom">
+                    <i>🏫</i> 乡村教室
+                </button>
+                <button class="control-btn" data-scene="village">
+                    <i>🏡</i> 传统村落
+                </button>
+                <button class="control-btn" data-scene="market">
+                    <i>🛒</i> 乡村市集
+                </button>
             </div>
         </div>
-        
-        <!-- VR场景容器 -->
-        <div id="vr-container"></div>
-        
-        <!-- 提示信息 -->
-        <div class="hint">
-            💡 提示：使用鼠标拖动可以360度查看场景，滚轮可以缩放
+
+    </div>
+
+    <!-- 信息面板 -->
+    <div class="info-panel" id="infoPanel">
+        <div class="info-header">
+            <h3 class="info-title" id="infoTitle">场景信息</h3>
+            <button class="close-info" id="closeInfo">×</button>
         </div>
-    </main>
+        <div class="info-content">
+            <div class="info-image" id="infoImage">🌾</div>
+            <p id="infoDescription">选择场景以查看详细信息</p>
+        </div>
+    </div>
 
-    <script>
-        // 场景数据
-        const scenes = {
-            village: {
-                title: "传统村落全景",
-                description: "探索保存完好的传统乡村聚落，了解古老的建筑技艺和村落布局智慧。这里的每一座建筑都承载着数百年的历史记忆。",
-                hotspots: [
-                    { position: { x: 10, y: 2, z: -5 }, title: "古民居", description: "典型的木结构传统民居，采用榫卯工艺建造" },
-                    { position: { x: -8, y: 1, z: 3 }, title: "水井", description: "村落的生活水源，体现了先民的选址智慧" },
-                    { position: { x: 5, y: 3, z: 8 }, title: "祠堂", description: "宗族祭祀和议事的场所" }
-                ]
-            },
-            market: {
-                title: "乡村市集风貌",
-                description: "沉浸式体验乡村市集的繁华场景，了解农产品交易和乡村商业文化。",
-                hotspots: [
-                    { position: { x: 9, y: 1, z: -6 }, title: "农产品区", description: "当地特色农产品展示" },
-                    { position: { x: -4, y: 0.7, z: 5 }, title: "手工艺品", description: "乡村手工艺品交易" },
-                    { position: { x: 1, y: 2, z: -4 }, title: "小吃摊位", description: "传统乡村美食体验" }
-                ]
-            },
-            classroom: {
-                title: "乡村教室学习",
-                description: "体验真实的乡村教室学习环境，观察学生在传统教室中的学习场景。教室布置简洁而温馨，体现了乡村教育的特色。",
-                hotspots: [
-                    { position: { x: 0, y: 2, z: -8 }, title: "黑板", description: "传统黑板，老师正在讲解数学题" },
-                    { position: { x: -3, y: 1, z: -2 }, title: "学生课桌", description: "认真学习的学生正在做练习题" },
-                    { position: { x: 3, y: 1, z: -2 }, title: "图书角", description: "教室角落的小小图书角" },
-                    { position: { x: 0, y: 1, z: 2 }, title: "讲台", description: "老师的讲台，摆放着教案和教具" }
-                ]
-            }
-        };
+    <!-- VR场景容器 -->
+    <div id="vr-container"></div>
 
-        // Three.js变量
-        let scene, camera, renderer, controls;
-        let currentScene = 'classroom';
-        let hotspots = [];
-        let students = [];
-        let isSceneLoading = false;
-        
-        // 初始化Three.js场景
-        function init() {
-            // 创建场景
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x87CEEB);
-            scene.fog = new THREE.Fog(0x87CEEB, 10, 50);
-            
-            // 创建相机
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 80), 0.1, 1000);
-            camera.position.set(0, 1.6, 10);
-            
-            // 创建渲染器
-            renderer = new THREE.WebGLRenderer({ 
-                antialias: true,
-                powerPreference: "high-performance"
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight - 80);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.autoClear = false;
-            document.getElementById('vr-container').appendChild(renderer.domElement);
-            
-            // 添加轨道控制
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.screenSpacePanning = false;
-            controls.minDistance = 1;
-            controls.maxDistance = 50;
-            controls.maxPolarAngle = Math.PI;
-            
-            // 添加灯光
-            setupLighting();
-            
-            // 创建地面
-            const groundGeometry = new THREE.PlaneGeometry(100, 100);
-            const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x7CFC00 });
-            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-            ground.rotation.x = -Math.PI / 2;
-            ground.receiveShadow = true;
-            scene.add(ground);
-            
-            // 预加载资源
-            preloadResources().then(() => {
-                // 加载初始场景
-                loadScene(currentScene);
-                
-                // 隐藏加载界面
-                setTimeout(() => {
-                    document.getElementById('loadingScreen').classList.add('fade-out');
-                    setTimeout(() => {
-                        document.getElementById('loadingScreen').style.display = 'none';
-                    }, 500);
-                }, 1000);
-            });
-            
-            // 窗口调整大小时更新渲染器
-            window.addEventListener('resize', onWindowResize);
-            
-            // 开始动画循环
-            animate();
+    <!-- 提示信息 -->
+    <div class="hint">
+        💡 提示：使用鼠标拖动可以360度查看场景，滚轮可以缩放
+    </div>
+</main>
+
+<script>
+    // 场景数据
+    const scenes = {
+        village: {
+            title: "传统村落全景",
+            description: "探索保存完好的传统乡村聚落，了解古老的建筑技艺和村落布局智慧。这里的每一座建筑都承载着数百年的历史记忆。",
+            hotspots: [
+                { position: { x: 10, y: 2, z: -5 }, title: "古民居", description: "典型的木结构传统民居，采用榫卯工艺建造" },
+                { position: { x: -8, y: 1, z: 3 }, title: "水井", description: "村落的生活水源，体现了先民的选址智慧" },
+                { position: { x: 5, y: 3, z: 8 }, title: "祠堂", description: "宗族祭祀和议事的场所" }
+            ]
+        },
+        market: {
+            title: "乡村市集风貌",
+            description: "沉浸式体验乡村市集的繁华场景，了解农产品交易和乡村商业文化。",
+            hotspots: [
+                { position: { x: 9, y: 1, z: -6 }, title: "农产品区", description: "当地特色农产品展示" },
+                { position: { x: -4, y: 0.7, z: 5 }, title: "手工艺品", description: "乡村手工艺品交易" },
+                { position: { x: 1, y: 2, z: -4 }, title: "小吃摊位", description: "传统乡村美食体验" }
+            ]
+        },
+        classroom: {
+            title: "乡村教室学习",
+            description: "体验真实的乡村教室学习环境，观察学生在传统教室中的学习场景。教室布置简洁而温馨，体现了乡村教育的特色。",
+            hotspots: [
+                { position: { x: 0, y: 2, z: -8 }, title: "黑板", description: "传统黑板，老师正在讲解数学题" },
+                { position: { x: -3, y: 1, z: -2 }, title: "学生课桌", description: "认真学习的学生正在做练习题" },
+                { position: { x: 3, y: 1, z: -2 }, title: "图书角", description: "教室角落的小小图书角" },
+                { position: { x: 0, y: 1, z: 2 }, title: "讲台", description: "老师的讲台，摆放着教案和教具" }
+            ]
         }
-        
-        // 设置光照
-        function setupLighting() {
-            // 环境光
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-            
-            // 主方向光（模拟太阳）
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(10, 10, 5);
-            directionalLight.castShadow = true;
-            directionalLight.shadow.mapSize.width = 2048;
-            directionalLight.shadow.mapSize.height = 2048;
-            directionalLight.shadow.camera.near = 0.5;
-            directionalLight.shadow.camera.far = 500;
-            directionalLight.shadow.camera.left = -50;
-            directionalLight.shadow.camera.right = 50;
-            directionalLight.shadow.camera.top = 50;
-            directionalLight.shadow.camera.bottom = -50;
-            scene.add(directionalLight);
-            
-            // 补光
-            const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
-            fillLight.position.set(-5, 5, 5);
-            scene.add(fillLight);
-        }
-        
-        // 预加载资源
-        function preloadResources() {
-            return new Promise((resolve) => {
-                // 这里可以预加载纹理等资源
-                setTimeout(resolve, 500);
-            });
-        }
-        
-        // 加载场景
-        function loadScene(sceneName) {
-            if (isSceneLoading) return;
-            
-            isSceneLoading = true;
-            document.getElementById('sceneLoading').style.display = 'block';
-            
-            // 使用requestAnimationFrame避免阻塞
-            requestAnimationFrame(() => {
-                // 清除现有场景对象（保留灯光和地面）
-                const objectsToRemove = [];
-                scene.traverse((child) => {
-                    if (child.isMesh && 
-                        child.material && 
-                        !child.isGround && 
-                        !child.isLight) {
-                        objectsToRemove.push(child);
-                    }
-                });
-                
-                objectsToRemove.forEach(obj => scene.remove(obj));
-                hotspots = [];
-                students = [];
-                
-                // 根据场景名称创建不同的环境
-                switch(sceneName) {
-                    case 'village':
-                        createVillageScene();
-                        break;
-                    case 'market':
-                        createMarketScene();
-                        break;
-                    case 'classroom':
-                        createClassroomScene();
-                        break;
-                }
-                
-                // 更新信息面板
-                updateInfoPanel(sceneName);
-                
-                // 创建热点
-                createHotspots(scenes[sceneName].hotspots);
-                
-                // 完成加载
-                setTimeout(() => {
-                    document.getElementById('sceneLoading').style.display = 'none';
-                    isSceneLoading = false;
-                }, 300);
-            });
-        }
-        
-        // 创建教室场景
-        function createClassroomScene() {
-            // 创建教室房间
-            createClassroomRoom();
-            
-            // 创建课桌和学生
-            createDesksAndStudents();
-            
-            // 创建黑板
-            createBlackboard();
-            
-            // 创建讲台
-            createTeacherDesk();
-            
-            // 创建图书角
-            createBookshelf();
-            
-            // 创建窗户
-            createWindows();
-            
-            // 添加细节装饰
-            createClassroomDetails();
-        }
-        
-        // 创建教室房间
-        function createClassroomRoom() {
-            // 教室尺寸
-            const roomWidth = 20;
-            const roomHeight = 8;
-            const roomDepth = 15;
-            
-            // 创建墙壁材质
-            const wallMaterial = new THREE.MeshLambertMaterial({ color: 0xF5F5DC });
-            const floorMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x8B4513,
-                roughness: 0.8
-            });
-            const ceilingMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
-            
-            // 地板
-            const floorGeometry = new THREE.PlaneGeometry(roomWidth, roomDepth);
-            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-            floor.rotation.x = -Math.PI / 2;
-            floor.position.y = 0;
-            floor.receiveShadow = true;
-            floor.isGround = true;
-            scene.add(floor);
-            
-            // 天花板
-            const ceilingGeometry = new THREE.PlaneGeometry(roomWidth, roomDepth);
-            const ceiling = new THREE.Mesh(ceilingGeometry, ceilingMaterial);
-            ceiling.rotation.x = Math.PI / 2;
-            ceiling.position.y = roomHeight;
-            ceiling.receiveShadow = true;
-            scene.add(ceiling);
-            
-            // 后墙
-            const backWallGeometry = new THREE.PlaneGeometry(roomWidth, roomHeight);
-            const backWall = new THREE.Mesh(backWallGeometry, wallMaterial);
-            backWall.position.set(0, roomHeight/2, -roomDepth/2);
-            backWall.receiveShadow = true;
-            scene.add(backWall);
-            
-            // 前墙（有门）
-            const frontWallGeometry = new THREE.PlaneGeometry(roomWidth, roomHeight);
-            const frontWall = new THREE.Mesh(frontWallGeometry, wallMaterial);
-            frontWall.position.set(0, roomHeight/2, roomDepth/2);
-            frontWall.receiveShadow = true;
-            scene.add(frontWall);
-            
-            // 左墙
-            const leftWallGeometry = new THREE.PlaneGeometry(roomDepth, roomHeight);
-            const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
-            leftWall.rotation.y = Math.PI / 2;
-            leftWall.position.set(-roomWidth/2, roomHeight/2, 0);
-            leftWall.receiveShadow = true;
-            scene.add(leftWall);
-            
-            // 右墙
-            const rightWallGeometry = new THREE.PlaneGeometry(roomDepth, roomHeight);
-            const rightWall = new THREE.Mesh(rightWallGeometry, wallMaterial);
-            rightWall.rotation.y = Math.PI / 2;
-            rightWall.position.set(roomWidth/2, roomHeight/2, 0);
-            rightWall.receiveShadow = true;
-            scene.add(rightWall);
-        }
-        
-        // 创建课桌和学生
-        function createDesksAndStudents() {
-            const deskColors = [0x8B4513, 0xA0522D, 0xCD853F];
-            const studentColors = [0xFF69B4, 0x87CEEB, 0x98FB98, 0xFFD700, 0xFFA07A];
-            
-            // 创建4排课桌，每排3个
-            for (let row = 0; row < 4; row++) {
-                for (let col = 0; col < 3; col++) {
-                    const deskX = -6 + col * 6;
-                    const deskZ = -10 + row * 3;
-                    
-                    // 创建课桌
-                    const desk = createDesk(deskColors[col % deskColors.length]);
-                    desk.position.set(deskX, 0, deskZ);
-                    scene.add(desk);
-                    
-                    // 创建学生
-                    const student = createStudent(studentColors[(row * 3 + col) % studentColors.length]);
-                    student.position.set(deskX, 0, deskZ - 0.8);
-                    student.rotation.y = Math.PI;
-                    scene.add(student);
-                    students.push(student);
-                    
-                    // 添加学习动画
-                    animateStudent(student, row, col);
-                }
-            }
-        }
-        
-        // 创建课桌
-        function createDesk(color) {
-            const group = new THREE.Group();
-            
-            // 桌面
-            const desktopGeometry = new THREE.BoxGeometry(2, 0.1, 1);
-            const desktopMaterial = new THREE.MeshLambertMaterial({ 
-                color: color,
-                roughness: 0.7
-            });
-            const desktop = new THREE.Mesh(desktopGeometry, desktopMaterial);
-            desktop.position.y = 1.2;
-            desktop.castShadow = true;
-            desktop.receiveShadow = true;
-            group.add(desktop);
-            
-            // 桌腿
-            const legGeometry = new THREE.BoxGeometry(0.1, 2.4, 0.1);
-            const legMaterial = new THREE.MeshLambertMaterial({ color: color });
-            const legPositions = [
-                [-0.9, 0.6, -0.4],
-                [0.9, 0.6, -0.4],
-                [-0.9, 0.6, 0.4],
-                [0.9, 0.6, 0.4]
-            ];
-            
-            legPositions.forEach(pos => {
-                const leg = new THREE.Mesh(legGeometry, legMaterial);
-                leg.position.set(pos[0], pos[1], pos[2]);
-                leg.castShadow = true;
-                group.add(leg);
-            });
-            
-            return group;
-        }
-        
-        // 创建学生模型
-        function createStudent(color) {
-            const group = new THREE.Group();
-            
-            // 身体
-            const bodyGeometry = new THREE.BoxGeometry(0.8, 1.2, 0.4);
-            const bodyMaterial = new THREE.MeshLambertMaterial({ 
-                color: color,
-                roughness: 0.9
-            });
-            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-            body.position.y = 1.2;
-            body.castShadow = true;
-            group.add(body);
-            
-            // 头部
-            const headGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-            const headMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0xFFEBCD,
-                roughness: 0.8
-            });
-            const head = new THREE.Mesh(headGeometry, headMaterial);
-            head.position.y = 2.1;
-            head.castShadow = true;
-            group.add(head);
-            
-            // 头发
-            const hairGeometry = new THREE.BoxGeometry(0.7, 0.2, 0.6);
-            const hairMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x8B4513,
-                roughness: 0.9
-            });
-            const hair = new THREE.Mesh(hairGeometry, hairMaterial);
-            hair.position.y = 2.25;
-            hair.castShadow = true;
-            group.add(hair);
-            
-            // 手臂
-            const armGeometry = new THREE.BoxGeometry(0.2, 0.8, 0.2);
-            const leftArm = new THREE.Mesh(armGeometry, bodyMaterial);
-            leftArm.position.set(-0.5, 1.2, 0);
-            leftArm.castShadow = true;
-            group.add(leftArm);
-            
-            const rightArm = new THREE.Mesh(armGeometry, bodyMaterial);
-            rightArm.position.set(0.5, 1.2, 0);
-            rightArm.castShadow = true;
-            group.add(rightArm);
-            
-            return group;
-        }
-        
-        // 学生动画
-        function animateStudent(student, row, col) {
-            const speed = 0.5 + Math.random() * 0.5;
-            const amplitude = 0.1;
-            let lastTime = 0;
-            
-            function animate(time) {
-                if (!lastTime) lastTime = time;
-                const delta = (time - lastTime) * 0.001;
-                lastTime = time;
-                
-                // 头部轻微摆动
-                student.children[1].rotation.y = Math.sin(time * 0.001 * speed) * amplitude;
-                
-                // 手臂轻微动作（模拟写字）
-                if (col === 1) { // 中间的学生在写字
-                    student.children[3].rotation.x = Math.sin(time * 0.002) * 0.2;
-                    student.children[4].rotation.x = Math.sin(time * 0.002 + Math.PI) * 0.2;
-                }
-                
-                requestAnimationFrame(animate);
-            }
-            requestAnimationFrame(animate);
-        }
-        
-        // 创建黑板
-        function createBlackboard() {
-            const group = new THREE.Group();
-            
-            // 黑板
-            const boardGeometry = new THREE.BoxGeometry(8, 4, 0.1);
-            const boardMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x000000,
-                roughness: 0.9
-            });
-            const board = new THREE.Mesh(boardGeometry, boardMaterial);
-            board.position.set(0, 3, -7.4);
-            board.castShadow = true;
-            board.receiveShadow = true;
-            group.add(board);
-            
-            // 黑板框
-            const frameGeometry = new THREE.BoxGeometry(8.2, 4.2, 0.2);
-            const frameMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x8B4513,
-                roughness: 0.7
-            });
-            const frame = new THREE.Mesh(frameGeometry, frameMaterial);
-            frame.position.set(0, 3, -7.3);
-            frame.castShadow = true;
-            group.add(frame);
-            
-            scene.add(group);
-            return group;
-        }
-        
-        // 创建讲台
-        function createTeacherDesk() {
-            const group = new THREE.Group();
-            
-            // 讲台桌面
-            const deskGeometry = new THREE.BoxGeometry(3, 0.2, 1.5);
-            const deskMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x8B4513,
-                roughness: 0.7
-            });
-            const desk = new THREE.Mesh(deskGeometry, deskMaterial);
-            desk.position.set(0, 1, 5);
-            desk.castShadow = true;
-            desk.receiveShadow = true;
-            group.add(desk);
-            
-            // 讲台主体
-            const bodyGeometry = new THREE.BoxGeometry(2.8, 1, 1.3);
-            const body = new THREE.Mesh(bodyGeometry, deskMaterial);
-            body.position.set(0, 0.5, 5);
-            body.castShadow = true;
-            group.add(body);
-            
-            scene.add(group);
-            return group;
-        }
-        
-        // 创建图书角
-        function createBookshelf() {
-            const group = new THREE.Group();
-            
-            // 书架
-            const shelfGeometry = new THREE.BoxGeometry(2, 4, 0.8);
-            const shelfMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0xD2691E,
-                roughness: 0.7
-            });
-            const shelf = new THREE.Mesh(shelfGeometry, shelfMaterial);
-            shelf.position.set(8, 2, -4);
-            shelf.castShadow = true;
-            shelf.receiveShadow = true;
-            group.add(shelf);
-            
-            scene.add(group);
-            return group;
-        }
-        
-        // 创建窗户
-        function createWindows() {
-            // 左侧窗户
-            const windowGeometry = new THREE.PlaneGeometry(3, 2);
-            const windowMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x87CEEB,
-                transparent: true,
-                opacity: 0.3
-            });
-            
-            const leftWindow = new THREE.Mesh(windowGeometry, windowMaterial);
-            leftWindow.position.set(-10, 4, 0);
-            leftWindow.rotation.y = Math.PI / 2;
-            scene.add(leftWindow);
-            
-            const rightWindow = new THREE.Mesh(windowGeometry, windowMaterial);
-            rightWindow.position.set(10, 4, 0);
-            rightWindow.rotation.y = -Math.PI / 2;
-            scene.add(rightWindow);
-        }
-        
-        // 创建教室细节
-        function createClassroomDetails() {
-            // 添加一些随机物品增加真实感
-            const detailColors = [0xFF0000, 0x0000FF, 0x00FF00, 0xFFFF00, 0xFF00FF];
-            
-            // 在讲台上添加书本
-            const bookGeometry = new THREE.BoxGeometry(0.5, 0.05, 0.7);
-            const bookMaterial = new THREE.MeshLambertMaterial({ 
-                color: detailColors[Math.floor(Math.random() * detailColors.length)],
-                roughness: 0.8
-            });
-            const book = new THREE.Mesh(bookGeometry, bookMaterial);
-            book.position.set(0, 1.2, 5.2);
-            book.rotation.y = Math.PI / 4;
-            book.castShadow = true;
-            scene.add(book);
-            
-            // 添加钟表
-            const clockGeometry = new THREE.CylinderGeometry(0.8, 0.8, 0.1, 32);
-            const clockMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
-            const clock = new THREE.Mesh(clockGeometry, clockMaterial);
-            clock.position.set(0, 7, -7.3);
-            scene.add(clock);
-        }
-        
-        // 创建热点
-        function createHotspots(hotspotData) {
-            // 清除现有热点
-            hotspots.forEach(hotspot => scene.remove(hotspot));
-            hotspots = [];
-            
-            hotspotData.forEach((data, index) => {
-                // 创建热点标记
-                const geometry = new THREE.SphereGeometry(0.3, 16, 16);
-                const material = new THREE.MeshLambertMaterial({ 
-                    color: 0xFF0000,
-                    emissive: 0xFF0000,
-                    emissiveIntensity: 0.5
-                });
-                const hotspot = new THREE.Mesh(geometry, material);
-                hotspot.position.set(data.position.x, data.position.y, data.position.z);
-                hotspot.userData = data;
-                
-                // 添加脉动动画
-                animateHotspotPulse(hotspot);
-                
-                scene.add(hotspot);
-                hotspots.push(hotspot);
-            });
-        }
-        
-        // 热点脉动动画
-        function animateHotspotPulse(hotspot) {
-            const scale = hotspot.scale.clone();
-            
-            function animate(time) {
-                const pulse = Math.sin(time * 0.003) * 0.2 + 1;
-                hotspot.scale.lerp(scale.clone().multiplyScalar(pulse), 0.1);
-                requestAnimationFrame(animate);
-            }
-            requestAnimationFrame(animate);
-        }
-        
-        // 更新信息面板
-        function updateInfoPanel(sceneName) {
-            const sceneData = scenes[sceneName];
-            document.getElementById('infoTitle').textContent = sceneData.title;
-            document.getElementById('infoDescription').textContent = sceneData.description;
-            document.getElementById('infoImage').textContent = getSceneIcon(sceneName);
-        }
-        
-        // 获取场景图标
-        function getSceneIcon(sceneName) {
-            const icons = {
-                village: '🏡',
-                market: '🛒',
-                classroom: '🏫'
-            };
-            return icons[sceneName] || '🌾';
-        }
-        
-        // 窗口调整大小
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / (window.innerHeight - 80);
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight - 80);
-        }
-        
-        // 动画循环
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            
-            // 清除画布
-            renderer.clear();
-            
-            // 渲染场景
-            renderer.render(scene, camera);
-        }
-        
-        // 平滑切换场景
-        function switchScene(sceneName) {
-            if (currentScene === sceneName || isSceneLoading) return;
-            
-            currentScene = sceneName;
-            loadScene(sceneName);
-        }
-        
-        // 初始化事件监听
-        function initEventListeners() {
-            // 场景切换按钮
-            document.querySelectorAll('.control-btn[data-scene]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // 更新按钮状态
-                    document.querySelectorAll('.control-btn[data-scene]').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // 切换场景
-                    switchScene(this.dataset.scene);
-                });
-            });
-            
-            // 重置视角
-            document.getElementById('resetView').addEventListener('click', function() {
-                controls.reset();
-            });
-            
-            // VR模式切换
-            document.getElementById('toggleVR').addEventListener('click', function() {
-                alert('VR模式需要VR设备支持，当前为桌面模拟模式');
-            });
-            
-            // 全屏显示
-            document.getElementById('fullscreen').addEventListener('click', function() {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen();
-                } else {
-                    document.exitFullscreen();
-                }
-            });
-            
-            // 显示热点
-            document.getElementById('showHotspots').addEventListener('click', function() {
-                hotspots.forEach(hotspot => {
-                    hotspot.material.emissiveIntensity = hotspot.material.emissiveIntensity === 0.5 ? 0 : 0.5;
-                });
-            });
-            
-            // 语音导览
-            document.getElementById('audioGuide').addEventListener('click', function() {
-                alert('语音导览功能正在开发中');
-            });
-            
-            // 自动导览
-            document.getElementById('takeTour').addEventListener('click', function() {
-                alert('自动导览功能正在开发中');
-            });
-            
-            // 关闭信息面板
-            document.getElementById('closeInfo').addEventListener('click', function() {
-                document.getElementById('infoPanel').classList.remove('active');
-            });
-            
-            // 点击场景检测热点
-            renderer.domElement.addEventListener('click', onCanvasClick);
-            
-            // 防止右键菜单
-            renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
-        }
-        
-        // 画布点击事件
-        function onCanvasClick(event) {
-            const mouse = new THREE.Vector2();
-            const rect = renderer.domElement.getBoundingClientRect();
-            
-            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-            
-            const raycaster = new THREE.Raycaster();
-            raycaster.setFromCamera(mouse, camera);
-            
-            const intersects = raycaster.intersectObjects(hotspots);
-            
-            if (intersects.length > 0) {
-                const hotspot = intersects[0].object;
-                showHotspotInfo(hotspot.userData);
-            }
-        }
-        
-        // 显示热点信息
-        function showHotspotInfo(data) {
-            document.getElementById('infoTitle').textContent = data.title;
-            document.getElementById('infoDescription').textContent = data.description;
-            document.getElementById('infoPanel').classList.add('active');
-        }
-        
-        // 页面加载完成后初始化
-        window.addEventListener('DOMContentLoaded', function() {
-            // 检查Three.js支持
-            if (!window.WebGLRenderingContext) {
-                alert('您的浏览器不支持WebGL，无法显示VR场景');
-                return;
-            }
-            
-            init();
-            initEventListeners();
+    };
+
+    // Three.js变量
+    let scene, camera, renderer, controls;
+    let currentScene = 'classroom';
+    let hotspots = [];
+    let students = [];
+    let isSceneLoading = false;
+
+    // 初始化Three.js场景
+    function init() {
+        // 创建场景
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x87CEEB);
+        scene.fog = new THREE.Fog(0x87CEEB, 10, 50);
+
+        // 创建相机
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 80), 0.1, 1000);
+        camera.position.set(0, 1.6, 10);
+
+        // 创建渲染器
+        renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            powerPreference: "high-performance"
         });
-    </script>
+        renderer.setSize(window.innerWidth, window.innerHeight - 80);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.autoClear = false;
+        document.getElementById('vr-container').appendChild(renderer.domElement);
+
+        // 添加轨道控制
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.screenSpacePanning = false;
+        controls.minDistance = 1;
+        controls.maxDistance = 50;
+        controls.maxPolarAngle = Math.PI;
+
+        // 添加灯光
+        setupLighting();
+
+        // 创建地面
+        const groundGeometry = new THREE.PlaneGeometry(100, 100);
+        const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x7CFC00 });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        // 预加载资源
+        preloadResources().then(() => {
+            // 加载初始场景
+            loadScene(currentScene);
+
+            // 隐藏加载界面
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('fade-out');
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // 窗口调整大小时更新渲染器
+        window.addEventListener('resize', onWindowResize);
+
+        // 开始动画循环
+        animate();
+    }
+
+    // 设置光照
+    function setupLighting() {
+        // 环境光
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        // 主方向光（模拟太阳）
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(10, 10, 5);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.mapSize.width = 2048;
+        directionalLight.shadow.mapSize.height = 2048;
+        directionalLight.shadow.camera.near = 0.5;
+        directionalLight.shadow.camera.far = 500;
+        directionalLight.shadow.camera.left = -50;
+        directionalLight.shadow.camera.right = 50;
+        directionalLight.shadow.camera.top = 50;
+        directionalLight.shadow.camera.bottom = -50;
+        scene.add(directionalLight);
+
+        // 补光
+        const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
+        fillLight.position.set(-5, 5, 5);
+        scene.add(fillLight);
+    }
+
+    // 预加载资源
+    function preloadResources() {
+        return new Promise((resolve) => {
+            // 这里可以预加载纹理等资源
+            setTimeout(resolve, 500);
+        });
+    }
+
+    // 加载场景
+    function loadScene(sceneName) {
+        if (isSceneLoading) return;
+
+        isSceneLoading = true;
+        document.getElementById('sceneLoading').style.display = 'block';
+
+        // 使用requestAnimationFrame避免阻塞
+        requestAnimationFrame(() => {
+            // 清除现有场景对象（保留灯光和地面）
+            const objectsToRemove = [];
+            scene.traverse((child) => {
+                if (child.isMesh &&
+                    child.material &&
+                    !child.isGround &&
+                    !child.isLight) {
+                    objectsToRemove.push(child);
+                }
+            });
+
+            objectsToRemove.forEach(obj => scene.remove(obj));
+            hotspots = [];
+            students = [];
+
+            // 根据场景名称创建不同的环境
+            switch(sceneName) {
+                case 'village':
+                    createVillageScene();
+                    break;
+                case 'market':
+                    createMarketScene();
+                    break;
+                case 'classroom':
+                    createClassroomScene();
+                    break;
+            }
+
+            // 更新信息面板
+            updateInfoPanel(sceneName);
+
+            // 创建热点
+            createHotspots(scenes[sceneName].hotspots);
+
+            // 完成加载
+            setTimeout(() => {
+                document.getElementById('sceneLoading').style.display = 'none';
+                isSceneLoading = false;
+            }, 300);
+        });
+    }
+
+    // 创建教室场景
+    function createClassroomScene() {
+        // 创建教室房间
+        createClassroomRoom();
+
+        // 创建课桌和学生
+        createDesksAndStudents();
+
+        // 创建黑板
+        createBlackboard();
+
+        // 创建讲台
+        createTeacherDesk();
+
+        // 创建图书角
+        createBookshelf();
+
+        // 创建窗户
+        createWindows();
+
+        // 添加细节装饰
+        createClassroomDetails();
+    }
+
+    // 创建教室房间
+    function createClassroomRoom() {
+        // 教室尺寸
+        const roomWidth = 20;
+        const roomHeight = 8;
+        const roomDepth = 15;
+
+        // 创建墙壁材质
+        const wallMaterial = new THREE.MeshLambertMaterial({ color: 0xF5F5DC });
+        const floorMaterial = new THREE.MeshLambertMaterial({
+            color: 0x8B4513,
+            roughness: 0.8
+        });
+        const ceilingMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+
+        // 地板
+        const floorGeometry = new THREE.PlaneGeometry(roomWidth, roomDepth);
+        const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = 0;
+        floor.receiveShadow = true;
+        floor.isGround = true;
+        scene.add(floor);
+
+        // 天花板
+        const ceilingGeometry = new THREE.PlaneGeometry(roomWidth, roomDepth);
+        const ceiling = new THREE.Mesh(ceilingGeometry, ceilingMaterial);
+        ceiling.rotation.x = Math.PI / 2;
+        ceiling.position.y = roomHeight;
+        ceiling.receiveShadow = true;
+        scene.add(ceiling);
+
+        // 后墙
+        const backWallGeometry = new THREE.PlaneGeometry(roomWidth, roomHeight);
+        const backWall = new THREE.Mesh(backWallGeometry, wallMaterial);
+        backWall.position.set(0, roomHeight/2, -roomDepth/2);
+        backWall.receiveShadow = true;
+        scene.add(backWall);
+
+        // 前墙（有门）
+        const frontWallGeometry = new THREE.PlaneGeometry(roomWidth, roomHeight);
+        const frontWall = new THREE.Mesh(frontWallGeometry, wallMaterial);
+        frontWall.position.set(0, roomHeight/2, roomDepth/2);
+        frontWall.receiveShadow = true;
+        scene.add(frontWall);
+
+        // 左墙
+        const leftWallGeometry = new THREE.PlaneGeometry(roomDepth, roomHeight);
+        const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+        leftWall.rotation.y = Math.PI / 2;
+        leftWall.position.set(-roomWidth/2, roomHeight/2, 0);
+        leftWall.receiveShadow = true;
+        scene.add(leftWall);
+
+        // 右墙
+        const rightWallGeometry = new THREE.PlaneGeometry(roomDepth, roomHeight);
+        const rightWall = new THREE.Mesh(rightWallGeometry, wallMaterial);
+        rightWall.rotation.y = Math.PI / 2;
+        rightWall.position.set(roomWidth/2, roomHeight/2, 0);
+        rightWall.receiveShadow = true;
+        scene.add(rightWall);
+    }
+
+    // 创建课桌和学生
+    function createDesksAndStudents() {
+        const deskColors = [0x8B4513, 0xA0522D, 0xCD853F];
+        const studentColors = [0xFF69B4, 0x87CEEB, 0x98FB98, 0xFFD700, 0xFFA07A];
+
+        // 创建4排课桌，每排3个
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 3; col++) {
+                const deskX = -6 + col * 6;
+                const deskZ = -10 + row * 3;
+
+                // 创建课桌
+                const desk = createDesk(deskColors[col % deskColors.length]);
+                desk.position.set(deskX, 0, deskZ);
+                scene.add(desk);
+
+                // 创建学生
+                const student = createStudent(studentColors[(row * 3 + col) % studentColors.length]);
+                student.position.set(deskX, 0, deskZ - 0.8);
+                student.rotation.y = Math.PI;
+                scene.add(student);
+                students.push(student);
+
+                // 添加学习动画
+                animateStudent(student, row, col);
+            }
+        }
+    }
+
+    // 创建课桌
+    function createDesk(color) {
+        const group = new THREE.Group();
+
+        // 桌面
+        const desktopGeometry = new THREE.BoxGeometry(2, 0.1, 1);
+        const desktopMaterial = new THREE.MeshLambertMaterial({
+            color: color,
+            roughness: 0.7
+        });
+        const desktop = new THREE.Mesh(desktopGeometry, desktopMaterial);
+        desktop.position.y = 1.2;
+        desktop.castShadow = true;
+        desktop.receiveShadow = true;
+        group.add(desktop);
+
+        // 桌腿
+        const legGeometry = new THREE.BoxGeometry(0.1, 2.4, 0.1);
+        const legMaterial = new THREE.MeshLambertMaterial({ color: color });
+        const legPositions = [
+            [-0.9, 0.6, -0.4],
+            [0.9, 0.6, -0.4],
+            [-0.9, 0.6, 0.4],
+            [0.9, 0.6, 0.4]
+        ];
+
+        legPositions.forEach(pos => {
+            const leg = new THREE.Mesh(legGeometry, legMaterial);
+            leg.position.set(pos[0], pos[1], pos[2]);
+            leg.castShadow = true;
+            group.add(leg);
+        });
+
+        return group;
+    }
+
+    // 创建学生模型
+    function createStudent(color) {
+        const group = new THREE.Group();
+
+        // 身体
+        const bodyGeometry = new THREE.BoxGeometry(0.8, 1.2, 0.4);
+        const bodyMaterial = new THREE.MeshLambertMaterial({
+            color: color,
+            roughness: 0.9
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        body.position.y = 1.2;
+        body.castShadow = true;
+        group.add(body);
+
+        // 头部
+        const headGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+        const headMaterial = new THREE.MeshLambertMaterial({
+            color: 0xFFEBCD,
+            roughness: 0.8
+        });
+        const head = new THREE.Mesh(headGeometry, headMaterial);
+        head.position.y = 2.1;
+        head.castShadow = true;
+        group.add(head);
+
+        // 头发
+        const hairGeometry = new THREE.BoxGeometry(0.7, 0.2, 0.6);
+        const hairMaterial = new THREE.MeshLambertMaterial({
+            color: 0x8B4513,
+            roughness: 0.9
+        });
+        const hair = new THREE.Mesh(hairGeometry, hairMaterial);
+        hair.position.y = 2.25;
+        hair.castShadow = true;
+        group.add(hair);
+
+        // 手臂
+        const armGeometry = new THREE.BoxGeometry(0.2, 0.8, 0.2);
+        const leftArm = new THREE.Mesh(armGeometry, bodyMaterial);
+        leftArm.position.set(-0.5, 1.2, 0);
+        leftArm.castShadow = true;
+        group.add(leftArm);
+
+        const rightArm = new THREE.Mesh(armGeometry, bodyMaterial);
+        rightArm.position.set(0.5, 1.2, 0);
+        rightArm.castShadow = true;
+        group.add(rightArm);
+
+        return group;
+    }
+
+    // 学生动画
+    function animateStudent(student, row, col) {
+        const speed = 0.5 + Math.random() * 0.5;
+        const amplitude = 0.1;
+        let lastTime = 0;
+
+        function animate(time) {
+            if (!lastTime) lastTime = time;
+            const delta = (time - lastTime) * 0.001;
+            lastTime = time;
+
+            // 头部轻微摆动
+            student.children[1].rotation.y = Math.sin(time * 0.001 * speed) * amplitude;
+
+            // 手臂轻微动作（模拟写字）
+            if (col === 1) { // 中间的学生在写字
+                student.children[3].rotation.x = Math.sin(time * 0.002) * 0.2;
+                student.children[4].rotation.x = Math.sin(time * 0.002 + Math.PI) * 0.2;
+            }
+
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    }
+
+    // 创建黑板
+    function createBlackboard() {
+        const group = new THREE.Group();
+
+        // 黑板
+        const boardGeometry = new THREE.BoxGeometry(8, 4, 0.1);
+        const boardMaterial = new THREE.MeshLambertMaterial({
+            color: 0x000000,
+            roughness: 0.9
+        });
+        const board = new THREE.Mesh(boardGeometry, boardMaterial);
+        board.position.set(0, 3, -7.4);
+        board.castShadow = true;
+        board.receiveShadow = true;
+        group.add(board);
+
+        // 黑板框
+        const frameGeometry = new THREE.BoxGeometry(8.2, 4.2, 0.2);
+        const frameMaterial = new THREE.MeshLambertMaterial({
+            color: 0x8B4513,
+            roughness: 0.7
+        });
+        const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+        frame.position.set(0, 3, -7.3);
+        frame.castShadow = true;
+        group.add(frame);
+
+        scene.add(group);
+        return group;
+    }
+
+    // 创建讲台
+    function createTeacherDesk() {
+        const group = new THREE.Group();
+
+        // 讲台桌面
+        const deskGeometry = new THREE.BoxGeometry(3, 0.2, 1.5);
+        const deskMaterial = new THREE.MeshLambertMaterial({
+            color: 0x8B4513,
+            roughness: 0.7
+        });
+        const desk = new THREE.Mesh(deskGeometry, deskMaterial);
+        desk.position.set(0, 1, 5);
+        desk.castShadow = true;
+        desk.receiveShadow = true;
+        group.add(desk);
+
+        // 讲台主体
+        const bodyGeometry = new THREE.BoxGeometry(2.8, 1, 1.3);
+        const body = new THREE.Mesh(bodyGeometry, deskMaterial);
+        body.position.set(0, 0.5, 5);
+        body.castShadow = true;
+        group.add(body);
+
+        scene.add(group);
+        return group;
+    }
+
+    // 创建图书角
+    function createBookshelf() {
+        const group = new THREE.Group();
+
+        // 书架
+        const shelfGeometry = new THREE.BoxGeometry(2, 4, 0.8);
+        const shelfMaterial = new THREE.MeshLambertMaterial({
+            color: 0xD2691E,
+            roughness: 0.7
+        });
+        const shelf = new THREE.Mesh(shelfGeometry, shelfMaterial);
+        shelf.position.set(8, 2, -4);
+        shelf.castShadow = true;
+        shelf.receiveShadow = true;
+        group.add(shelf);
+
+        scene.add(group);
+        return group;
+    }
+
+    // 创建窗户
+    function createWindows() {
+        // 左侧窗户
+        const windowGeometry = new THREE.PlaneGeometry(3, 2);
+        const windowMaterial = new THREE.MeshLambertMaterial({
+            color: 0x87CEEB,
+            transparent: true,
+            opacity: 0.3
+        });
+
+        const leftWindow = new THREE.Mesh(windowGeometry, windowMaterial);
+        leftWindow.position.set(-10, 4, 0);
+        leftWindow.rotation.y = Math.PI / 2;
+        scene.add(leftWindow);
+
+        const rightWindow = new THREE.Mesh(windowGeometry, windowMaterial);
+        rightWindow.position.set(10, 4, 0);
+        rightWindow.rotation.y = -Math.PI / 2;
+        scene.add(rightWindow);
+    }
+
+    // 创建教室细节
+    function createClassroomDetails() {
+        // 添加一些随机物品增加真实感
+        const detailColors = [0xFF0000, 0x0000FF, 0x00FF00, 0xFFFF00, 0xFF00FF];
+
+        // 在讲台上添加书本
+        const bookGeometry = new THREE.BoxGeometry(0.5, 0.05, 0.7);
+        const bookMaterial = new THREE.MeshLambertMaterial({
+            color: detailColors[Math.floor(Math.random() * detailColors.length)],
+            roughness: 0.8
+        });
+        const book = new THREE.Mesh(bookGeometry, bookMaterial);
+        book.position.set(0, 1.2, 5.2);
+        book.rotation.y = Math.PI / 4;
+        book.castShadow = true;
+        scene.add(book);
+
+        // 添加钟表
+        const clockGeometry = new THREE.CylinderGeometry(0.8, 0.8, 0.1, 32);
+        const clockMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+        const clock = new THREE.Mesh(clockGeometry, clockMaterial);
+        clock.position.set(0, 7, -7.3);
+        scene.add(clock);
+    }
+
+    // 创建热点
+    function createHotspots(hotspotData) {
+        // 清除现有热点
+        hotspots.forEach(hotspot => scene.remove(hotspot));
+        hotspots = [];
+
+        hotspotData.forEach((data, index) => {
+            // 创建热点标记
+            const geometry = new THREE.SphereGeometry(0.3, 16, 16);
+            const material = new THREE.MeshLambertMaterial({
+                color: 0xFF0000,
+                emissive: 0xFF0000,
+                emissiveIntensity: 0.5
+            });
+            const hotspot = new THREE.Mesh(geometry, material);
+            hotspot.position.set(data.position.x, data.position.y, data.position.z);
+            hotspot.userData = data;
+
+            // 添加脉动动画
+            animateHotspotPulse(hotspot);
+
+            scene.add(hotspot);
+            hotspots.push(hotspot);
+        });
+    }
+
+    // 热点脉动动画
+    function animateHotspotPulse(hotspot) {
+        const scale = hotspot.scale.clone();
+
+        function animate(time) {
+            const pulse = Math.sin(time * 0.003) * 0.2 + 1;
+            hotspot.scale.lerp(scale.clone().multiplyScalar(pulse), 0.1);
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    }
+
+    // 更新信息面板
+    function updateInfoPanel(sceneName) {
+        const sceneData = scenes[sceneName];
+        document.getElementById('infoTitle').textContent = sceneData.title;
+        document.getElementById('infoDescription').textContent = sceneData.description;
+        document.getElementById('infoImage').textContent = getSceneIcon(sceneName);
+    }
+
+    // 获取场景图标
+    function getSceneIcon(sceneName) {
+        const icons = {
+            village: '🏡',
+            market: '🛒',
+            classroom: '🏫'
+        };
+        return icons[sceneName] || '🌾';
+    }
+
+    // 窗口调整大小
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / (window.innerHeight - 80);
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight - 80);
+    }
+
+    // 动画循环
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+
+        // 清除画布
+        renderer.clear();
+
+        // 渲染场景
+        renderer.render(scene, camera);
+    }
+
+    // 平滑切换场景
+    function switchScene(sceneName) {
+        if (currentScene === sceneName || isSceneLoading) return;
+
+        currentScene = sceneName;
+        loadScene(sceneName);
+    }
+
+    // 初始化事件监听
+    function initEventListeners() {
+        // 场景切换按钮
+        document.querySelectorAll('.control-btn[data-scene]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 更新按钮状态
+                document.querySelectorAll('.control-btn[data-scene]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // 切换场景
+                switchScene(this.dataset.scene);
+            });
+        });
+
+        // 重置视角
+        document.getElementById('resetView').addEventListener('click', function() {
+            controls.reset();
+        });
+
+        // VR模式切换
+        document.getElementById('toggleVR').addEventListener('click', function() {
+            alert('VR模式需要VR设备支持，当前为桌面模拟模式');
+        });
+
+        // 全屏显示
+        document.getElementById('fullscreen').addEventListener('click', function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        // 显示热点
+        document.getElementById('showHotspots').addEventListener('click', function() {
+            hotspots.forEach(hotspot => {
+                hotspot.material.emissiveIntensity = hotspot.material.emissiveIntensity === 0.5 ? 0 : 0.5;
+            });
+        });
+
+        // 语音导览
+        document.getElementById('audioGuide').addEventListener('click', function() {
+            alert('语音导览功能正在开发中');
+        });
+
+        // 自动导览
+        document.getElementById('takeTour').addEventListener('click', function() {
+            alert('自动导览功能正在开发中');
+        });
+
+        // 关闭信息面板
+        document.getElementById('closeInfo').addEventListener('click', function() {
+            document.getElementById('infoPanel').classList.remove('active');
+        });
+
+        // 点击场景检测热点
+        renderer.domElement.addEventListener('click', onCanvasClick);
+
+        // 防止右键菜单
+        renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    // 画布点击事件
+    function onCanvasClick(event) {
+        const mouse = new THREE.Vector2();
+        const rect = renderer.domElement.getBoundingClientRect();
+
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(mouse, camera);
+
+        const intersects = raycaster.intersectObjects(hotspots);
+
+        if (intersects.length > 0) {
+            const hotspot = intersects[0].object;
+            showHotspotInfo(hotspot.userData);
+        }
+    }
+
+    // 显示热点信息
+    function showHotspotInfo(data) {
+        document.getElementById('infoTitle').textContent = data.title;
+        document.getElementById('infoDescription').textContent = data.description;
+        document.getElementById('infoPanel').classList.add('active');
+    }
+
+    // 页面加载完成后初始化
+    window.addEventListener('DOMContentLoaded', function() {
+        // 检查Three.js支持
+        if (!window.WebGLRenderingContext) {
+            alert('您的浏览器不支持WebGL，无法显示VR场景');
+            return;
+        }
+
+        init();
+        initEventListeners();
+    });
+</script>
 </body>
 </html>

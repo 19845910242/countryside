@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>乡村韵学 - 课程中心</title>
     <style>
+        /* 样式保持不变，与您提供的代码相同 */
         * {
             margin: 0;
             padding: 0;
@@ -302,17 +303,60 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .course-image {
+        .course-video-container {
             width: 100%;
             height: 180px;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
             position: relative;
             overflow: hidden;
+            background: #000;
+        }
+
+        .course-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .course-card:hover .course-video {
+            transform: scale(1.05);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 48px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .course-card:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background: white;
         }
 
         .course-category {
@@ -325,6 +369,7 @@
             border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
+            z-index: 2;
         }
 
         .favorite-btn {
@@ -342,6 +387,7 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 18px;
+            z-index: 2;
         }
 
         .favorite-btn:hover {
@@ -691,17 +737,19 @@
             padding: 20px;
         }
 
-        .modal-course-image {
+        .modal-course-video {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            height: 300px;
+            background: #000;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 64px;
             margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .modal-course-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .modal-course-info {
@@ -880,6 +928,10 @@
             .modal-course-info {
                 grid-template-columns: 1fr;
             }
+
+            .modal-course-video {
+                height: 200px;
+            }
         }
 
         /* 加载动画 */
@@ -943,6 +995,29 @@
             font-size: 14px;
             margin-bottom: 10px;
         }
+
+        /* 视频播放器样式 */
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .video-control-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .video-control-btn:hover {
+            background: var(--primary-dark);
+        }
     </style>
 </head>
 <body>
@@ -954,7 +1029,7 @@
     </div>
     <ul class="nav-links">
         <li><a href="./index.html">首页</a></li>
-        <li><a href="./courses.html"  class="active">课程中心</a></li>
+        <li><a href="./courses.html" class="active">课程中心</a></li>
         <li><a href="./vr.html">VR体验</a></li>
         <li><a href="./ai.html">AI助手</a></li>
     </ul>
@@ -982,7 +1057,12 @@
             <button class="close-modal" id="closeModal">&times;</button>
         </div>
         <div class="modal-content">
-            <div class="modal-course-image" id="modalCourseImage"></div>
+            <div class="modal-course-video">
+                <video id="modalVideoPlayer" controls>
+                    <source src="" type="video/mp4">
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
             <div class="modal-course-info">
                 <div class="info-item">
                     <span class="info-label">分类:</span>
@@ -1016,8 +1096,12 @@
                     <!-- 章节将通过JavaScript动态生成 -->
                 </ul>
             </div>
-            <div class="modal-actions">
 
+            <div class="modal-actions">
+                <button class="modal-btn primary" id="startLearningBtn">
+                    <span id="startLearningText">开始学习</span>
+                    <span class="loader" id="startLearningLoader" style="display: none;"></span>
+                </button>
                 <button class="modal-btn secondary" id="addToFavoritesBtn">加入收藏</button>
             </div>
         </div>
@@ -1042,7 +1126,7 @@
                     <a href="#" class="slide-btn">立即学习</a>
                 </div>
                 <div class="slide-image">
-                    <img src="./images/19.jpeg" width="400px" height="400px" alt="">
+                    <img src="./images/23.jpeg" width="350px" height="400px" alt="">
                 </div>
             </div>
             <div class="featured-slide">
@@ -1052,7 +1136,7 @@
                     <a href="#" class="slide-btn">立即学习</a>
                 </div>
                 <div class="slide-image">
-                    <img src="./images/20.jpeg" width="400px" height="400px" alt="">
+                    <img src="./images/24.jpeg" width="350px" height="400px" alt="">
                 </div>
             </div>
             <div class="featured-slide">
@@ -1062,7 +1146,7 @@
                     <a href="#" class="slide-btn">立即学习</a>
                 </div>
                 <div class="slide-image">
-                    <img src="./images/21.jpeg" width="400px" height="400px" alt="">
+                    <img src="./images/25.jpeg" width="3501px" height="400px" alt="">
                 </div>
             </div>
         </div>
@@ -1179,7 +1263,7 @@
 </footer>
 
 <script>
-    // 课程数据
+    // 课程数据 - 添加视频路径
     const courses = [
         {
             id: 1,
@@ -1188,7 +1272,7 @@
             category: "农耕技术",
             duration: "12课时",
             level: "初级",
-            icon: "🎋",
+            videoUrl: "./images/1.mp4", // 添加视频路径
             students: 1250,
             rating: 4.8,
             chapters: [
@@ -1207,7 +1291,7 @@
             category: "农耕技术",
             duration: "15课时",
             level: "中级",
-            icon: "🌱",
+            videoUrl: "./images/2.mp4",
             students: 980,
             rating: 4.7,
             chapters: [
@@ -1222,11 +1306,11 @@
         {
             id: 3,
             title: "稻田里的生态智慧",
-            description: "探究稻鱼鸭共生系统，监测农田土壤与水质，亲手搭建微型生态农场，理解“天人合一”的农耕哲学。",
+            description: "探究稻鱼鸭共生系统，监测农田土壤与水质，亲手搭建微型生态农场，理解'天人合一'的农耕哲学。",
             category: "农耕技术",
             duration: "10课时",
             level: "初级",
-            icon: "🍲",
+            videoUrl: "./images/3.mp4",
             students: 2100,
             rating: 4.9,
             chapters: [
@@ -1244,7 +1328,7 @@
             category: "乡土文化",
             duration: "8课时",
             level: "初级",
-            icon: "✂️",
+            videoUrl: "./images/4.mp4",
             students: 850,
             rating: 4.6,
             chapters: [
@@ -1262,7 +1346,7 @@
             category: "乡土文化",
             duration: "12课时",
             level: "初级",
-            icon: "🔍",
+            videoUrl: "./images/6.mp4",
             students: 720,
             rating: 4.5,
             chapters: [
@@ -1277,17 +1361,17 @@
         {
             id: 6,
             title: "先贤精神寻访记",
-            description: "探访乡村名人故居、古书院，提炼“耕读传家”的精神内核，制作品质卡片并制定个人践行计划。",
+            description: "探访乡村名人故居、古书院，提炼'耕读传家'的精神内核，制作品质卡片并制定个人践行计划。",
             category: "乡土文化",
             duration: "10课时",
             level: "中级",
-            icon: "🎨",
+            videoUrl: "./images/5.mp4",
             students: 630,
             rating: 4.7,
             chapters: [
                 { name: "探访乡村名人故居", duration: "2课时" },
                 { name: "探访古书院", duration: "3课时" },
-                { name: "提炼“耕读传家”精神内核", duration: "5课时" }
+                { name: "提炼'耕读传家'精神内核", duration: "5课时" }
             ],
             progress: 0,
             createdAt: "2023-03-28"
@@ -1299,7 +1383,7 @@
             category: "生态科考",
             duration: "14课时",
             level: "中级",
-            icon: "🥬",
+            videoUrl: "./images/8.mp4",
             students: 1100,
             rating: 4.8,
             chapters: [
@@ -1316,7 +1400,7 @@
             category: "生态科考",
             duration: "9课时",
             level: "初级",
-            icon: "🥬",
+            videoUrl: "./images/7.mp4",
             students: 590,
             rating: 4.4,
             chapters: [
@@ -1329,11 +1413,11 @@
         {
             id: 9,
             title: "乡村气象观察员",
-            description: "搭建简易气象观测站，记录晴雨、温湿度与农事活动的关联，解读“朝霞不出门”等气象谚语的科学依据。",
+            description: "搭建简易气象观测站，记录晴雨、温湿度与农事活动的关联，解读'朝霞不出门'等气象谚语的科学依据。",
             category: "生态科考",
             duration: "11课时",
             level: "高级",
-            icon: "🥬",
+            videoUrl: "./videos/weather.mp4",
             students: 480,
             rating: 4.9,
             chapters: [
@@ -1350,7 +1434,7 @@
             category: "乡村研学",
             duration: "13课时",
             level: "高级",
-            icon: "🗺️",
+            videoUrl: "./videos/smart-farming.mp4",
             students: 320,
             rating: 4.6,
             chapters: [
@@ -1368,7 +1452,7 @@
             category: "乡村研学",
             duration: "13课时",
             level: "高级",
-            icon: "🗺️",
+            videoUrl: "./videos/rural-revitalization.mp4",
             students: 320,
             rating: 4.6,
             chapters: [
@@ -1386,7 +1470,7 @@
             category: "乡村研学",
             duration: "13课时",
             level: "高级",
-            icon: "🗺️",
+            videoUrl: "./videos/rural-food.mp4",
             students: 320,
             rating: 4.6,
             chapters: [
@@ -1396,7 +1480,6 @@
             progress: 0,
             createdAt: "2023-05-30"
         }
-
     ];
 
     // 用户数据
@@ -1502,8 +1585,14 @@
             const courseCard = document.createElement('div');
             courseCard.className = 'course-card';
             courseCard.innerHTML = `
-                    <div class="course-image">
-                        ${course.icon}
+                    <div class="course-video-container">
+                        <video class="course-video" muted loop>
+                            <source src="${course.videoUrl}" type="video/mp4">
+                            您的浏览器不支持视频播放。
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
                         <span class="course-category">${course.category}</span>
                         <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-course-id="${course.id}">
                             ${isFavorite ? '❤️' : '🤍'}
@@ -1538,6 +1627,28 @@
                     </div>
                 `;
             coursesGrid.appendChild(courseCard);
+        });
+
+        // 为视频添加悬停播放效果
+        document.querySelectorAll('.course-video').forEach(video => {
+            video.addEventListener('mouseenter', function() {
+                this.play();
+            });
+
+            video.addEventListener('mouseleave', function() {
+                this.pause();
+                this.currentTime = 0;
+            });
+        });
+
+        // 为播放按钮添加点击事件
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const video = this.closest('.course-video-container').querySelector('.course-video');
+                video.muted = false;
+                video.play();
+            });
         });
 
         // 为开始学习按钮添加事件监听
@@ -1577,7 +1688,7 @@
         const modalDuration = document.getElementById('modalCourseDuration');
         const modalStudents = document.getElementById('modalCourseStudents');
         const modalDescription = document.getElementById('modalCourseDescription');
-        const modalImage = document.getElementById('modalCourseImage');
+        const modalVideoPlayer = document.getElementById('modalVideoPlayer');
         const modalChapterList = document.getElementById('modalChapterList');
         const modalProgressFill = document.getElementById('modalProgressFill');
         const modalProgressText = document.getElementById('modalProgressText');
@@ -1591,7 +1702,10 @@
         modalDuration.textContent = course.duration;
         modalStudents.textContent = `${course.students}人`;
         modalDescription.textContent = course.description;
-        modalImage.innerHTML = course.icon;
+
+        // 设置视频源
+        modalVideoPlayer.src = course.videoUrl;
+
         modalProgressFill.style.width = `${course.progress}%`;
         modalProgressText.textContent = `学习进度: ${course.progress}%`;
 
@@ -1612,7 +1726,6 @@
         addToFavoritesBtn.innerHTML = isFavorite ? '已收藏' : '加入收藏';
         addToFavoritesBtn.style.background = isFavorite ? '#ff4757' : '#f0f0f0';
         addToFavoritesBtn.style.color = isFavorite ? 'white' : 'var(--text-dark)';
-
 
         // 显示模态框
         modal.classList.add('active');
