@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>乡韵智学</title>
+    <title>乡韵智学 - 课程中心</title>
     <style>
         /* 样式保持不变，与您提供的代码相同 */
         * {
@@ -134,7 +135,7 @@
             right: 0;
             background: white;
             border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             width: 180px;
             opacity: 0;
             visibility: hidden;
@@ -191,302 +192,11 @@
             margin: 0 auto;
         }
 
-        /* 搜索和筛选区域 */
-        .search-filter-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .search-box {
-            position: relative;
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            border: 1px solid var(--primary-light);
-            border-radius: 30px;
-            background: white;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            cursor: pointer;
-        }
-
-        .sort-options {
-            display: flex;
-            gap: 10px;
-        }
-
-        .sort-btn {
-            padding: 10px 15px;
-            background: white;
-            border: 1px solid var(--primary-light);
-            border-radius: 20px;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-
-        .sort-btn.active, .sort-btn:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* 课程筛选 */
-        .course-filters {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background: var(--white);
-            border: 1px solid var(--primary-light);
-            border-radius: 30px;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-color);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 124, 89, 0.2);
-        }
-
-        /* 课程网格 */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .course-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .course-video-container {
-            width: 100%;
-            height: 180px;
-            position: relative;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .course-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .course-card:hover .course-video {
-            transform: scale(1.05);
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .course-card:hover .video-overlay {
-            opacity: 1;
-        }
-
-        .play-button {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
-            background: white;
-        }
-
-        .course-category {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--accent-color);
-            color: var(--white);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 2;
-        }
-
-        .favorite-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(255,255,255,0.8);
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 18px;
-            z-index: 2;
-        }
-
-        .favorite-btn:hover {
-            background: white;
-            transform: scale(1.1);
-        }
-
-        .favorite-btn.active {
-            color: #ff4757;
-        }
-
-        .course-content {
-            padding: 20px;
-        }
-
-        .course-title {
-            font-size: 20px;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .course-description {
-            color: var(--text-light);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            height: 60px;
-            overflow: hidden;
-        }
-
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .course-duration, .course-level {
-            display: flex;
-            align-items: center;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        .course-duration i, .course-level i {
-            margin-right: 5px;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: #f0f0f0;
-            border-radius: 3px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: var(--primary-color);
-            border-radius: 3px;
-            transition: width 0.5s ease;
-        }
-
-        .progress-text {
-            font-size: 12px;
-            color: var(--text-light);
-            text-align: right;
-            margin-bottom: 15px;
-        }
-
-        .course-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-color);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .course-btn:hover {
-            background: var(--primary-dark);
-        }
-
         /* 特色课程 */
         .featured-courses {
             margin-bottom: 60px;
         }
 
-        .section-title {
-            font-size: 28px;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            text-align: center;
-        }
 
         .featured-slider {
             position: relative;
@@ -580,38 +290,6 @@
             background: var(--primary-color);
         }
 
-        /* 统计信息 */
-        .stats-section {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 60px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: var(--text-light);
-        }
-
         /* 页脚 */
         .footer {
             background: var(--primary-color);
@@ -658,7 +336,7 @@
             color: white;
             padding: 15px 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 1000;
             opacity: 0;
             transform: translateY(-20px);
@@ -670,356 +348,323 @@
             transform: translateY(0);
         }
 
-        /* 课程详情模态框 */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
+        /* 三级联动导航样式 */
+        .course-navigation {
+            margin-bottom: 40px;
+        }
+
+        .level-1-menu {
             display: flex;
-            align-items: center;
             justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .course-modal {
-            background: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            transition: transform 0.3s;
-        }
-
-        .modal-overlay.active .course-modal {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 24px;
+        .level-1-item {
+            padding: 12px 25px;
+            background: var(--white);
+            border: 2px solid var(--primary-light);
+            border-radius: 30px;
             color: var(--primary-color);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 24px;
             cursor: pointer;
-            color: var(--text-light);
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 16px;
         }
 
-        .close-modal:hover {
+        .level-1-item.active,
+        .level-1-item:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 124, 89, 0.2);
+        }
+
+        /* 二级菜单放在左侧的布局 */
+        .course-content-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .level-2-menu {
+            width: 250px;
+            flex-shrink: 0;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            top: 100px;
+        }
+
+        .level-2-item {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            border-left: 4px solid transparent;
+        }
+
+        .level-2-item.active,
+        .level-2-item:hover {
+            background: var(--primary-light);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .level-3-container {
+            flex: 1;
+        }
+
+        .level-3-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .level-3-title {
+            font-size: 24px;
+            text-align: center;
             color: var(--primary-color);
         }
 
-        .modal-content {
-            padding: 20px;
+        .level-3-count {
+            color: var(--text-light);
+            font-size: 14px;
         }
 
-        .modal-course-video {
+        .level-3-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .level-3-items.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .level-3-item {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .level-3-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-image-slider {
             width: 100%;
-            height: 300px;
-            background: #000;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            height: 200px;
+            position: relative;
             overflow: hidden;
         }
 
-        .modal-course-video video {
-            width: 100%;
+        .item-images {
+            display: flex;
+            width: 300%;
+            /* 3张图片的宽度 */
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .item-image {
+            width: 33.333%;
+            /* 每张图片占1/3 */
             height: 100%;
             object-fit: cover;
         }
 
-        .modal-course-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .info-label {
-            font-weight: bold;
-            margin-right: 10px;
-            color: var(--text-dark);
-        }
-
-        .info-value {
-            color: var(--text-light);
-        }
-
-        .modal-course-description {
-            margin-bottom: 20px;
-            line-height: 1.6;
-            color: var(--text-dark);
-        }
-
-        .course-chapters {
-            margin-bottom: 20px;
-        }
-
-        .chapter-title {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .chapter-list {
-            list-style: none;
-        }
-
-        .chapter-item {
-            padding: 10px 15px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chapter-item:last-child {
-            border-bottom: none;
-        }
-
-        .chapter-name {
-            color: var(--text-dark);
-        }
-
-        .chapter-duration {
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .modal-btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .modal-btn.primary {
-            background: var(--primary-color);
-            color: white;
-            flex: 2;
-        }
-
-        .modal-btn.secondary {
-            background: #f0f0f0;
-            color: var(--text-dark);
-            flex: 1;
-        }
-
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* 学习进度指示器 */
-        .learning-progress {
-            margin: 20px 0;
-        }
-
-        .progress-container {
-            background: #f0f0f0;
-            border-radius: 10px;
-            height: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-color);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px;
-            }
-
-            .nav-links {
-                margin: 20px 0;
-            }
-
-            .nav-links li {
-                margin: 0 10px;
-            }
-
-            .page-title {
-                font-size: 28px;
-            }
-
-            .search-filter-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .search-box {
-                min-width: 100%;
-            }
-
-            .sort-options {
-                justify-content: center;
-            }
-
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .featured-slide {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-
-            .slide-content {
-                max-width: 100%;
-                margin-bottom: 30px;
-            }
-
-            .slide-image {
-                position: relative;
-                right: 0;
-                width: 100%;
-                height: 150px;
-                font-size: 80px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-course-info {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-course-video {
-                height: 200px;
-            }
-        }
-
-        /* 加载动画 */
-        .loader {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* 高级筛选面板 */
-        .advanced-filter-panel {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .advanced-filter-panel.active {
-            display: block;
-        }
-
-        .filter-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .filter-group {
-            margin-bottom: 15px;
-        }
-
-        .filter-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
-
-        .filter-group select, .filter-group input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .toggle-advanced {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            cursor: pointer;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        /* 视频播放器样式 */
-        .video-controls {
+        .slider-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin-top: 10px;
+            gap: 5px;
         }
 
-        .video-control-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
-            margin: 0 5px;
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: background 0.3s;
         }
 
-        .video-control-btn:hover {
-            background: var(--primary-dark);
+        .slider-dot.active {
+            background: var(--white);
+        }
+
+        .item-content {
+            padding: 20px;
+            padding-top: 10px;
+        }
+
+        .item-title {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .course-content-container {
+                flex-direction: column;
+            }
+
+            .level-2-menu {
+                width: 100%;
+                max-height: 200px;
+            }
+
+            .level-1-item {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .level-2-item {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+
+            .level-3-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        .item-content {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .item-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-title {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+            position: relative;
+        }
+
+        .item-title:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .content-section {
+            margin-bottom: 20px;
+            padding-left: 5px;
+            position: relative;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title:before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 0px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+
+        .section-content {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+            padding-left: 18px;
+        }
+
+        .content-section:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 110%;
+            height: 1px;
+            background: linear-gradient(to right, var(--primary-light), transparent);
+        }
+
+        .content-section:last-child:after {
+            display: none;
+        }
+
+        .section-highlight {
+            background-color: rgba(200, 230, 201, 0.3);
+            border-left: 3px solid var(--primary-color);
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 8px;
         }
     </style>
 </head>
+
 <body>
 <!-- 导航栏 -->
 <nav class="navbar">
@@ -1047,68 +692,6 @@
     </div>
 </nav>
 
-<!-- 消息提示 -->
-<div class="message" id="message"></div>
-
-<!-- 课程详情模态框 -->
-<div class="modal-overlay" id="courseModal">
-    <div class="course-modal">
-        <div class="modal-header">
-            <h2 class="modal-title" id="modalCourseTitle">课程标题</h2>
-            <button class="close-modal" id="closeModal">&times;</button>
-        </div>
-        <div class="modal-content">
-            <div class="modal-course-video">
-                <video id="modalVideoPlayer" controls>
-                    <source src="" type="video/mp4">
-                    您的浏览器不支持视频播放。
-                </video>
-            </div>
-            <div class="modal-course-info">
-                <div class="info-item">
-                    <span class="info-label">分类:</span>
-                    <span class="info-value" id="modalCourseCategory">手工艺</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">难度:</span>
-                    <span class="info-value" id="modalCourseLevel">初级</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">时长:</span>
-                    <span class="info-value" id="modalCourseDuration">12课时</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">学习人数:</span>
-                    <span class="info-value" id="modalCourseStudents">1250人</span>
-                </div>
-            </div>
-            <p class="modal-course-description" id="modalCourseDescription">课程描述内容...</p>
-
-            <div class="learning-progress">
-                <div class="progress-container">
-                    <div class="progress-fill" id="modalProgressFill" style="width: 0%"></div>
-                </div>
-                <div class="progress-text" id="modalProgressText">学习进度: 0%</div>
-            </div>
-
-            <div class="course-chapters">
-                <h3 class="chapter-title">课程章节</h3>
-                <ul class="chapter-list" id="modalChapterList">
-                    <!-- 章节将通过JavaScript动态生成 -->
-                </ul>
-            </div>
-
-            <div class="modal-actions">
-                <button class="modal-btn primary" id="startLearningBtn">
-                    <span id="startLearningText">开始学习</span>
-                    <span class="loader" id="startLearningLoader" style="display: none;"></span>
-                </button>
-                <button class="modal-btn secondary" id="addToFavoritesBtn">加入收藏</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- 主内容区 -->
 <main class="main-content">
     <!-- 页面标题 -->
@@ -1116,6 +699,7 @@
         <h1 class="page-title">探索乡村文化课程</h1>
         <p class="page-subtitle">从传统手工艺到自然农耕，从民间艺术到乡土文学，发现乡村的无限魅力</p>
     </header>
+
     <!-- 特色课程 -->
     <section class="featured-courses">
         <h2 class="section-title">精选特色课程</h2>
@@ -1133,7 +717,8 @@
             <div class="featured-slide">
                 <div class="slide-content">
                     <h3 class="slide-title">生态农业实践</h3>
-                    <p class="slide-description">了解生态农业的基本原理和实践方法，学习如何在不破坏自然环境的前提下实现可持续农业生产。课程包含土壤改良、有机肥料制作和病虫害生态防治。</p>
+                    <p class="slide-description">了解生态农业的基本原理和实践方法，学习如何在不破坏自然环境的前提下实现可持续农业生产。课程包含土壤改良、有机肥料制作和病虫害生态防治。
+                    </p>
                     <a href="#" class="slide-btn">立即学习</a>
                 </div>
                 <div class="slide-image">
@@ -1147,7 +732,7 @@
                     <a href="#" class="slide-btn">立即学习</a>
                 </div>
                 <div class="slide-image">
-                    <img src="./images/25.jpeg" width="3501px" height="400px" alt="">
+                    <img src="./images/25.jpeg" width="350px" height="400px" alt="">
                 </div>
             </div>
         </div>
@@ -1157,99 +742,32 @@
             <span class="slider-dot" data-index="2"></span>
         </div>
     </section>
-    <!-- 搜索和筛选区域 -->
-    <div class="search-filter-section">
-        <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="搜索课程...">
-            <span class="search-icon">🔍</span>
-        </div>
-        <div class="sort-options">
-            <button class="sort-btn active" data-sort="popular">最受欢迎</button>
-            <button class="sort-btn" data-sort="rating">最高评分</button>
-            <button class="sort-btn" data-sort="newest">最新发布</button>
-            <button class="toggle-advanced" id="toggleAdvanced">高级筛选 ∨</button>
-        </div>
-    </div>
 
-    <!-- 高级筛选面板 -->
-    <div class="advanced-filter-panel" id="advancedFilterPanel">
-        <div class="filter-options">
-            <div class="filter-group">
-                <label>难度级别</label>
-                <select id="levelFilter">
-                    <option value="all">全部级别</option>
-                    <option value="初级">初级</option>
-                    <option value="中级">中级</option>
-                    <option value="高级">高级</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>课程时长</label>
-                <select id="durationFilter">
-                    <option value="all">全部时长</option>
-                    <option value="short">0-5课时</option>
-                    <option value="medium">6-10课时</option>
-                    <option value="long">11+课时</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>学习进度</label>
-                <select id="progressFilter">
-                    <option value="all">全部状态</option>
-                    <option value="not-started">未开始</option>
-                    <option value="in-progress">进行中</option>
-                    <option value="completed">已完成</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>评分范围</label>
-                <select id="ratingFilter">
-                    <option value="all">全部评分</option>
-                    <option value="4.5+">4.5分以上</option>
-                    <option value="4.0+">4.0分以上</option>
-                    <option value="3.5+">3.5分以上</option>
-                </select>
-            </div>
+    <!-- 三级联动导航 -->
+    <section class="course-navigation">
+        <div class="level-1-menu" id="level1Menu">
+            <div class="level-1-item active" data-level1="farming">农耕文明研学系列（自然与劳动融合）</div>
+            <div class="level-1-item" data-level1="culture">乡土文化研学系列（人文与传承融合）</div>
+            <div class="level-1-item" data-level1="ecology">生态科考研学系列（科学与实践融合）</div>
+            <div class="level-1-item" data-level1="modern">现代乡村研学系列（创新与发展融合）</div>
         </div>
-    </div>
 
-    <!-- 统计信息 -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">120+</div>
-                <div class="stat-label">精品课程</div>
+        <div class="course-content-container">
+            <div class="level-2-menu" id="level2Menu">
+                <!-- 二级菜单将通过JavaScript动态生成 -->
             </div>
-            <div class="stat-item">
-                <div class="stat-number">5,000+</div>
-                <div class="stat-label">注册学员</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">满意度</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">专业讲师</div>
+
+            <div class="level-3-container">
+                <div class="level-3-header">
+                    <h2 class="level-3-title" id="level3Title">传统农耕技艺</h2>
+                </div>
+
+                <div class="level-3-items active" id="level3Items">
+                    <!-- 三级项目将通过JavaScript动态生成 -->
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- 课程筛选 -->
-    <div class="course-filters">
-        <button class="filter-btn active" data-category="all">全部课程</button>
-        <button class="filter-btn" data-category="农耕技术">农耕文明研学系列（自然与劳动融合）</button>
-        <button class="filter-btn" data-category="乡土文化">乡土文化研学系列（人文与传承融合）</button>
-        <button class="filter-btn" data-category="生态科考">生态科考研学系列（科学与实践融合）</button>
-        <button class="filter-btn" data-category="乡村研学">现代乡村研学系列（创新与发展融合）</button>
-    </div>
-
-    <!-- 课程网格 -->
-    <div class="courses-grid" id="coursesGrid">
-        <!-- 课程卡片将通过JavaScript动态生成 -->
-    </div>
-
-
 </main>
 
 <!-- 页脚 -->
@@ -1264,705 +782,657 @@
 </footer>
 
 <script>
-    // 课程数据 - 添加视频路径
-    const courses = [
-        {
-            id: 1,
-            title: "节气里的农耕密码",
-            description: "跟着二十四节气下田劳作，春种育苗、夏耘灌溉、秋收脱粒、冬藏储粮，结合圭表测影理解节气数理逻辑，创编农谚手册。",
-            category: "农耕技术",
-            duration: "12课时",
-            level: "初级",
-            videoUrl: "./images/1.mp4", // 添加视频路径
-            students: 1250,
-            rating: 4.8,
-            chapters: [
-                { name: "秋收脱粒", duration: "2课时" },
-                { name: "夏耘灌溉", duration: "3课时" },
-                { name: "冬藏储粮", duration: "3课时" },
-                { name: "春种育苗", duration: "4课时" }
-            ],
-            progress: 30,
-            createdAt: "2023-01-15"
+    // 三级课程数据结构
+    const courseStructure = {
+        farming: {
+            title: "农耕文明研学系列（自然与劳动融合）",
+            level2: {
+                farming1: {
+                    title: "节气里的农耕密码",
+                    items: [
+                        {
+                            id: 1,
+                            title: "湖州·安吉</br>-《春醒安吉·茶竹知时》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "观察山地丘陵农业与节气的关联",
+                            description: "1.春分、清明：参与“白茶第一采”，了解“明前茶，贵如金”，学习采摘标准，体验茶青摊晾。</br>2.谷雨：学习“雨后春笋”的采收，参与制作笋干，理解节气与林下经济的关系。</br>3.芒种：梯田区体验“芒种芒种，连收带种”，收割油菜，感受时间的紧迫与劳动的节奏。",
+                            images: ["./images/a/1.jpg", "./images/a/2.jpg", "./images/a/3.jpg"]
+                        },
+                        {
+                            id: 2,
+                            title: "丽水·云和</br>-《云和梯田·四季农谚》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "梯田农业景观中，深度理解节气、水文与农耕的系统性",
+                            description: "1.清明、立夏：参与“开犁节”，学习梯田独特的自流灌溉系统，何时蓄水、插秧。</br>2.举办“梯田丰收节”，参与收割，并用传统“稻桶”打谷，对比现代机械的效率。</br>3.霜降：研究梯田为何“霜降不起葱，越长越要空”，探究微气候对作物的影响。",
+                            images: ["./images/a/4.webp", "./images/5.jpg", "./images/6.jpg"]
+                        },
+                        {
+                            id: 3,
+                            title: "嘉兴·桐乡</br>-《水乡节律·稻桑轮回》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "体验江南水乡独特的“稻桑共生”生态系统与节气循环",
+                            description: " 1.谷雨、立夏：参与“养春蚕”全过程，从喂桑叶到上簇结茧，理解“春蚕到死丝方尽”的生命周期和精神。</br> 2.小满：体验“小满动三车（丝车、油车、水车）”的民俗，动手操作缫丝车，体验无人机浇水。</br> 3.秋分：在杭嘉湖平原的万亩方田中，操作小型收割机，感受现代科技如何服务于大规模的粮食生产。",
+                            images: ["./images/7.jpg", "./images/8.jpg", "./images/9.jpg"]
+                        },
+                        {
+                            id: 4,
+                            title: "金华·武义</br>-《武义农法·古今对话》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "探究传统农耕智慧与现代有机农业在节气中的应用",
+                            description: "1.惊蛰：“惊蛰过，茶脱壳”。参与茶园松土、施肥，观察虫蚁苏醒，理解万物复苏的含义。</br>2.小暑、大暑：学习“稻田养鸭”的生态除虫法，测量水温气温对水稻生长的影响，制作绿豆汤等消暑食物。</br>3.寒露、霜降：了解“霜打菜”为何更甜，制作植物标本，记录物候变化。",
+                            images: ["./images/10.jpg", "./images/11.jpg"]
+                        }
+                    ]
+                },
+                farming2: {
+                    title: "传统农具进化史",
+                    items: [
+                        {
+                            id: 5,
+                            title: "杭州·阜阳</br>-《从“借力自然”到“自主驱动”的跨越》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "以富阳的古法造纸和智慧农业为对比，探究农具动力源从自然力到机械力的伟大变革。",
+                            description: "1.体验“借力”农具：操作水碓舂米，学习利用水能；使用龙骨水车车水，理解其链传动原理。</br>2，探寻“驱动”农具：从脚踏式脱粒机入手，了解人力如何通过齿轮、皮带转化为机械能。</br>3.感受“智能”农具：参观智慧农业园区，了解无人机如何通过编程实现自主飞行并辅助农业，体会从人力到算力的升华。",
+                            images: ["./images/12.jpg", "./images/13.jpg"]
+                        },
+                        {
+                            id: 6,
+                            title: "金华·永康</br>-《从“一块铁”到“一台机”的蜕变》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "以永康悠久的金属加工技艺为线索，探究农具从锻造到智造的材质与工艺演进。",
+                            description: "1.解构曲辕犁：铁匠铺，分析榫卯结构与钢铁刃口的结合，理解结构 </br>2.锻造体验：在工匠指导下，观看锤炼一件小铁器（如鱼钩），感受“百炼成钢”。</br>3.参观现代工厂：对比观看五金厂冲压、模具制造现代农具部件，感受工业化",
+                            images: ["./images/14.jpg", "./images/15.jpg", "./images/16.jpg"]
+                        },
+                        {
+                            id: 7,
+                            title: "绍兴·诸暨</br>-《从“剑”到“犁”的金属智慧》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "以诸暨深厚的古越冶炼文化为背景，探究金属技术的应用如何从兵器礼器扩展到农具，推动农业革命。",
+                            description: "1.“犁剑同源”探究：在文化馆对比越王剑与铁犁铧，分析其共同锻造、淬火工艺。</br>2.“铸铁农具”体验：亲手用砂模铸造一件小型铁制农具，区别“范铸法”与“锻打法”。</br>3.“珍珠工具”演进：作为“中国珍珠之都”，对比传统剖蚌刀与现代珍珠分选机，理解工具革新如何提升产业效率。",
+                            images: ["./images/17.jpg", "./images/18.jpg"]
+                        },
+                        {
+                            id: 8,
+                            title: "台州·仙居</br>-《从“竹木”到“机械”的材料与工艺演进》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "以仙居丰富的竹木资源和保留的非遗技艺为基础，探究在金属普及前，古人如何利用天然材料制作精巧农具。",
+                            description: "1.“竹编农具”制作：跟随非遗传承人，学习制作畚箕、谷箩等竹编农具，理解其取材便利、轻便坚固的优点。</br>2.“木制机巧”解析：拆解研究木制风车（清选谷物），分析其如何利用风力和重力实现“扇秕留实”。</br> 3.“非遗工具”体验：使用传统木质织布机，感受其复杂的提综蹑蹀机构，感受机械的雏形，体会非遗传承的文化魅力。",
+                            images: ["./images/19.jpg", "./images/20.jpg", "./images/21.jpg"]
+                        }
+                    ]
+                },
+                farming3: {
+                    title: "稻田里的生态智慧",
+                    items: [
+                        {
+                            id: 9,
+                            title: "丽水</br>-《稻鱼共生的秘密》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "探究全球农业遗产“稻鱼共生系统”，理解生态链中各生命相互依存的关系。",
+                            description: "1. 我是小鱼管家：下田喂养田鱼，观察它如何吃害虫、松泥土。</br>2.科学探究：绘制“稻-鱼-虫-水”的简单关系图",
+                            images: ["./images/22.jpg", "./images/23.jpg"]
+                        },
+                        {
+                            id: 10,
+                            title: "德清</br>-《稻与鸭的同盟》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "探索“稻鸭共作”这种生物防治模式如何取代化肥农药，打造健康、安全的农田环境。",
+                            description: "1.鸭司令上岗：认领一群小鸭，将其放入稻田，记录鸭子除草、捕虫、踩草的行为。</br>2.田野侦探社：设立观察区，对比稻鸭田与常规稻田的病虫害、杂草数量差异。</br>3.经济效益分析师：理解绿色农业的经济优势。",
+                            images: ["./images/24.jpg", "./images/25.jpg", "./images/26.jpg"]
+                        },
+                        {
+                            id: 11,
+                            title: "衢州</br>-《萤火虫的回归计划》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "探索“稻鸭共作”这种生物防治模式如何取代化肥农药，打造健康、安全的农田环境。",
+                            description: "1.暗夜观察员：在导师带领下，于无污染的稻田边进行夜间观测，了解并记录萤火虫的种群与数量。</br>2.栖息地建筑师：学习维护萤火虫栖息地的要点，清理溪流、种植蜜源植物，为萤火虫安家。</br>3.自然摄影师：用相机记录稻田夜间的生物，建立一份农田生物多样性档案。",
+                            images: ["./images/27.jpg", "./images/28.jpg"]
+                        },
+                        {
+                            id: 12,
+                            title: "嘉兴</br>-《桑基鱼塘的循环魔法》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "培养物质循环观念与动手创造素养，感悟“变废为宝”的可持续智慧。",
+                            description: "1. 体验工坊：亲手用蚕沙喂鱼，用塘泥肥桑，体验“废物”如何变成“宝贝”。</br>2. 创意设计：利用本地植物、沙子、水等，制作一个模拟桑基鱼塘原理的微型生态瓶。",
+                            images: ["./images/29.jpg", "./images/30.jpg", "./images/31.jpg"]
+                        }
+                    ]
+                }
+            }
         },
-        {
-            id: 2,
-            title: "传统农具进化史",
-            description: "拆解曲辕犁、龙骨水车等古农具的力学原理，用3D建模设计改良方案，体验古法榨油、竹编农具制作的非遗技艺。",
-            category: "农耕技术",
-            duration: "15课时",
-            level: "中级",
-            videoUrl: "./images/2.mp4",
-            students: 980,
-            rating: 4.7,
-            chapters: [
-                { name: "拆解曲辕犁", duration: "3课时" },
-                { name: "龙骨水车", duration: "4课时" },
-                { name: "3D建模", duration: "3课时" },
-                { name: "古农具", duration: "5课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-02-20"
+        culture: {
+            title: "乡土文化研学系列（人文与传承融合）",
+            level2: {
+                culture1: {
+                    title: "村落里的非遗奇遇",
+                    items: [
+                        {
+                            id: 13,
+                            title: "龙泉·青瓷</br>-《泥土与火焰的千年之约》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "亲历一件青瓷从泥土到美器的升华过程，感悟“匠人精神”对极致的追求。",
+                            description: "1.“瓷土密码”：在国家级工艺美术师指导下，学习拉坯技艺，感受泥土在指尖的塑形。</br>2.“天青色的秘密”：学习上釉，了解草木灰与紫金土如何在不同窑火中幻化成粉青、梅子青。</br>3.“青瓷新语”：设计一款融入现代生活美学的青瓷小件（如茶器、香插），完成从传统到现代的创意转换。",
+                            images: ["./images/32.jpg", "./images/33.jpg", "./images/34.jpg"]
+                        },
+                        {
+                            id: 14,
+                            title: "海宁·皮影戏</br>-《光影里的童话世界》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "探究光、影、画、声的融合艺术，体验集体创作的乐趣，成为非遗故事的新编导。",
+                            description: "1.“皮影魔法课堂”：在老艺人指导下，亲手雕刻、敷彩一个皮影人物。</br>2.“幕后配音师”：学习为皮影角色配音、配乐，体验声情并茂的表演。</br>3.“我们的新剧本”：小组合作，将现代童话或校园故事改编成皮影戏短剧，并进行汇报演出。",
+                            images: ["./images/35.jpg", "./images/36.jpg"]
+                        },
+                        {
+                            id: 15,
+                            title: "桐乡·蓝印花布（国家级非遗）</br>-《布里生花的蓝白魔法》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "学习从植物中提取色彩，通过刻版、刮浆、浸染等工艺，创造独具一格的蓝白之美。",
+                            description: "1.“采蓝制靛”：认识马蓝草，参与打靛过程，了解天然染料的制作。</br>2.“巧手印染”：亲手刻制版纹、刮浆防染，将自己的手帕或布袋放入染缸，等待“青出于蓝”的奇迹。</br>3.“时尚改造家”：用自己染制的蓝印花布，设计制作一个书皮、杯垫或时尚饰品。",
+                            images: ["./images/37.jpg", "./images/38.jpg", "./images/39.jpg"]
+                        },
+                        {
+                            id: 16,
+                            title: "绍兴·古桥建筑（地域文化标志）</br>-《古桥的“指纹”与“新生”》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "以古桥为载体，通过科学测绘与艺术拓印，解读石雕纹样中的文化密码，发展想象力。",
+                            description: "1.“桥上的石头记”：在八字桥、广宁桥等名桥，拓印桥栏、学习望柱上的精美纹样。</br>2.“古桥测绘师”：使用卷尺、量角器等工具，分组测量古桥的坡度、长度，绘制简易桥梁结构图。</br>3.“文创设计师”：将拓印的纹样进行数字化或艺术化再创作，设计成明信片、帆布袋等文创产品。",
+                            images: ["./images/40.jpg", "./images/41.jpg"]
+                        }
+                    ]
+                },
+                culture2: {
+                    title: "乡韵诗文创作营",
+                    items: [
+                        {
+                            id: 17,
+                            title: "杭州·余杭</br>-《茶山小诗人》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "在漫山茶园中，调动五感感受自然，学习用简单优美的语言描绘茶山的宁静与美丽。",
+                            description: "五感感受自然，学习用简单优美的语言描绘茶山的宁静与美丽。1.五感漫步：在径山茶园，闭上眼睛闻一闻茶香，摸一摸茶叶的触感，听一听山风与鸟鸣，记录感受，撰写随笔。</br>2.茶叶明信片：采摘茶叶，贴在卡片上制作成明信片，并写一首三行小诗。</br>3.茶田诗歌朗诵会：用最自然声音朗诵自己创作的小诗，录制音频作为纪念。",
+                            images: ["./images/42.jpg", "./images/43.jpg", "./images/44.jpg"]
+                        },
+                        {
+                            id: 18,
+                            title: "宁波·宁海</br>-《古镇水墨画》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "学习将眼前的小桥、流水、人家等江南景致，转化为简练的图画和诗句，捕捉水墨画般的意境。",
+                            description: "1.古镇线条写生：用铅笔简单勾勒古镇的马头墙、石花窗的轮廓。</br>2.“诗歌贴贴乐”：学生选择词语拼贴创作一首集体诗歌。</br>3.童谣创作：根据地名或特色，小组合作编一首有趣的童谣，并拍手唱出来。",
+                            images: ["./images/45.jpg", "./images/46.jpg"]
+                        },
+                        {
+                            id: 19,
+                            title: "湖州·南浔</br>-《中西合璧的建筑诗》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "观察江南水乡与西洋建筑的有趣结合，培养对比观察能力，创作关于“融合”与“对话”的诗歌。",
+                            description: "1.通过承重测试，对比传统木柱与西式石柱在材料特性上的差异，理解不同建筑风格背后的科学原理。</br>2.手持寻宝图：在张石铭旧宅开展建筑侦探活动，对比记录中式木雕与西式彩绘玻璃的文化特征。</br>3.文化小主播：起草《古镇保护小卫士公约》并录制倡议视频；担任小导游。",
+                            images: ["./images/47.jpg", "./images/48.jpg", "./images/49.jpg"]
+                        },
+                        {
+                            id: 20,
+                            title: "衢州·江山</br>-《方言密码破译员》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "在“方言飞地”廿八都，通过收集有趣的方言和童谣，感受语言的多样性，激发对语言的好奇心。",
+                            description: "1.方言问候大收集：勇敢地与当地店主、居民交流，学习并用录音记录3-5句不同的方言问候语。</br>2.学唱古老童谣：跟当地文化使者学唱一首廿八都的传统童谣，了解童谣里的故事。</br>3.创作“密码”诗歌：将学会的方言词或童谣里的意象作为“密码”，编入一首短诗中。",
+                            images: ["./images/50.jpg", "./images/51.jpg"]
+                        }
+                    ]
+                },
+                culture3: {
+                    title: "先贤精神寻访记",
+                    items: [
+                        {
+                            id: 21,
+                            title: "绍兴·鲁迅故里</br>-《从百草园到三味书屋》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "感悟鲁迅的批判精神与家国情怀，理解“横眉冷对千夫指，俯首甘为孺子牛”的责任担当",
+                            description: "1. 在三味书屋体验迟到的早字，制作自律书签</br>2. 在百草园寻找鲁迅笔下的动植物，绘制我的百草园</br>3. 创作新时代少年说短文，制定个人成长计划",
+                            images: ["./images/52.jpg", "./images/53.jpg", "./images/54.jpg"]
+                        },
+                        {
+                            id: 22,
+                            title: "宁波·王阳明故居</br>-《知行合一的成长密码》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "学习“知行合一”哲学思想，培养在实践中求真知的品格",
+                            description: "1. 在瑞云楼参与格竹体验，记录观察心得</br>2. 学习《教约》精髓，制定每日一善践行卡</br>3. 模拟天泉证道辩论会，探讨知与行的关系",
+                            images: ["./images/55.jpg", "./images/56.jpg"]
+                        },
+                        {
+                            id: 23,
+                            title: "金华·郑义门</br>-《江南第一家的家风密码》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "理解孝义传家的家风传承，培养孝亲敬长、团结互助的品格",
+                            description: "1. 寻访《郑氏规范》碑刻，摘抄经典家训</br>2. 参与“家族议事会”情景剧，学习公平处事</br>3. 制作“我的家风树”，制定家庭责任清单",
+                            images: ["./images/57.jpg", "./images/58.jpg", "./images/59.jpg"]
+                        },
+                        {
+                            id: 24,
+                            title: "温州·永嘉书院</br>-《永嘉学派的务实精神》",
+                            wheath: "春分、清明、谷雨、芒种",
+                            core: "领悟“经世致用”的务实理念，培养学以致用的实践能力",
+                            description: "1. 在楠溪江畔开展“义利之辨”主题讨论</br>2. 设计“我为家乡献一策”实践方案</br>3. 制作“知行记录本”，记录每周学以致用的事例",
+                            images: ["./images/60.jpg", "./images/61.jpg"]
+                        }
+                    ]
+                }
+            }
         },
-        {
-            id: 3,
-            title: "稻田里的生态智慧",
-            description: "探究稻鱼鸭共生系统，监测农田土壤与水质，亲手搭建微型生态农场，理解'天人合一'的农耕哲学。",
-            category: "农耕技术",
-            duration: "10课时",
-            level: "初级",
-            videoUrl: "./images/3.mp4",
-            students: 2100,
-            rating: 4.9,
-            chapters: [
-                { name: "探究稻鱼", duration: "2课时" },
-                { name: "监测农田", duration: "3课时" },
-                { name: "搭建微型生态农场", duration: "5课时" }
-            ],
-            progress: 70,
-            createdAt: "2023-03-10"
+        ecology: {
+            title: "生态科考研学系列（科学与实践融合）",
+            level2: {
+                ecology1: {
+                    title: "生态监测与保护",
+                    items: [
+                        {
+                            id: 25,
+                            title: "溪流生态侦探",
+                            description: "实地监测乡村溪流的水质、水生生物，分析植被与水土保持的关系，设计简易生态修复方案。",
+                            images: ["./images/62.jpg", "./images/63.jpg", "./images/64.jpg"]
+                        },
+                        {
+                            id: 26,
+                            title: "森林生态系统",
+                            description: "了解森林生态系统的结构和功能，学习森林资源调查和生态监测的基本方法。",
+                            images: ["./images/65.jpg", "./images/66.jpg"]
+                        },
+                        {
+                            id: 27,
+                            title: "湿地生态保护",
+                            description: "了解湿地生态系统的特点和功能，学习湿地资源调查和生态修复的基本技术。",
+                            images: ["./images/67.jpg", "./images/68.jpg", "./images/69.jpg"]
+                        },
+                        {
+                            id: 28,
+                            title: "生物多样性调查",
+                            description: "学习生物多样性调查的基本方法，了解物种识别和生态位分析的基本原理。",
+                            images: ["./images/70.jpg", "./images/71.jpg"]
+                        }
+                    ]
+                },
+                ecology2: {
+                    title: "植物识别与应用",
+                    items: [
+                        {
+                            id: 29,
+                            title: "山野植物密码",
+                            description: "辨识乡土药用植物、珍稀树种，制作植物标本与叶脉书签，探究草木灰等天然肥料的化学原理。",
+                            images: ["./images/72.jpg", "./images/73.jpg", "./images/74.jpg"]
+                        },
+                        {
+                            id: 30,
+                            title: "药用植物识别",
+                            description: "学习药用植物的识别特征和药用价值，了解传统草药的应用和现代药物开发。",
+                            images: ["./images/75.jpg", "./images/76.jpg"]
+                        },
+                        {
+                            id: 31,
+                            title: "食用植物采集",
+                            description: "学习食用植物的识别和采集方法，了解野生食用植物的营养价值和食用安全。",
+                            images: ["./images/77.jpg", "./images/78.jpg", "./images/79.jpg"]
+                        },
+                        {
+                            id: 32,
+                            title: "植物标本制作",
+                            description: "学习植物标本的制作和保存技术，了解植物分类学和植物资源调查的基本方法。",
+                            images: ["./images/80.jpg", "./images/81.jpg"]
+                        }
+                    ]
+                },
+                ecology3: {
+                    title: "气象与地理",
+                    items: [
+                        {
+                            id: 33,
+                            title: "乡村气象观察员",
+                            description: "搭建简易气象观测站，记录晴雨、温湿度与农事活动的关联，解读'朝霞不出门'等气象谚语的科学依据。",
+                            images: ["./images/82.jpg", "./images/83.jpg", "./images/84.jpg"]
+                        },
+                        {
+                            id: 34,
+                            title: "地形地貌考察",
+                            description: "了解地形地貌的形成和演变，学习地形测量和地质调查的基本方法。",
+                            images: ["./images/85.jpg", "./images/86.jpg"]
+                        },
+                        {
+                            id: 35,
+                            title: "土壤生态研究",
+                            description: "学习土壤生态系统的结构和功能，了解土壤理化性质分析和土壤改良的基本技术。",
+                            images: ["./images/87.jpg", "./images/88.jpg", "./images/89.jpg"]
+                        },
+                        {
+                            id: 36,
+                            title: "水文资源调查",
+                            description: "了解水文资源的分布和利用，学习水文监测和水资源评价的基本方法。",
+                            images: ["./images/90.jpg", "./images/91.jpg"]
+                        }
+                    ]
+                }
+            }
         },
-        {
-            id: 4,
-            title: "村落里的非遗奇遇",
-            description: "跟着乡土工匠学陶艺、皮影戏、草木染，拓印乡村古建瓦当，创编融入现代元素的民俗情景剧。",
-            category: "乡土文化",
-            duration: "8课时",
-            level: "初级",
-            videoUrl: "./images/4.mp4",
-            students: 850,
-            rating: 4.6,
-            chapters: [
-                { name: "陶艺", duration: "1课时" },
-                { name: "皮影戏", duration: "3课时" },
-                { name: "草木染", duration: "4课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-01-25"
-        },
-        {
-            id: 5,
-            title: "乡韵诗文创作营",
-            description: "漫步古村落解读《诗经》农耕篇章，收集民间故事与方言谚语，用文字、摄影记录乡村肌理，制作乡土诗集。",
-            category: "乡土文化",
-            duration: "12课时",
-            level: "初级",
-            videoUrl: "./images/6.mp4",
-            students: 720,
-            rating: 4.5,
-            chapters: [
-                { name: "解读《诗经》", duration: "2课时" },
-                { name: "收集民间故事", duration: "4课时" },
-                { name: "用文字记录乡村肌理", duration: "3课时" },
-                { name: "制作乡土诗集", duration: "3课时" }
-            ],
-            progress: 20,
-            createdAt: "2023-04-05"
-        },
-        {
-            id: 6,
-            title: "先贤精神寻访记",
-            description: "探访乡村名人故居、古书院，提炼'耕读传家'的精神内核，制作品质卡片并制定个人践行计划。",
-            category: "乡土文化",
-            duration: "10课时",
-            level: "中级",
-            videoUrl: "./images/5.mp4",
-            students: 630,
-            rating: 4.7,
-            chapters: [
-                { name: "探访乡村名人故居", duration: "2课时" },
-                { name: "探访古书院", duration: "3课时" },
-                { name: "提炼'耕读传家'精神内核", duration: "5课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-03-28"
-        },
-        {
-            id: 7,
-            title: "溪流生态侦探",
-            description: "实地监测乡村溪流的水质、水生生物，分析植被与水土保持的关系，设计简易生态修复方案。",
-            category: "生态科考",
-            duration: "14课时",
-            level: "中级",
-            videoUrl: "./images/8.mp4",
-            students: 1100,
-            rating: 4.8,
-            chapters: [
-                { name: "监测乡村溪流的水质", duration: "2课时" },
-                { name: "土壤准备与改良", duration: "3课时" },
-            ],
-            progress: 50,
-            createdAt: "2023-02-14"
-        },
-        {
-            id: 8,
-            title: "山野植物密码",
-            description: "辨识乡土药用植物、珍稀树种，制作植物标本与叶脉书签，探究草木灰等天然肥料的化学原理。",
-            category: "生态科考",
-            duration: "9课时",
-            level: "初级",
-            videoUrl: "./images/7.mp4",
-            students: 590,
-            rating: 4.4,
-            chapters: [
-                { name: "辨识乡土药用植物", duration: "2课时" },
-                { name: "制作植物标本", duration: "3课时" },
-            ],
-            progress: 0,
-            createdAt: "2023-05-12"
-        },
-        {
-            id: 9,
-            title: "乡村气象观察员",
-            description: "搭建简易气象观测站，记录晴雨、温湿度与农事活动的关联，解读'朝霞不出门'等气象谚语的科学依据。",
-            category: "生态科考",
-            duration: "11课时",
-            level: "高级",
-            videoUrl: "./videos/weather.mp4",
-            students: 480,
-            rating: 4.9,
-            chapters: [
-                { name: "搭建简易气象观测站", duration: "2课时" },
-                { name: "记录晴雨、温湿度与农事活动", duration: "4课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-04-20"
-        },
-        {
-            id: 10,
-            title: "智慧农业小创客",
-            description: "学习智能灌溉、无人机巡田等现代农业技术，用编程设计简易农田监测系统，对比传统农耕与科技农业的差异。",
-            category: "乡村研学",
-            duration: "13课时",
-            level: "高级",
-            videoUrl: "./videos/smart-farming.mp4",
-            students: 320,
-            rating: 4.6,
-            chapters: [
-                { name: "学习智能灌溉", duration: "2课时" },
-                { name: "学习无人机巡田", duration: "3课时" },
-                { name: "编程设计简易农田监测系统", duration: "4课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-05-30"
-        },
-        {
-            id: 11,
-            title: "乡村振兴调研行",
-            description: "走访乡村合作社、特色工坊，调研农产品产销链，分组设计乡村旅游推广方案或文创产品。",
-            category: "乡村研学",
-            duration: "13课时",
-            level: "高级",
-            videoUrl: "./videos/rural-revitalization.mp4",
-            students: 320,
-            rating: 4.6,
-            chapters: [
-                { name: "走访乡村合作社", duration: "2课时" },
-                { name: "走访特色工坊", duration: "3课时" },
-                { name: "调研农产品产销链", duration: "4课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-05-30"
-        },
-        {
-            id: 12,
-            title: "乡土美食文化课",
-            description: "了解杂粮、野菜等乡村食材的营养知识，跟着村民学做传统小吃，探究食物发酵、腌制的科学原理。",
-            category: "乡村研学",
-            duration: "13课时",
-            level: "高级",
-            videoUrl: "./videos/rural-food.mp4",
-            students: 320,
-            rating: 4.6,
-            chapters: [
-                { name: "了解杂粮、野菜等乡村食材的营养知识", duration: "2课时" },
-                { name: "做传统小吃", duration: "3课时" }
-            ],
-            progress: 0,
-            createdAt: "2023-05-30"
+        modern: {
+            title: "现代乡村研学系列（创新与发展融合）",
+            level2: {
+                modern1: {
+                    title: "智慧农业技术",
+                    items: [
+                        {
+                            id: 37,
+                            title: "智慧农业小创客",
+                            description: "学习智能灌溉、无人机巡田等现代农业技术，用编程设计简易农田监测系统，对比传统农耕与科技农业的差异。",
+                            images: ["./images/92.jpg", "./images/93.jpg", "./images/94.jpg"]
+                        },
+                        {
+                            id: 38,
+                            title: "农业物联网应用",
+                            description: "了解农业物联网的基本原理和应用，学习传感器技术和数据传输在农业中的应用。",
+                            images: ["./images/95.jpg", "./images/96.jpg"]
+                        },
+                        {
+                            id: 39,
+                            title: "精准农业技术",
+                            description: "学习精准农业的基本原理和技术，了解GPS、GIS和遥感技术在农业生产中的应用。",
+                            images: ["./images/97.jpg", "./images/98.jpg", "./images/99.jpg"]
+                        },
+                        {
+                            id: 40,
+                            title: "农业机器人技术",
+                            description: "了解农业机器人的发展现状和应用前景，学习机器人技术在农业生产中的实现方式。",
+                            images: ["./images/100.jpg", "./images/101.jpg"]
+                        }
+                    ]
+                },
+                modern2: {
+                    title: "乡村产业发展",
+                    items: [
+                        {
+                            id: 41,
+                            title: "乡村振兴调研行",
+                            description: "走访乡村合作社、特色工坊，调研农产品产销链，分组设计乡村旅游推广方案或文创产品。",
+                            images: ["./images/102.jpg", "./images/103.jpg", "./images/104.jpg"]
+                        },
+                        {
+                            id: 42,
+                            title: "农产品电商运营",
+                            description: "学习农产品电商的运营模式和技术，了解农产品品牌建设和网络营销的基本方法。",
+                            images: ["./images/105.jpg", "./images/106.jpg"]
+                        },
+                        {
+                            id: 43,
+                            title: "乡村旅游规划",
+                            description: "了解乡村旅游的发展模式和规划原则，学习乡村旅游产品设计和营销推广的基本方法。",
+                            images: ["./images/107.jpg", "./images/108.jpg", "./images/109.jpg"]
+                        },
+                        {
+                            id: 44,
+                            title: "乡村文创产品开发",
+                            description: "学习乡村文创产品的开发流程和设计方法，了解传统文化元素在现代产品设计中的应用。",
+                            images: ["./images/110.jpg", "./images/111.jpg"]
+                        }
+                    ]
+                },
+                modern3: {
+                    title: "乡村美食文化",
+                    items: [
+                        {
+                            id: 45,
+                            title: "乡土美食文化课",
+                            description: "了解杂粮、野菜等乡村食材的营养知识，跟着村民学做传统小吃，探究食物发酵、腌制的科学原理。",
+                            images: ["./images/112.jpg", "./images/113.jpg", "./images/114.jpg"]
+                        },
+                        {
+                            id: 46,
+                            title: "传统食品加工",
+                            description: "学习传统食品加工的技术和工艺，了解食品保藏和品质控制的基本原理。",
+                            images: ["./images/115.jpg", "./images/116.jpg"]
+                        },
+                        {
+                            id: 47,
+                            title: "乡村餐饮创业",
+                            description: "了解乡村餐饮创业的基本流程和经营模式，学习餐饮产品设计和营销推广的基本方法。",
+                            images: ["./images/117.jpg", "./images/118.jpg", "./images/119.jpg"]
+                        },
+                        {
+                            id: 48,
+                            title: "食品安全与营养",
+                            description: "学习食品安全和营养学的基本知识，了解食品质量控制和营养配餐的基本原则。",
+                            images: ["./images/120.jpg", "./images/121.jpg"]
+                        }
+                    ]
+                }
+            }
         }
-    ];
-
-    // 用户数据
-    let userData = JSON.parse(localStorage.getItem('userData')) || {
-        favorites: [],
-        progress: {},
-        recentlyViewed: []
     };
 
-    // 显示消息提示
-    function showMessage(text, duration = 3000) {
-        const messageEl = document.getElementById('message');
-        messageEl.textContent = text;
-        messageEl.classList.add('show');
+    // 当前选中的一级和二级菜单
+    let currentLevel1 = 'farming';
+    let currentLevel2 = Object.keys(courseStructure[currentLevel1].level2)[0];
 
-        setTimeout(() => {
-            messageEl.classList.remove('show');
-        }, duration);
-    }
+    // 渲染二级菜单
+    function renderLevel2Menu(level1Key) {
+        const level2Menu = document.getElementById('level2Menu');
+        level2Menu.innerHTML = '';
 
-    // 课程排序函数
-    function sortCourses(courses, sortBy) {
-        const sortedCourses = [...courses];
+        const level2Data = courseStructure[level1Key].level2;
 
-        switch(sortBy) {
-            case 'popular':
-                return sortedCourses.sort((a, b) => b.students - a.students);
-            case 'rating':
-                return sortedCourses.sort((a, b) => b.rating - a.rating);
-            case 'newest':
-                return sortedCourses.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            default:
-                return sortedCourses;
-        }
-    }
-
-    // 高级筛选函数
-    function applyAdvancedFilters(courses, filters) {
-        return courses.filter(course => {
-            // 难度筛选
-            if (filters.level !== 'all' && course.level !== filters.level) {
-                return false;
-            }
-
-            // 时长筛选
-            if (filters.duration !== 'all') {
-                const durationValue = parseInt(course.duration);
-                if (filters.duration === 'short' && durationValue > 5) return false;
-                if (filters.duration === 'medium' && (durationValue <= 5 || durationValue > 10)) return false;
-                if (filters.duration === 'long' && durationValue <= 10) return false;
-            }
-
-            // 进度筛选
-            if (filters.progress !== 'all') {
-                if (filters.progress === 'not-started' && course.progress > 0) return false;
-                if (filters.progress === 'in-progress' && (course.progress === 0 || course.progress === 100)) return false;
-                if (filters.progress === 'completed' && course.progress < 100) return false;
-            }
-
-            // 评分筛选
-            if (filters.rating !== 'all') {
-                const ratingThreshold = parseFloat(filters.rating);
-                if (course.rating < ratingThreshold) return false;
-            }
-
-            return true;
+        Object.keys(level2Data).forEach((key, index) => {
+            const level2Item = document.createElement('div');
+            level2Item.className = `level-2-item ${index === 0 ? 'active' : ''}`;
+            level2Item.setAttribute('data-level2', key);
+            level2Item.textContent = level2Data[key].title;
+            level2Menu.appendChild(level2Item);
         });
+
+        // 更新当前选中的二级菜单
+        currentLevel2 = Object.keys(level2Data)[0];
+
+        // 渲染三级内容
+        renderLevel3Items(level1Key, currentLevel2);
     }
 
-    // 动态生成课程卡片
-    function renderCourses(filterCategory = 'all', searchTerm = '', sortBy = 'popular', advancedFilters = {}) {
-        const coursesGrid = document.getElementById('coursesGrid');
-        coursesGrid.innerHTML = '';
+    // 渲染三级内容
+    function renderLevel3Items(level1Key, level2Key) {
+        const level3Items = document.getElementById('level3Items');
+        const level3Title = document.getElementById('level3Title');
 
-        let filteredCourses = filterCategory === 'all'
-            ? courses
-            : courses.filter(course => course.category === filterCategory);
+        level3Items.innerHTML = '';
 
-        // 搜索过滤
-        if (searchTerm) {
-            filteredCourses = filteredCourses.filter(course =>
-                course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                course.category.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-        }
+        const items = courseStructure[level1Key].level2[level2Key].items;
 
-        // 应用高级筛选
-        if (Object.keys(advancedFilters).length > 0) {
-            filteredCourses = applyAdvancedFilters(filteredCourses, advancedFilters);
-        }
+        // 更新标题和计数
+        level3Title.textContent = courseStructure[level1Key].level2[level2Key].title;
 
-        // 排序
-        filteredCourses = sortCourses(filteredCourses, sortBy);
 
-        if (filteredCourses.length === 0) {
-            coursesGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-light); font-size: 18px; padding: 40px;">暂无相关课程</p>';
+        if (items.length === 0) {
+            level3Items.innerHTML = '<div class="empty-state">暂无相关内容</div>';
             return;
         }
 
-        filteredCourses.forEach(course => {
-            const isFavorite = userData.favorites.includes(course.id);
-            const courseCard = document.createElement('div');
-            courseCard.className = 'course-card';
-            courseCard.innerHTML = `
-                    <div class="course-video-container">
-                        <video class="course-video" muted loop>
-                            <source src="${course.videoUrl}" type="video/mp4">
-                            您的浏览器不支持视频播放。
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="course-category">${course.category}</span>
-                        <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-course-id="${course.id}">
-                            ${isFavorite ? '❤️' : '🤍'}
-                        </button>
+        items.forEach(item => {
+            const level3Item = document.createElement('div');
+            level3Item.className = 'level-3-item';
+
+            // 生成图片轮播HTML
+            let imagesHTML = '';
+            item.images.forEach((image, index) => {
+                imagesHTML += `<img src="${image}" class="item-image" alt="${item.title}">`;
+            });
+
+            // 生成轮播点HTML
+            let dotsHTML = '';
+            item.images.forEach((_, index) => {
+                dotsHTML += `<span class="slider-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`;
+            });
+
+            level3Item.innerHTML = `
+                <div class="item-image-slider">
+                    <div class="item-images">
+                        ${imagesHTML}
                     </div>
-                    <div class="course-content">
-                        <h3 class="course-title">${course.title}</h3>
-                        <p class="course-description">${course.description}</p>
-                        <div class="course-meta">
-                            <div class="course-duration">
-                                <span>⏱️</span> ${course.duration}
-                            </div>
-                            <div class="course-level">
-                                <span>📊</span> ${course.level}
-                            </div>
-                        </div>
-                        <div class="course-meta">
-                            <div class="course-students">
-                                <span>👥</span> ${course.students}人学习
-                            </div>
-                            <div class="course-rating">
-                                <span>⭐</span> ${course.rating}
-                            </div>
-                        </div>
-                        ${course.progress > 0 ? `
-                            <div class="progress-bar">
-                                <div class="progress" style="width: ${course.progress}%"></div>
-                            </div>
-                            <div class="progress-text">已学习 ${course.progress}%</div>
-                        ` : ''}
-                        <button class="course-btn" data-course-id="${course.id}">${course.progress > 0 ? '继续学习' : '开始学习'}</button>
+                    <div class="slider-controls">
+                        ${dotsHTML}
                     </div>
-                `;
-            coursesGrid.appendChild(courseCard);
+                </div>
+
+                  <div class="item-content">
+        <h3 class="item-title">${item.title}</h3>
+
+        <div class="content-section section-wheath">
+            <h4 class="section-title">节气</h4>
+            <div class="section-content">
+                ${item.wheath}
+            </div>
+        </div>
+
+        <div class="content-section section-core">
+            <h4 class="section-title">体会</h4>
+            <div class="section-content">
+               ${item.core}
+            </div>
+        </div>
+
+        <div class="content-section section-description">
+            <h4 class="section-title">活动内容</h4>
+            <div class="section-content">
+                <div class="section-highlight">
+                    ${item.description}
+                </div>
+            </div>
+        </div>
+    </div>
+            `;
+
+            level3Items.appendChild(level3Item);
         });
 
-        // 为视频添加悬停播放效果
-        document.querySelectorAll('.course-video').forEach(video => {
-            video.addEventListener('mouseenter', function() {
-                this.play();
-            });
+        // 显示三级内容
+        level3Items.classList.add('active');
 
-            video.addEventListener('mouseleave', function() {
-                this.pause();
-                this.currentTime = 0;
-            });
-        });
-
-        // 为播放按钮添加点击事件
-        document.querySelectorAll('.play-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const video = this.closest('.course-video-container').querySelector('.course-video');
-                video.muted = false;
-                video.play();
-            });
-        });
-
-        // 为开始学习按钮添加事件监听
-        document.querySelectorAll('.course-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const courseId = this.getAttribute('data-course-id');
-                const course = courses.find(c => c.id == courseId);
-                showCourseModal(course);
-            });
-        });
-
-        // 为收藏按钮添加事件监听
-        document.querySelectorAll('.favorite-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const courseId = parseInt(this.getAttribute('data-course-id'));
-                toggleFavorite(courseId, this);
-            });
-        });
-
-        // 为课程卡片添加点击事件（打开详情）
-        document.querySelectorAll('.course-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const courseId = this.querySelector('.course-btn').getAttribute('data-course-id');
-                const course = courses.find(c => c.id == courseId);
-                showCourseModal(course);
-            });
-        });
+        // 初始化图片轮播
+        initImageSliders();
     }
 
-    // 显示课程详情模态框
-    function showCourseModal(course) {
-        const modal = document.getElementById('courseModal');
-        const modalTitle = document.getElementById('modalCourseTitle');
-        const modalCategory = document.getElementById('modalCourseCategory');
-        const modalLevel = document.getElementById('modalCourseLevel');
-        const modalDuration = document.getElementById('modalCourseDuration');
-        const modalStudents = document.getElementById('modalCourseStudents');
-        const modalDescription = document.getElementById('modalCourseDescription');
-        const modalVideoPlayer = document.getElementById('modalVideoPlayer');
-        const modalChapterList = document.getElementById('modalChapterList');
-        const modalProgressFill = document.getElementById('modalProgressFill');
-        const modalProgressText = document.getElementById('modalProgressText');
-        const startLearningBtn = document.getElementById('startLearningBtn');
-        const addToFavoritesBtn = document.getElementById('addToFavoritesBtn');
+    // 初始化图片轮播
+    function initImageSliders() {
+        const sliders = document.querySelectorAll('.item-image-slider');
 
-        // 填充模态框内容
-        modalTitle.textContent = course.title;
-        modalCategory.textContent = course.category;
-        modalLevel.textContent = course.level;
-        modalDuration.textContent = course.duration;
-        modalStudents.textContent = `${course.students}人`;
-        modalDescription.textContent = course.description;
+        sliders.forEach(slider => {
+            const images = slider.querySelector('.item-images');
+            const dots = slider.querySelectorAll('.slider-dot');
+            let currentIndex = 0;
 
-        // 设置视频源
-        modalVideoPlayer.src = course.videoUrl;
+            // 为每个轮播点添加点击事件
+            dots.forEach(dot => {
+                dot.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    currentIndex = index;
 
-        modalProgressFill.style.width = `${course.progress}%`;
-        modalProgressText.textContent = `学习进度: ${course.progress}%`;
+                    // 移动图片
+                    images.style.transform = `translateX(-${index * 33.333}%)`;
 
-        // 生成章节列表
-        modalChapterList.innerHTML = '';
-        course.chapters.forEach((chapter, index) => {
-            const chapterItem = document.createElement('li');
-            chapterItem.className = 'chapter-item';
-            chapterItem.innerHTML = `
-                    <span class="chapter-name">${index + 1}. ${chapter.name}</span>
-                    <span class="chapter-duration">${chapter.duration}</span>
-                `;
-            modalChapterList.appendChild(chapterItem);
+                    // 更新轮播点状态
+                    dots.forEach(d => d.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // 自动轮播
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % dots.length;
+
+                // 移动图片
+                images.style.transform = `translateX(-${currentIndex * 33.333}%)`;
+
+                // 更新轮播点状态
+                dots.forEach(d => d.classList.remove('active'));
+                dots[currentIndex].classList.add('active');
+            }, 4000);
         });
-
-        // 更新按钮状态
-        const isFavorite = userData.favorites.includes(course.id);
-        addToFavoritesBtn.innerHTML = isFavorite ? '已收藏' : '加入收藏';
-        addToFavoritesBtn.style.background = isFavorite ? '#ff4757' : '#f0f0f0';
-        addToFavoritesBtn.style.color = isFavorite ? 'white' : 'var(--text-dark)';
-
-        // 显示模态框
-        modal.classList.add('active');
-
-        // 添加课程到最近查看
-        addToRecentlyViewed(course.id);
-    }
-
-    // 切换收藏状态
-    function toggleFavorite(courseId, button) {
-        const index = userData.favorites.indexOf(courseId);
-        if (index > -1) {
-            userData.favorites.splice(index, 1);
-            button.innerHTML = '🤍';
-            button.classList.remove('active');
-            showMessage('已从收藏中移除');
-        } else {
-            userData.favorites.push(courseId);
-            button.innerHTML = '❤️';
-            button.classList.add('active');
-            showMessage('已添加到收藏');
-        }
-
-        // 保存到本地存储
-        localStorage.setItem('userData', JSON.stringify(userData));
-
-        // 如果模态框打开，更新模态框中的收藏按钮
-        const modal = document.getElementById('courseModal');
-        if (modal.classList.contains('active')) {
-            const addToFavoritesBtn = document.getElementById('addToFavoritesBtn');
-            const isFavorite = userData.favorites.includes(courseId);
-            addToFavoritesBtn.innerHTML = isFavorite ? '已收藏' : '加入收藏';
-            addToFavoritesBtn.style.background = isFavorite ? '#ff4757' : '#f0f0f0';
-            addToFavoritesBtn.style.color = isFavorite ? 'white' : 'var(--text-dark)';
-        }
-    }
-
-    // 添加到最近查看
-    function addToRecentlyViewed(courseId) {
-        const index = userData.recentlyViewed.indexOf(courseId);
-        if (index > -1) {
-            userData.recentlyViewed.splice(index, 1);
-        }
-        userData.recentlyViewed.unshift(courseId);
-
-        // 只保留最近5个
-        if (userData.recentlyViewed.length > 5) {
-            userData.recentlyViewed = userData.recentlyViewed.slice(0, 5);
-        }
-
-        localStorage.setItem('userData', JSON.stringify(userData));
-    }
-
-    // 特色课程轮播
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.featured-slide');
-    const dots = document.querySelectorAll('.slider-dot');
-
-    function showSlide(index) {
-        // 隐藏所有幻灯片
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-
-        // 显示当前幻灯片
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    // 自动轮播
-    function autoSlide() {
-        let nextSlide = (currentSlide + 1) % slides.length;
-        showSlide(nextSlide);
     }
 
     // 初始化页面
-    document.addEventListener('DOMContentLoaded', function() {
-        // 初始渲染全部课程
-        renderCourses();
+    document.addEventListener('DOMContentLoaded', function () {
+        // 初始渲染
+        renderLevel2Menu(currentLevel1);
 
-        // 为筛选按钮添加事件监听
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // 移除所有按钮的active类
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                // 为当前点击的按钮添加active类
+        // 一级菜单点击事件
+        document.querySelectorAll('.level-1-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const level1Key = this.getAttribute('data-level1');
+
+                // 更新当前选中的一级菜单
+                document.querySelectorAll('.level-1-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
-                // 根据data-category属性筛选课程
-                const category = this.getAttribute('data-category');
-                renderCourses(category);
+
+                currentLevel1 = level1Key;
+
+                // 渲染二级菜单
+                renderLevel2Menu(level1Key);
             });
         });
 
-        // 为排序按钮添加事件监听
-        document.querySelectorAll('.sort-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (this.classList.contains('toggle-advanced')) return;
+        // 二级菜单点击事件
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('level-2-item')) {
+                const level2Key = e.target.getAttribute('data-level2');
 
-                // 移除所有按钮的active类
-                document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-                // 为当前点击的按钮添加active类
-                this.classList.add('active');
-                // 根据data-sort属性排序课程
-                const sortBy = this.getAttribute('data-sort');
-                renderCourses('all', '', sortBy);
-            });
+                // 更新当前选中的二级菜单
+                document.querySelectorAll('.level-2-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                e.target.classList.add('active');
+
+                currentLevel2 = level2Key;
+
+                // 渲染三级内容
+                renderLevel3Items(currentLevel1, level2Key);
+            }
         });
 
-        // 搜索功能
-        const searchInput = document.getElementById('searchInput');
-        let searchTimeout;
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = this.value;
-                renderCourses('all', searchTerm);
-            }, 300);
-        });
+        // 特色课程轮播
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.featured-slide');
+        const dots = document.querySelectorAll('.featured-courses .slider-dot');
 
-        // 高级筛选切换
-        const toggleAdvanced = document.getElementById('toggleAdvanced');
-        const advancedPanel = document.getElementById('advancedFilterPanel');
-        toggleAdvanced.addEventListener('click', function() {
-            advancedPanel.classList.toggle('active');
-            this.innerHTML = advancedPanel.classList.contains('active') ? '高级筛选 ∧' : '高级筛选 ∨';
-        });
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
 
-        // 高级筛选变化监听
-        const advancedFilters = {
-            level: document.getElementById('levelFilter'),
-            duration: document.getElementById('durationFilter'),
-            progress: document.getElementById('progressFilter'),
-            rating: document.getElementById('ratingFilter')
-        };
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
 
-        Object.values(advancedFilters).forEach(select => {
-            select.addEventListener('change', function() {
-                const filters = {
-                    level: advancedFilters.level.value,
-                    duration: advancedFilters.duration.value,
-                    progress: advancedFilters.progress.value,
-                    rating: advancedFilters.rating.value
-                };
-                renderCourses('all', '', 'popular', filters);
-            });
-        });
-
-        // 为特色课程的立即学习按钮添加事件监听
-        document.querySelectorAll('.slide-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const slideTitle = this.closest('.slide-content').querySelector('.slide-title').textContent;
-                const course = courses.find(c => c.title === slideTitle);
-                if (course) {
-                    showCourseModal(course);
-                } else {
-                    showMessage('开始学习功能演示');
-                }
-            });
-        });
+        // 自动轮播
+        function autoSlide() {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        }
 
         // 为轮播点添加点击事件
         dots.forEach(dot => {
-            dot.addEventListener('click', function() {
+            dot.addEventListener('click', function () {
                 const index = parseInt(this.getAttribute('data-index'));
                 showSlide(index);
             });
         });
 
+        // 启动自动轮播
+        setInterval(autoSlide, 5000);
+
         // 用户菜单功能
         const userAvatar = document.getElementById('userAvatar');
         const userMenu = document.getElementById('userMenu');
-        userAvatar.addEventListener('click', function() {
+        userAvatar.addEventListener('click', function () {
             userMenu.classList.toggle('active');
         });
 
         // 点击其他地方关闭用户菜单
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!userAvatar.contains(e.target) && !userMenu.contains(e.target)) {
                 userMenu.classList.remove('active');
             }
         });
-
-        // 模态框关闭功能
-        const closeModal = document.getElementById('closeModal');
-        const courseModal = document.getElementById('courseModal');
-        closeModal.addEventListener('click', function() {
-            courseModal.classList.remove('active');
-        });
-
-        // 点击模态框外部关闭
-        courseModal.addEventListener('click', function(e) {
-            if (e.target === courseModal) {
-                courseModal.classList.remove('active');
-            }
-        });
-
-        // 开始学习按钮功能
-        const startLearningBtn = document.getElementById('startLearningBtn');
-        startLearningBtn.addEventListener('click', function() {
-            const startLearningText = document.getElementById('startLearningText');
-            const startLearningLoader = document.getElementById('startLearningLoader');
-
-            startLearningText.style.display = 'none';
-            startLearningLoader.style.display = 'inline-block';
-
-            setTimeout(() => {
-                startLearningText.style.display = 'inline';
-                startLearningLoader.style.display = 'none';
-                showMessage('课程加载成功，即将开始学习！');
-
-                // 模拟跳转到学习页面
-                setTimeout(() => {
-                    window.location.href = 'learning.html';
-                }, 1500);
-            }, 2000);
-        });
-
-        // 加入收藏按钮功能
-        const addToFavoritesBtn = document.getElementById('addToFavoritesBtn');
-        addToFavoritesBtn.addEventListener('click', function() {
-            const modalTitle = document.getElementById('modalCourseTitle').textContent;
-            const course = courses.find(c => c.title === modalTitle);
-            if (course) {
-                toggleFavorite(course.id, this);
-            }
-        });
-
-        // 启动自动轮播
-        setInterval(autoSlide, 5000);
-
-        // 显示欢迎消息
-        // setTimeout(() => {
-        //     showMessage('欢迎来到乡韵智学课程中心！发现乡村文化的无限魅力。');
-        // }, 1000);
     });
 </script>
 </body>
+
 </html>
