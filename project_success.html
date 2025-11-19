@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>预定成功 - 乡韵智学</title>
+  <style>
+    /* 使用与基地申报页面相同的样式变量和基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Microsoft YaHei', sans-serif;
+    }
+
+    :root {
+      --primary-color: #4a7c59;
+      --primary-dark: #3a6b49;
+      --primary-light: #c8e6c9;
+      --accent-color: #e6b450;
+      --text-dark: #2c3e2d;
+      --text-light: #6b8e6b;
+      --bg-light: #f9fffa;
+      --white: #ffffff;
+      --gray-light: #f5f5f5;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e6f2e6, #c8e6c9);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-icon {
+      margin-right: 10px;
+      font-size: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-links a.active {
+      color: var(--primary-color);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-actions a {
+      text-decoration: none;
+      color: var(--text-dark);
+      margin-left: 20px;
+      transition: color 0.3s;
+    }
+
+    .user-actions a:hover {
+      color: var(--primary-color);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-left: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .user-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s;
+    }
+
+    .user-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .user-menu a {
+      display: block;
+      padding: 12px 15px;
+      color: var(--text-dark);
+      text-decoration: none;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.2s;
+    }
+
+    .user-menu a:hover {
+      background: #f9f9f9;
+      color: var(--primary-color);
+    }
+
+    .user-menu a:last-child {
+      border-bottom: none;
+    }
+
+    /* 主内容区 */
+    .main-content {
+      margin-top: 80px;
+      padding: 40px 5%;
+    }
+
+    /* 页面标题 */
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .page-subtitle {
+      font-size: 18px;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* 页脚 */
+    .footer {
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 40px 5%;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* 成功页面样式 */
+    .success-section {
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .success-icon {
+      font-size: 80px;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+    }
+
+    .success-title {
+      font-size: 32px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .success-description {
+      font-size: 18px;
+      color: var(--text-light);
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .reference-number {
+      background: var(--primary-light);
+      padding: 15px 30px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 40px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(74, 124, 89, 0.3);
+    }
+
+    .secondary-button {
+      display: inline-block;
+      padding: 12px 30px;
+      background: var(--white);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .secondary-button:hover {
+      background: var(--primary-light);
+    }
+
+    /* 订单详情卡片 */
+    .order-details {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin: 0 auto 40px;
+      max-width: 800px;
+    }
+
+    .order-section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--primary-light);
+    }
+
+    .order-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .order-title {
+      font-size: 20px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .order-title::before {
+      content: "✓";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .order-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .info-item {
+      margin-bottom: 15px;
+    }
+
+    .info-label {
+      font-weight: bold;
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      color: var(--text-light);
+    }
+
+    .cost-summary {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .cost-title {
+      font-size: 18px;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .cost-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .cost-total {
+      border-top: 1px solid var(--primary-light);
+      padding-top: 10px;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* 页面切换 */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .nav-links {
+        margin: 20px 0;
+      }
+
+      .nav-links li {
+        margin: 0 10px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .order-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="navbar">
+  <div class="logo">
+    <span class="logo-icon"><img style="width: 50px;height: 50px" src="./images/27.png" alt=""></span>
+    乡韵智学
+  </div>
+  <ul class="nav-links">
+    <li><a href="./index.html">首页</a></li>
+    <li><a href="./courses.html">课程中心</a></li>
+    <li><a href="./vr.html">VR体验</a></li>
+    <li><a href="./ai.html">AI助手</a></li>
+    <li><a href="./base-application.html">基地申报</a></li>
+    <li><a href="./project-search.html">研学项目</a></li>
+  </ul>
+  <div class="user-actions">
+    <a href="profile.html">个人中心</a>
+    <div class="user-avatar" id="userAvatar">用</div>
+    <div class="user-menu" id="userMenu">
+      <a href="#">个人资料</a>
+      <a href="#">我的课程</a>
+      <a href="#">我的收藏</a>
+      <a href="#">设置</a>
+      <a href="#">退出登录</a>
+    </div>
+  </div>
+</nav>
+
+<!-- 主内容区 -->
+<main class="main-content">
+  <!-- 预定成功页面 -->
+  <div id="success-booking-page" class="page active">
+    <section class="success-section">
+      <div class="success-icon">✅</div>
+      <h1 class="success-title">预定成功！</h1>
+      <p class="success-description">您已成功预定研学项目，我们已向您的邮箱发送确认信息，请查收。</p>
+
+      <div class="reference-number">
+        订单编号：<span id="order-id">XY20230521001</span>
+      </div>
+
+      <!-- 订单详情 -->
+      <div class="order-details">
+        <div class="order-section">
+          <h2 class="order-title">项目信息</h2>
+          <div class="order-info">
+            <div class="info-item">
+              <div class="info-label">项目名称</div>
+              <div class="info-value" id="order-project">杭州现代农业研学之旅</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">行程天数</div>
+              <div class="info-value" id="order-duration">2天1晚</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-section">
+          <h2 class="order-title">出行信息</h2>
+          <div class="order-info">
+            <div class="info-item">
+              <div class="info-label">出行日期</div>
+              <div class="info-value" id="order-date">2023年10月15日</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">出行人数</div>
+              <div class="info-value" id="order-people">2位成人，1位儿童</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">包含服务</div>
+              <div class="info-value" id="order-services">午餐、保险、包车</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-section">
+          <h2 class="order-title">联系人信息</h2>
+          <div class="order-info">
+            <div class="info-item">
+              <div class="info-label">联系人</div>
+              <div class="info-value" id="order-contact">张小姐</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">联系电话</div>
+              <div class="info-value" id="order-phone">138****5678</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">电子邮箱</div>
+              <div class="info-value" id="order-email">zhang@example.com</div>
+            </div>
+          </div>
+        </div>
+
+      <p style="color: var(--text-light); margin-bottom: 40px; max-width: 600px; margin: 0 auto 40px;">
+        我们的工作人员将在24小时内与您联系确认行程细节。如有任何问题，请拨打客服热线：400-123-4567
+      </p>
+
+      <div class="action-buttons">
+        <a href="./project-search.html" class="cta-button">继续浏览项目</a>
+        <a href="./index.html" class="secondary-button">返回首页</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="logo" style="color: white; justify-content: center; margin-bottom: 20px;">
+      <span class="logo-icon"><img style="width: 50px;height: 50px" src="./images/27.png" alt=""></span>
+      乡韵智学
+    </div>
+    <div class="footer-links">
+      <a href="#">关于我们</a>
+      <a href="#">联系我们</a>
+      <a href="#">隐私政策</a>
+      <a href="#">用户协议</a>
+      <a href="#">帮助中心</a>
+    </div>
+    <p class="copyright">© 2025 乡韵智学 版权所有</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 用户菜单功能
+    const userAvatar = document.getElementById('userAvatar');
+    const userMenu = document.getElementById('userMenu');
+    userAvatar.addEventListener('click', function() {
+      userMenu.classList.toggle('active');
+    });
+
+    // 点击其他地方关闭用户菜单
+    document.addEventListener('click', function(e) {
+      if (!userAvatar.contains(e.target) && !userMenu.contains(e.target)) {
+        userMenu.classList.remove('active');
+      }
+    });
+
+    // 查看订单详情按钮点击事件
+    document.getElementById('view-order').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('订单详情功能开发中，请稍后访问');
+    });
+
+    // 从URL参数获取订单信息
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // 获取参数或使用默认值
+    const orderId = urlParams.get('orderId') || 'XY' + new Date().getFullYear() +
+            String(new Date().getMonth() + 1).padStart(2, '0') +
+            String(new Date().getDate()).padStart(2, '0') +
+            String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+
+    const projectName = urlParams.get('project') || '杭州现代农业研学之旅';
+    const location = urlParams.get('location') || '浙江杭州';
+    const theme = urlParams.get('theme') || '现代农业';
+    const duration = urlParams.get('duration') || '2天1晚';
+    const date = urlParams.get('date') || '2023年10月15日';
+    const adults = urlParams.get('adults') || '2';
+    const children = urlParams.get('children') || '1';
+    const services = urlParams.get('services') || '午餐、保险、包车';
+    const contact = urlParams.get('contact') || '张先生';
+    const phone = urlParams.get('phone') || '138****5678';
+    const email = urlParams.get('email') || 'zhang@example.com';
+    const totalCost = urlParams.get('total') || '1360';
+
+    // 设置订单信息
+    document.getElementById('order-id').textContent = orderId;
+    document.getElementById('order-project').textContent = projectName;
+    document.getElementById('order-location').textContent = location;
+    document.getElementById('order-theme').textContent = theme;
+    document.getElementById('order-duration').textContent = duration;
+    document.getElementById('order-date').textContent = formatDate(date);
+    document.getElementById('order-people').textContent = `${adults}位成人，${children}位儿童`;
+    document.getElementById('order-services').textContent = services;
+    document.getElementById('order-contact').textContent = contact;
+    document.getElementById('order-phone').textContent = phone;
+    document.getElementById('order-email').textContent = email;
+    document.getElementById('cost-total').textContent = `¥${totalCost}`;
+
+    // 计算各项费用（模拟）
+    const projectCost = Math.floor(totalCost * 0.7);
+    const lunchCost = Math.floor(totalCost * 0.11);
+    const insuranceCost = Math.floor(totalCost * 0.02);
+    const transportationCost = Math.floor(totalCost * 0.15);
+
+    document.getElementById('cost-project').textContent = `¥${projectCost}`;
+    document.getElementById('cost-lunch').textContent = `¥${lunchCost}`;
+    document.getElementById('cost-insurance').textContent = `¥${insuranceCost}`;
+    document.getElementById('cost-transportation').textContent = `¥${transportationCost}`;
+
+    // 辅助函数：格式化日期
+    function formatDate(dateString) {
+      // 如果是YYYY-MM-DD格式，则转换为中文格式
+      if (dateString.includes('-')) {
+        const [year, month, day] = dateString.split('-');
+        return `${year}年${parseInt(month)}月${parseInt(day)}日`;
+      }
+      return dateString;
+    }
+
+    // 保存订单信息到本地存储，以便在其他页面访问
+    const orderData = {
+      id: orderId,
+      project: projectName,
+      location: location,
+      theme: theme,
+      duration: duration,
+      date: date,
+      adults: adults,
+      children: children,
+      services: services,
+      contact: contact,
+      phone: phone,
+      email: email,
+      total: totalCost
+    };
+
+    localStorage.setItem('lastOrder', JSON.stringify(orderData));
+  });
+</script>
+</body>
+</html>
