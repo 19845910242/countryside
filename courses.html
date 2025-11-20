@@ -1379,6 +1379,8 @@
     }
 
     // 渲染三级内容
+  // ... existing code ...
+    // 渲染三级内容
     function renderLevel3Items(level1Key, level2Key) {
         const level3Items = document.getElementById('level3Items');
         const level3Title = document.getElementById('level3Title');
@@ -1400,10 +1402,11 @@
             const level3Item = document.createElement('div');
             level3Item.className = 'level-3-item';
 
-            // 生成图片轮播HTML
+            // 生成图片轮播HTML - 修改为懒加载方式
             let imagesHTML = '';
             item.images.forEach((image, index) => {
-                imagesHTML += `<img src="${image}" class="item-image" alt="${item.title}">`;
+                // 使用data-src存储实际图片地址，src使用占位图
+                imagesHTML += `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23f0f0f0'/%3E%3Ctext x='200' y='100' font-family='Arial' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3E加载中...%3C/text%3E%3C/svg%3E" data-src="${image}" class="item-image lazy-image" alt="${item.title}">`;
             });
 
             // 生成轮播点HTML
@@ -1456,10 +1459,53 @@
         // 显示三级内容
         level3Items.classList.add('active');
 
+        // 初始化图片懒加载
+        initImageLazyLoading();
+        
         // 初始化图片轮播
         initImageSliders();
     }
 
+    // ... existing code ...
+    
+    // 图片懒加载函数
+    function initImageLazyLoading() {
+        // 检查浏览器是否支持Intersection Observer
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        // 将data-src的值赋给src
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            // 移除data-src属性，避免重复加载
+                            img.removeAttribute('data-src');
+                            // 加载完成后取消观察
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '50px', // 提前50px开始加载
+                threshold: 0.01    // 只要有1%的部分可见就开始加载
+            });
+
+            // 观察所有带有lazy-image类的图片
+            document.querySelectorAll('.lazy-image').forEach(img => {
+                imageObserver.observe(img);
+            });
+        } else {
+            // 降级处理：不支持Intersection Observer的浏览器直接加载所有图片
+            document.querySelectorAll('.lazy-image').forEach(img => {
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+            });
+        }
+    }
+    
     // 初始化图片轮播
     function initImageSliders() {
         const sliders = document.querySelectorAll('.item-image-slider');
@@ -1497,7 +1543,7 @@
             }, 4000);
         });
     }
-
+// ... existing code ...
     // 初始化页面
     document.addEventListener('DOMContentLoaded', function () {
         // 初始渲染
