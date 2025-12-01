@@ -1,59 +1,182 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>乡韵智学</title>
+    <title>乡韵智学 - 科技版</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Microsoft YaHei', sans-serif;
+            font-family: 'Inter', 'Microsoft YaHei', sans-serif;
         }
 
         :root {
-            --primary-color: #4a7c59;
-            --primary-dark: #3a6b49;
-            --primary-light: #c8e6c9;
-            --accent-color: #e6b450;
-            --text-dark: #2c3e2d;
-            --text-light: #6b8e6b;
-            --bg-light: #f9fffa;
-            --white: #ffffff;
-            --gray-light: #f5f5f5;
-            --error-color: #ff4757;
-            --success-color: #2ed573;
+            --primary-color: #0a8c8c;
+            --primary-dark: #066;
+            --primary-light: #0db9b9;
+            --accent-color: #00f5ff;
+            --accent-glow: rgba(0, 245, 255, 0.5);
+            --text-dark: #e0e0e0;
+            --text-light: #a0a0a0;
+            --bg-dark: #0a0f1a;
+            --bg-darker: #050913;
+            --bg-card: rgba(15, 25, 40, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --error-color: #ff3e6d;
+            --success-color: #00e6a9;
+            --warning-color: #ffaa00;
         }
 
         body {
-            background: linear-gradient(135deg, #e6f2e6, #c8e6c9);
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background-image:
+                linear-gradient(rgba(10, 20, 40, 0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 20, 40, 0.8) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            box-shadow: 0 0 5px 2px var(--accent-glow);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
         }
 
         .chat-container {
             width: 100%;
-            max-width: 800px;
-            height: 600px;
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            height: 700px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(0, 245, 255, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .chat-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            z-index: -1;
         }
 
         .chat-header {
-            background: var(--primary-color);
-            color: var(--white);
+            background: rgba(10, 20, 40, 0.8);
+            color: var(--text-dark);
             padding: 20px;
             text-align: center;
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            animation: headerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .chat-messages {
@@ -62,349 +185,1184 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 3px;
         }
 
         .message {
-            max-width: 70%;
-            padding: 12px 16px;
+            max-width: 75%;
+            padding: 15px 20px;
             border-radius: 18px;
-            line-height: 1.4;
+            line-height: 1.5;
             word-wrap: break-word;
+            position: relative;
+            animation: messageAppear 0.3s ease-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .user-message {
             align-self: flex-end;
-            background: var(--primary-light);
-            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
             border-bottom-right-radius: 5px;
+            flex-direction: row-reverse;
         }
 
         .bot-message {
             align-self: flex-start;
-            background: var(--primary-color);
-            color: var(--white);
+            background: var(--glass-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--glass-border);
             border-bottom-left-radius: 5px;
         }
 
         .error-message {
             align-self: flex-start;
             background: var(--error-color);
-            color: var(--white);
+            color: white;
             border-bottom-left-radius: 5px;
         }
 
-        .chat-input {
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
             display: flex;
-            padding: 15px;
-            background: var(--gray-light);
-            border-top: 1px solid #ddd;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-avatar {
+            background: linear-gradient(135deg, #4a7c59, #3a6b49);
+        }
+
+        .bot-avatar {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 20px;
+            background: rgba(10, 20, 40, 0.5);
+            border-top: 1px solid var(--glass-border);
+            gap: 10px;
         }
 
         .input-field {
             flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             font-size: 16px;
+            color: var(--text-dark);
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .input-field:focus {
             border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(10, 140, 140, 0.3);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-light);
         }
 
         .send-button {
-            margin-left: 10px;
-            padding: 12px 25px;
-            background: var(--primary-color);
-            color: var(--white);
+            padding: 15px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .send-button:hover {
-            background: var(--primary-dark);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .send-button:active {
+            transform: translateY(0);
         }
 
         .send-button:disabled {
-            background: var(--text-light);
+            background: #555;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .send-button i {
+            font-size: 18px;
         }
 
         .typing-indicator {
             align-self: flex-start;
-            background: var(--gray-light);
+            background: var(--glass-bg);
             color: var(--text-light);
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 18px;
-            font-style: italic;
             display: none;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 15px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            animation: typingPulse 1.5s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingPulse {
+
+            0%,
+            60%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            30% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         .api-status {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 8px 12px;
-            border-radius: 15px;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .api-status.connected {
-            background: var(--success-color);
-            color: white;
+            background: rgba(0, 230, 169, 0.2);
+            color: var(--success-color);
+            border: 1px solid rgba(0, 230, 169, 0.3);
         }
 
         .api-status.disconnected {
+            background: rgba(255, 62, 109, 0.2);
+            color: var(--error-color);
+            border: 1px solid rgba(255, 62, 109, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .connected .status-dot {
+            background: var(--success-color);
+            box-shadow: 0 0 8px var(--success-color);
+        }
+
+        .disconnected .status-dot {
             background: var(--error-color);
+            box-shadow: 0 0 8px var(--error-color);
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--accent-color);
+            white-space: pre-wrap;
+            margin: 0;
+            animation: blink-caret 1s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--accent-color);
+            }
+        }
+
+        .animation-container {
+            position: fixed;
+            bottom: 20px;
+            right: 0px;
+            z-index: 1000;
+            width: 350px;
+            height: 150px;
+        }
+
+        .status-animation {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+            animation: pulse 2s infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #thinking-animation {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        }
+
+        #idle-animation {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+        }
+
+        .animation-icon {
+            font-size: 30px;
             color: white;
         }
 
-        @media (max-width: 600px) {
+        .info-panel {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: rgba(10, 20, 40, 0.5);
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 0 20px 15px;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
             .chat-container {
                 height: 100vh;
                 border-radius: 0;
+                max-width: 100%;
             }
 
             .message {
                 max-width: 85%;
             }
 
+            .chat-input-container {
+                padding: 15px;
+            }
+
             .api-status {
-                top: 5px;
-                right: 5px;
-                font-size: 10px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .animation-container {
+                width: 60px;
+                height: 60px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .animation-icon {
+                font-size: 24px;
+            }
+
+            .message-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
             }
         }
     </style>
 </head>
-<body>
-<div class="api-status connected" id="apiStatus">API已连接</div>
 
-<div class="chat-container">
-    <div class="chat-header">
-        🌿 AI助手 - 乡村文化问答（API版）
+<body>
+    <div class="grid-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="api-status connected" id="apiStatus">
+        <div class="status-dot"></div>
+        <span>知识库已加载</span>
     </div>
 
-    <div class="chat-messages" id="chatMessages">
-        <div class="message bot-message">
-            您好！我是乡村文化AI助手，现在通过API提供实时回答。我可以回答关于传统手工艺、农耕技术、民间艺术等方面的问题。请问有什么可以帮您的？
+    <div class="chat-container" style="position: relative;left: -200px;">
+        <div class="chat-header">
+            <div>乡韵智学 - 本地知识库问答系统</div>
+            <div style="font-size: 0.7rem; margin-top: 5px; opacity: 0.8;">基于本地JSON的智能问答</div>
+        </div>
+
+        <div class="info-panel">
+            <div class="info-item">
+                <span>会话ID:</span>
+                <span id="sessionId">RST-20251201-001</span>
+            </div>
+            <div class="info-item">
+                <span>响应时间:</span>
+                <span id="responseTime">0.0s</span>
+            </div>
+            <div class="info-item">
+                <span>知识库版本:</span>
+                <span id="knowledgeVersion">v2.5.1</span>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="action-btn" id="clearBtn">清空对话</button>
+            <button class="action-btn" id="exportBtn">导出记录</button>
+            <button class="action-btn" id="helpBtn">使用帮助</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar bot-avatar">
+                    <img src='images/bot-avatar.png' style='width: 40px; height: 40px; border-radius: 50%;' />
+                </div>
+                <div class="message-content">
+                    <div>您好！我是小智，现在基于本地知识库为您提供准确的乡村文化知识问答。我可以回答关于传统手工艺、农耕技术、民间艺术等方面的问题。</div>
+                    <div class="message-time" id="welcomeTime"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <input type="text" class="input-field" id="userInput" placeholder="请输入关于乡村文化、传统手工艺、农耕技术等方面的问题..."
+                autocomplete="off">
+            <button class="send-button" id="sendButton">
+                <i>➤</i> 发送
+            </button>
         </div>
     </div>
 
-    <div class="chat-input">
-        <input type="text" class="input-field" id="userInput" placeholder="请输入您的问题..." autocomplete="off">
-        <button class="send-button" id="sendButton">发送</button>
+    <!-- 右下角动图容器 -->
+    <div class="animation-container">
+        <!-- 回答问题时的动图1 -->
+        <div class="status-animation" id="thinking-animation">
+            <div class="animation-icon">
+                <img src="images/gif/a.gif" alt="思考中">
+            </div>
+        </div>
+
+        <!-- 空闲/回答完毕时的动图2 -->
+        <div class="status-animation" id="idle-animation">
+            <div class="animation-icon">
+                <img src="images/gif/b.gif" alt="待机中">
+            </div>
+        </div>
     </div>
-</div>
 
-<script>
-    // 获取DOM元素
-    const chatMessages = document.getElementById('chatMessages');
-    const userInput = document.getElementById('userInput');
-    const sendButton = document.getElementById('sendButton');
-    const apiStatus = document.getElementById('apiStatus');
 
-    // API配置
-    const API_CONFIG = {
-        // 模拟API端点 - 在实际应用中替换为真实的AI服务API
-        endpoint: 'https://jsonplaceholder.typicode.com/posts',
-        timeout: 10000, // 10秒超时
-        retryCount: 3
-    };
+    <script type="application/json" id="myData">
+{
+  "questions": [
+    {
+        "question": "什么是传统手工艺？",
+        "answer": "传统手工艺是指以手工劳动为主的工艺制作方式，它承载着丰富的历史文化信息和民族特色。传统手工艺包括陶瓷、编织、刺绣、雕刻等多种形式，是乡村文化的重要组成部分。"
+    },
+    {
+        "question": "竹编工艺有哪些特点？",
+        "answer": "竹编工艺是利用竹子进行编织制作各种生活用品和艺术品的传统技艺。其特点包括：1、材料天然环保；2、工艺精巧细腻；3、产品实用美观；4、具有浓厚的地域特色。竹编工艺在中国南方地区尤为发达。"
+    },
+    {
+        "question": "传统农耕技术有哪些？",
+        "answer": "传统农耕技术包括轮作制度、有机肥料使用、水土保持措施等。这些技术注重与自然和谐共处，强调可持续发展，是现代生态农业的重要基础。传统农耕智慧体现了古人对自然规律的深刻理解。"
+    },
+    {
+        "question": "什么是乡村美食？",
+        "answer": "乡村美食是指源于农村地区的传统食物和烹饪方法，注重食材的本味和季节性。常见乡村美食包括农家腊肉、手工豆腐、时令野菜等，这些美食体现了'就地取材、因时而食'的饮食智慧。"
+    },
+    {
+        "question": "如何保护非遗文化？",
+        "answer": "非遗文化保护需要多方共同努力：1、记录和数字化保存；2、传承人培养；3、社区参与；4、与现代生活结合创新。保护非遗文化不仅是保存技艺，更是传承文化记忆和民族精神。"
+    },
+    {
+        "question": "剪纸艺术有什么特点？",
+        "answer": "剪纸是中国传统民间艺术，特点包括：1、工具简单（剪刀、红纸）；2、题材广泛（吉祥图案、民间故事）；3、寓意深刻；4、地域特色鲜明。剪纸不仅是装饰，更是寄托美好愿望的载体。"
+    },
+    {
+        "question": "什么是生态农业？",
+        "answer": "生态农业是一种注重生态系统平衡的农业生产方式，它尽量减少化学物质使用，保护生物多样性，实现农业可持续发展。生态农业结合了传统农耕智慧和现代科技，是未来农业的重要方向。"
+    },
+    {
+        "question": "乡村建筑有哪些特色？",
+        "answer": "乡村建筑特色包括：1、因地制宜的建筑材料；2、与自然环境和谐的设计；3、功能性强的空间布局；4、体现地方文化的装饰元素。传统乡村建筑是适应特定地理气候条件的智慧结晶。"
+    },
+    {
+        "question": "传统节日在乡村文化中有什么意义？",
+        "answer": "传统节日是乡村文化的重要载体，具有多重意义：1、强化社区凝聚力；2、传承文化记忆；3、调节农业生产节奏；4、表达对自然的敬畏。节日活动往往与农事周期密切相关。"
+    },
+    {
+        "question": "如何学习传统手工艺？",
+        "answer": "学习传统手工艺的途径包括：1、寻找传承人指导；2、参加非遗培训班；3、参观工艺博物馆；4、实践操作体验。学习过程中要注重理解技艺背后的文化内涵，而不仅仅是技术模仿。"
+    },
+    {
+        "question": "浙江人教版小学三年级数学的除法易错点有哪些？",
+        "answer": "小学三年级数学除法的易错点包括：1、余数概念理解不清，如忘记写余数或余数大于除数；2、除法竖式计算时数位对齐错误；3、应用题中未能正确理解'平均分'的含义；4、被除数中间或末尾有0的除法计算容易出错。建议通过实物演示和练习强化理解。"
+    },
+    {
+        "question": "初中语文古诗文默写常见篇目（浙江中考范围）有哪些？",
+        "answer": "浙江中考常见的古诗文默写篇目包括《论语》十二章、陶渊明《饮酒》、李白《行路难》、杜甫《春望》、苏轼《水调歌头·明月几时有》、范仲淹《岳阳楼记》等。重点考查名句默写和理解性默写，需熟记原文和注释。"
+    },
+    {
+        "question": "小学科学“植物生长与环境”知识点如何结合浙江本地作物理解？",
+        "answer": "可结合浙江常见的茶树、水稻、竹子等作物学习植物生长：1、茶树喜酸性土壤，适合浙江丘陵地形；2、水稻生长需充足水分，与浙江气候相关；3、竹子的地下茎繁殖体现植物适应性。通过观察本地作物，理解阳光、水分、土壤对生长的影响。"
+    },
+    {
+        "question": "八年级物理“压强”知识点有哪些浙江乡村生活中的应用案例？",
+        "answer": "压强在浙江乡村的应用案例：1、农用拖拉机宽履带减小压强，防止下陷；2、水库堤坝底部更宽，抵抗水压；3、插秧时脚陷泥潭，因受力面积小压强大；4、山区房屋地基加厚，应对土壤压力。这些案例帮助理解压强与受力面积关系。"
+    },
+    {
+        "question": "浙江中小学英语作文常用句型（适合不同学段）能整理吗？",
+        "answer": "常用英语作文句型分学段：小学低年级用简单句如'I like...'、'I can see...'；小学高年级用复合句如'Although...'、'If...'；初中用高级句型如'It is important to...'、'Not only...but also...'。主题可结合乡村生活，如描述农田景色或农事活动。"
+    },
+    {
+        "question": "如何用浙江方言相关知识辅助理解小学语文汉字的起源？",
+        "answer": "浙江方言保留古音韵，如吴语中'解'（ga）与古代读音相近，帮助理解汉字形声字规律。通过方言词如'畲族'（shezu）了解少数民族文化，辅助记忆汉字结构。方言俗语还能揭示汉字本义，如'箩'与竹编农具关联。"
+    },
+    {
+        "question": "初中历史“浙江古代农业发展”相关考点有哪些？",
+        "answer": "考点包括：1、河姆渡遗址的水稻种植，证明长江流域农业起源；2、春秋时期越国水利工程（如鉴湖）；3、南宋时期浙江成为粮仓；4、明清时期棉纺、丝织业发展。常结合地图考查农业与地理环境关系。"
+    },
+    {
+        "question": "小学作文“家乡的农田”怎么立意才能结合智慧农业元素？",
+        "answer": "立意方向：1、对比传统农耕与无人机播种、智能灌溉的效率；2、描写传感器监测土壤湿度的科技场景；3、通过农民使用手机APP管理农田，体现科技改变生活；4、结尾升华到智慧农业保护生态的主题。"
+    },
+    {
+        "question": "浙教版初中科学“生态系统”知识点如何联系本地乡村生态？",
+        "answer": "可联系浙江乡村案例：1、稻田养鱼系统（鱼吃虫、鱼粪肥田）展示物质循环；2、竹林生态系统保持水土；3、桑基鱼塘模式体现能量流动。通过实地观察，理解生物链、生态平衡等概念。"
+    },
+    {
+        "question": "数学应用题“农业产量计算”有哪些适合小学生的解题思路？",
+        "answer": "解题思路：1、画图法，如用方格表示田地面积；2、分步计算，先求单产再求总产；3、结合单位换算（如亩与平方米）；4、设计情境题，如'一块水稻田收成500kg，每袋装10kg，需多少袋？'培养逻辑思维。"
+    },
+    {
+        "question": "浙江乡村常用的农业无人机能做哪些事情？",
+        "answer": "农业无人机在浙江乡村主要用于：1、喷洒农药，提高效率并减少人工接触农药；2、播种水稻，精准均匀；3、监测作物长势，通过多光谱相机识别病虫害；4、施肥作业，变量控制用量。无人机适合丘陵地带，解决地形限制。"
+    },
+    {
+        "question": "智慧灌溉系统是如何判断农作物需要浇水的？",
+        "answer": "智慧灌溉系统通过传感器判断：1、土壤湿度传感器检测实时水分数据；2、气象站结合天气预报调整灌溉计划；3、植物茎流传感器监测作物蒸腾作用；4、数据汇聚到云平台，AI算法决策灌溉时机和水量，实现精准节水。"
+    },
+    {
+        "question": "物联网设备在浙江稻田种植中起到什么作用？",
+        "answer": "物联网设备在稻田中作用包括：1、环境传感器采集温湿度、光照强度；2、水位传感器自动控制稻田水深；3、摄像头监控生长情况；4、数据无线传输至手机APP，农民远程管理。这些设备帮助提高稻米品质和产量。"
+    },
+    {
+        "question": "智能温室是怎么调节温度和光照来培育作物的？",
+        "answer": "智能温室通过自动化系统调节：1、温度由风扇、湿帘、加热器维持恒温；2、光照采用LED补光灯，模拟日出日落；3、传感器实时监测，数据反馈至控制系统；4、遮阳网自动开合防止强光。适合培育草莓、蔬菜等浙江高附加值作物。"
+    },
+    {
+        "question": "无人机在农业作业时会不会掉下来？它的飞行高度是多少？",
+        "answer": "农业无人机有安全机制：GPS定位、避障雷达、自动返航，意外掉落概率低。飞行高度通常距作物3-10米，喷洒作业时较低（3-5米），测绘时较高（10-20米）。浙江地形多山，飞手需培训，遵守空域规定。"
+    },
+    {
+        "question": "浙江的智慧农业基地里有哪些先进的机械设备？",
+        "answer": "常见设备包括：1、自动驾驶拖拉机，带北斗导航系统；2、果蔬采摘机器人，视觉识别成熟度；3、移动喷灌机，节水灌溉；4、谷物烘干塔，避免霉变。基地多位于湖州、嘉兴，提供研学参观。"
+    },
+    {
+        "question": "机械臂在果实采摘中是如何精准抓取的？",
+        "answer": "机械臂采摘步骤：1、摄像头获取果实图像，AI识别颜色、形状判断成熟度；2、激光雷达测距，定位果实三维坐标；3、机械臂路径规划，避开枝条；4、柔性夹爪轻柔抓取并剪断果柄。适用于柑橘、杨梅等浙江特产。"
+    },
+    {
+        "question": "智慧农业能帮助农民解决哪些实际问题？",
+        "answer": "智慧农业解决：1、劳动力短缺，自动化设备减少人力依赖；2、资源浪费，精准施肥灌溉降低成本；3、灾害预警，如霜冻、病虫害提前报警；4、销售难题，电商平台对接市场。提升浙江农业竞争力。"
+    },
+    {
+        "question": "浙江常见的智慧农业技术有哪些（比如水稻、茶叶种植相关）？",
+        "answer": "浙江特色智慧农业技术：1、水稻种植用无人机直播和遥感监测；2、茶园布置物联网监测温湿度，指导采茶时机；3、大棚茶园调光调温，改善品质；4、区块链溯源茶叶流通路径。这些技术提升安吉白茶、龙井茶等品牌价值。"
+    },
+    {
+        "question": "如何通过数据监测判断农作物的生长状况？",
+        "answer": "数据监测方法：1、无人机航拍多光谱图像，分析植被指数；2、土壤探头检测氮磷钾含量；3、气象站记录积温、降雨量；4、数据模型预测产量和病虫害风险。农民通过手机APP查看警报，及时决策。"
+    },
+    {
+        "question": "浙江有哪些适合中小学的乡村研学基地？",
+        "answer": "浙江优秀乡村研学基地包括：1、泰顺竹里畲族乡，体验农耕和畲族非遗；2、温州乡村博物馆群，如金温铁路文化展示馆、南山索面记忆馆；3、湖州荻港村非遗陈列馆，江南文化探源；4、莫干山民宿集群，结合自然教育。这些基地提供定制化课程。"
+    },
+    {
+        "question": "研学旅行中可以体验哪些智慧农业实践活动？",
+        "answer": "可体验活动：1、操作传感器记录土壤数据；2、模拟无人机飞行规划路线；3、参与智能温室的播种、采摘；4、数据分析作物生长报告。例如在泰顺竹里，学生可参与'畲族田园农耕'数字剧本游，结合低碳理念。"
+    },
+    {
+        "question": "小学低年级的乡村研学活动有哪些安全注意事项？",
+        "answer": "安全注意事项：1、每5-10名学生配一名带队老师；2、提前检查农田、工具无尖锐物；3、禁止单独靠近水域或机械；4、备好急救包和联系方式；5、活动前开展安全教育，如正确使用农具。重点防范跌倒、虫咬等风险。"
+    },
+    {
+        "question": "浙江的研学旅行精品线路（乡村主题）有哪些？",
+        "answer": "精品线路推荐：1、浙北线：湖州（江南丝路）—嘉兴（水乡农耕），重点非遗体验；2、浙南线：泰顺（畲族文化）—温州（乡村博物馆），突出生态智慧农业；3、杭州湾线：宁波（渔业）—绍兴（黄酒工艺），结合地理学习。线路覆盖122家乡村博物馆。"
+    },
+    {
+        "question": "研学过程中如何观察和记录农作物的生长情况？",
+        "answer": "观察记录方法：1、制定表格，记录植株高度、叶色变化；2、拍照对比不同生长期；3、绘制农田地图标注作物分布；4、使用简易仪器测pH值、湿度。例如在研学基地，学生可长期跟踪一块稻田，撰写生长日记。"
+    },
+    {
+        "question": "初中研学报告“智慧农业实践”该怎么撰写？",
+        "answer": "撰写要点：1、引言说明实践目的和基地背景；2、方法描述使用的设备（如传感器、无人机）；3、结果分析数据（如灌溉节水率）；4、讨论智慧农业的优劣；5、总结个人收获。可参考湖州研学案例，结合图表更清晰。"
+    },
+    {
+        "question": "研学基地里有哪些可以亲手操作的农业科技设备？",
+        "answer": "可操作设备包括：1、便携式土壤检测仪，现场分析成分；2、模拟无人机操控台，学习飞行原理；3、小型灌溉系统，编程控制水量；4、VR设备体验虚拟农田管理。如温州乡村博物馆设有'机车模拟闯关系统'，安全有趣。"
+    },
+    {
+        "question": "浙江乡村研学活动一般会安排哪些课程内容？",
+        "answer": "典型课程内容：1、农事体验（插秧、采茶）；2、非遗手作（竹编、索面制作）；3、生态调查（水质检测、生物多样性）；4、科技讲座（智慧农业应用）。课程按学段分级，小学侧重体验，初中加入数据分析。"
+    },
+    {
+        "question": "如何将研学体验转化为作文或手抄报素材？",
+        "answer": "转化技巧：1、作文聚焦一个场景，如'第一次操作无人机'，描写细节和感受；2、手抄报分板块：'科技见闻''农事感悟''数据图表'；3、加入照片、手绘地图；4、结尾反思科技与自然的关系。素材要真实、个性化。"
+    },
+    {
+        "question": "不同学段的研学活动难度有什么区别？",
+        "answer": "难度区分：小学低年级以感官体验为主，如观察昆虫；小学高年级增加简单测量和记录；初中需完成课题报告，用科学方法分析问题；高中可参与复杂项目，如设计灌溉系统。基地会根据年龄调整讲解深度和任务复杂度。"
+    },
+    {
+        "question": "浙江有哪些具有特色的乡村文化（比如传统农事习俗）？",
+        "answer": "浙江特色乡村文化：1、农事习俗如'开犁节''谢洋节'，感恩自然；2、畲族'三月三'歌会，展示民族风情；3、浙南廊桥文化，融合建筑智慧；4、嘉兴船谣、宁波渔民号子等民间艺术。这些文化体现人与自然和谐。"
+    },
+    {
+        "question": "如何参与浙江乡村的农事体验活动（比如采茶、插秧）？",
+        "answer": "参与途径：1、通过学校组织研学旅行，前往认证基地；2、家庭报名乡村旅游项目，如安吉采茶体验；3、关注乡村文化节，如'开秧门'活动开放公众参与；4、志愿者平台招募助农。活动需提前预约，遵守农时。"
+    },
+    {
+        "question": "浙江乡村的传统手工艺品有哪些制作方法？",
+        "answer": "传统手工艺制作方法：1、竹编：选竹、破篾、编织、整形；2、索面：和面、盘面、拉面、晒面；3、畲绣：设计纹样、挑花刺绣；4、陶瓷：拉坯、上釉、烧制。如泰顺竹里馆提供竹雕工艺研学课程，可亲手尝试。"
+    },
+    {
+        "question": "浙江的乡村美食（比如年糕、米酒）是如何制作的？",
+        "answer": "乡村美食制作：1、年糕：糯米浸泡、蒸煮、捶打、定型；2、米酒：糯米发酵、加酒曲、密封陈化；3、笋干：春笋焯水、晾晒；4、鱼鲞：海盐腌制、风干。如瑞安南山索面记忆馆展示索面全过程，并可品尝。"
+    },
+    {
+        "question": "乡村里的古建筑（如祠堂、古民居）有什么文化寓意？",
+        "answer": "古建筑文化寓意：1、祠堂代表宗族团结，装饰常含忠孝题材；2、民居马头墙防火，也象征'步步高升'；3、砖雕、木雕体现祈福主题（如蝙蝠喻福）；4、天井设计聚财聚气。如库村古村落建筑展现千年耕读文化。"
+    },
+    {
+        "question": "浙江各地的乡村有哪些独特的节日或民俗活动？",
+        "answer": "独特节日民俗：1、丽水'抢猪节'，比赛养猪技艺；2、衢州'走灯会'，元宵祈福；3、温州'拦街福'，社区狂欢；4、畲族'婚俗表演'，展示民族礼仪。活动多与农事相关，如春祈秋报。"
+    },
+    {
+        "question": "如何保护和传承浙江的乡村传统文化？",
+        "answer": "保护传承措施：1、建立乡村博物馆，如温州已建98家省级馆；2、培养非遗传承人，如畲族婚俗传承人雷圣利；3、学校开设乡土课程；4、数字化保存影像资料。关键要让年轻人参与，活化利用。"
+    },
+    {
+        "question": "乡村的田埂、河流等地形对农业种植有什么影响？",
+        "answer": "地形影响农业：1、田埂划分地块，防止水土流失；2、河流提供灌溉，但需防洪；3、丘陵地形适合梯田种植茶树；4、洼地宜修水库。浙江农民依地形发展'立体农业'，如山顶植树、山腰种茶、平地耕稻。"
+    },
+    {
+        "question": "浙江乡村的非物质文化遗产有哪些（与农业相关）？",
+        "answer": "农业相关非遗：1、安吉竹编工艺；2、绍兴黄酒酿制技艺；3、金华火腿制作；4、畲族民歌（含农事歌词）；5、永康锡雕（农具制作）。非遗项目多列入各级保护名录，可通过研学体验。"
+    },
+    {
+        "question": "可以通过哪些方式了解浙江乡村的发展历史？",
+        "answer": "了解途径：1、参观乡村博物馆，如湖州'江南文化探源'线路；2、查阅地方志和族谱；3、访谈老人记录口述史；4、考古遗址如河姆渡。温州乡村博物馆通过实物、场景重现展现千年变迁。"
+    },
+    {
+        "question": "如何设计一份“乡村智慧学习”主题的手抄报？",
+        "answer": "手抄报设计：1、标题醒目，如'乡韵智学'；2、分栏：'智慧农业科技''非遗传承''我的研学日记'；3、插入照片、数据图表；4、色彩采用自然色（绿、棕）。内容突出科技与传统的结合。"
+    },
+    {
+        "question": "适合小学生的农业科技小实验有哪些（可以在家操作）？",
+        "answer": "家庭小实验：1、豆芽生长实验（对比光照、水分的影响）；2、制作简易雨水收集器；3、用醋和小苏打模拟土壤酸碱度测试；4、纸杯电话模拟物联网信号传输。实验培养观察力和科学思维。"
+    },
+    {
+        "question": "初中“乡韵智学”主题的演讲比赛该怎么准备？",
+        "answer": "演讲准备：1、选题具体，如'无人机如何改变我爷爷的农田'；2、加入个人研学故事增强感染力；3、用数据对比传统与智慧农业效率；4、练习抑扬顿挫，配合手势。可参考浙江乡村真实案例。"
+    },
+    {
+        "question": "如何用简单的语言向同学介绍智慧农业知识？",
+        "answer": "通俗化介绍：1、比喻：'传感器像农田的听诊器'；2、举例：'手机APP一键浇水，像点外卖一样方便'；3、对比：'过去看天浇水，现在看数据浇水'；4、互动：提问'如果让你设计农场，会加什么科技？'"
+    },
+    {
+        "question": "有哪些关于浙江乡村或农业科技的书籍、纪录片推荐？",
+        "answer": "推荐资源：1、书籍：《浙江民俗大观》《智慧农业：浙江实践》；2、纪录片：《浙江山水间的智慧》《乡村里的中国》；3、网站：浙江省农业农村厅官网、乡村博物馆在线平台。资源适合中小学生观看。"
+    },
+    {
+        "question": "乡村里的动植物有哪些是浙江特有的？",
+        "answer": "浙江特有物种：1、动物：镇海棘螈（两栖类）、安吉小鲵；2、植物：天目铁木、百山祖冷杉。此外常见松鼠、白鹭、杜鹃花等，可制作乡土图鉴。保护特有物种是生态平衡关键。"
+    },
+    {
+        "question": "如何将智慧农业知识融入校园科技节活动？",
+        "answer": "科技节活动创意：1、设立'模拟农田'展台，演示自动灌溉；2、竞赛设计未来农具模型；3、VR体验无人机施肥；4、邀请农业专家讲座。活动强调动手，如编程控制小车巡田。"
+    },
+    {
+        "question": "小学高年级可以开展哪些“乡韵智学”主题的小组活动？",
+        "answer": "小组活动建议：1、调查校园植物，制作数字档案；2、设计节水灌溉方案并答辩；3、排练情景剧'传统农具vs智能机器人'；4、合作绘制社区农业地图。活动培养团队合作和探究能力。"
+    },
+    {
+        "question": "如何通过观察乡村环境了解生态保护的重要性？",
+        "answer": "观察方法：1、记录河流水质与生物多样性关系；2、对比使用农药和有机农田的昆虫数量；3、分析树林对水土保持的作用；4、访谈农民了解气候变迁影响。结论：健康生态是农业基础。"
+    },
+    {
+        "question": "有没有适合中小学的乡村志愿服务活动（比如助农相关）？",
+        "answer": "志愿服务活动：1、帮助采摘滞销果蔬，义卖助农；2、清理农田塑料垃圾；3、为老人讲解智能手机管理农田；4、参与乡村博物馆讲解。活动需在老师带领下，确保安全。"
+    },
+    {
+        "question": "浙江方言如何帮助理解古诗词的韵律？",
+        "answer": "浙江方言保留古音入声，如'白'（ba?）在方言中为短促音，与唐诗平仄规律相符。通过方言朗读《悯农》等农事诗，更能体会韵律之美。方言词如'畲'（she）也帮助理解少数民族题材古诗。"
+    },
+    {
+        "question": "智慧农业中常用的传感器有哪些类型？",
+        "answer": "常用传感器包括：1、土壤湿度传感器；2、温度湿度传感器；3、光照强度传感器；4、CO2浓度传感器。这些传感器实时收集数据，通过无线网络传输到平台，为精准农业提供决策依据。"
+    },
+    {
+        "question": "如何区分浙江不同地区的乡村建筑风格？",
+        "answer": "区分要点：1、浙北水乡多白墙黑瓦，临河而建；2、浙南山地多用木材、夯土，防潮防虫；3、浙东沿海石材丰富，墙基较高抗风；4、畲族村落有特有图腾装饰。建筑差异反映地理气候和民族文化。"
+    },
+    {
+        "question": "乡村研学中如何培养学生的团队合作精神？",
+        "answer": "培养方法：1、分组完成农田测量任务，分工记录数据；2、集体游戏如'接力插秧'模拟协作；3、小组讨论解决方案，如设计节水装置；4、互评研学报告。教师引导分享心得，强调集体成就。"
+    },
+    {
+        "question": "浙江的乡村传统节日有哪些与农业相关？",
+        "answer": "农业相关节日：1、立春'鞭春牛'，象征开耕；2、端午划龙舟，祈愿降雨；3、中秋祭月，庆祝丰收；4、畲族'三月三'，感恩自然馈赠。节日活动多包含农事仪式，如祭祀田神。"
+    },
+    {
+        "question": "如何利用废旧物品制作智慧农业模型？",
+        "answer": "制作创意：1、用塑料瓶做滴灌系统模型；2、纸板拼装小型温室，覆盖保鲜膜；3、乐高搭建无人机，模拟飞行；4、 Arduino板连接传感器，演示自动照明。模型制作深化对科技原理的理解。"
+    },
+    {
+        "question": "浙江乡村的饮用水源保护有哪些措施？",
+        "answer": "保护措施：1、水库周边禁止工业项目；2、湿地净化生活污水；3、推广有机农业减少面源污染；4、村民公约规范垃圾处理。学生研学时可参与水源地清理，学习生态重要性。"
+    },
+    {
+        "question": "乡村中的古树名木有什么文化价值？",
+        "answer": "古树价值：1、历史见证，如树龄对应朝代；2、社区精神象征，如'风水树'；3、生物多样性载体；4、民间传说素材。浙江多古樟树、银杏，保护古树是乡村文化传承一部分。"
+    },
+    {
+        "question": "如何记录乡村生活中的科学现象？",
+        "answer": "记录方法：1、自然笔记：绘制天气、动植物变化；2、拍摄延时视频，展示作物生长；3、数据日志：记录温度、降水规律；4、实验报告：对比不同土壤的肥力。工具可用笔记本、手机APP。"
+    },
+    {
+        "question": "乡村常见的鸟类有哪些生态作用？",
+        "answer": "鸟类生态作用：1、麻雀、燕子捕食害虫，减少农药使用；2、鸟类传粉促进作物结果；3、猛禽控制鼠害；4、其迁徙反映季节变化。观鸟活动可结合研学，制作本地鸟类图册。"
+    },
+    {
+        "question": "如何理解“绿水青山就是金山银山”在浙江乡村的实践？",
+        "answer": "实践案例：1、安吉余村关停矿山，发展乡村旅游；2、丽水梯田保留生态，产有机稻米；3、千岛湖保护水质，带动渔业；4、乡村博物馆推广生态研学。浙江证明环保与经济发展可共赢。"
+    }
+]
+}
+</script>
 
-    // 添加消息到聊天界面
-    function addMessage(text, isUser = false, isError = false) {
-        const messageDiv = document.createElement('div');
-        if (isError) {
-            messageDiv.className = 'message error-message';
-        } else {
-            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+
+    <script>
+        // 获取DOM元素
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        const apiStatus = document.getElementById('apiStatus');
+        const responseTime = document.getElementById('responseTime');
+        const welcomeTime = document.getElementById('welcomeTime');
+        const thinkingAnimation = document.getElementById('thinking-animation');
+        const idleAnimation = document.getElementById('idle-animation');
+        const clearBtn = document.getElementById('clearBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const helpBtn = document.getElementById('helpBtn');
+
+        // 设置欢迎消息时间
+        welcomeTime.textContent = new Date().toLocaleTimeString();
+
+        // 初始状态显示空闲动画
+        idleAnimation.style.display = 'flex';
+        thinkingAnimation.style.display = 'none';
+
+
+        const jsonString = document.getElementById('myData').textContent;
+        const knowledgeBase = JSON.parse(jsonString);
+        console.log(knowledgeBase); // 现在可以正常使用数据了
+        // 本地知识库（JSON格式）
+        // console.log(knowledgeBase.questions[0].question)
+        // const knowledgeBase = {
+        //     "questions": [
+        //         {
+        //             "question": "什么是传统手工艺？",
+        //             "answer": "传统手工艺是指以手工劳动为主的工艺制作方式，它承载着丰富的历史文化信息和民族特色。传统手工艺包括陶瓷、编织、刺绣、雕刻等多种形式，是乡村文化的重要组成部分。"
+        //         },
+        //         {
+        //             "question": "竹编工艺有哪些特点？",
+        //             "answer": "竹编工艺是利用竹子进行编织制作各种生活用品和艺术品的传统技艺。其特点包括：1) 材料天然环保；2) 工艺精巧细腻；3) 产品实用美观；4) 具有浓厚的地域特色。竹编工艺在中国南方地区尤为发达。"
+        //         },
+        //         {
+        //             "question": "传统农耕技术有哪些？",
+        //             "answer": "传统农耕技术包括轮作制度、有机肥料使用、水土保持措施等。这些技术注重与自然和谐共处，强调可持续发展，是现代生态农业的重要基础。传统农耕智慧体现了古人对自然规律的深刻理解。"
+        //         },
+        //         {
+        //             "question": "什么是乡村美食？",
+        //             "answer": "乡村美食是指源于农村地区的传统食物和烹饪方法，注重食材的本味和季节性。常见乡村美食包括农家腊肉、手工豆腐、时令野菜等，这些美食体现了'就地取材、因时而食'的饮食智慧。"
+        //         },
+        //         {
+        //             "question": "如何保护非遗文化？",
+        //             "answer": "非遗文化保护需要多方共同努力：1) 记录和数字化保存；2) 传承人培养；3) 社区参与；4) 与现代生活结合创新。保护非遗文化不仅是保存技艺，更是传承文化记忆和民族精神。"
+        //         },
+        //         {
+        //             "question": "剪纸艺术有什么特点？",
+        //             "answer": "剪纸是中国传统民间艺术，特点包括：1) 工具简单（剪刀、红纸）；2) 题材广泛（吉祥图案、民间故事）；3) 寓意深刻；4) 地域特色鲜明。剪纸不仅是装饰，更是寄托美好愿望的载体。"
+        //         },
+        //         {
+        //             "question": "什么是生态农业？",
+        //             "answer": "生态农业是一种注重生态系统平衡的农业生产方式，它尽量减少化学物质使用，保护生物多样性，实现农业可持续发展。生态农业结合了传统农耕智慧和现代科技，是未来农业的重要方向。"
+        //         },
+        //         {
+        //             "question": "乡村建筑有哪些特色？",
+        //             "answer": "乡村建筑特色包括：1) 因地制宜的建筑材料；2) 与自然环境和谐的设计；3) 功能性强的空间布局；4) 体现地方文化的装饰元素。传统乡村建筑是适应特定地理气候条件的智慧结晶。"
+        //         },
+        //         {
+        //             "question": "传统节日在乡村文化中有什么意义？",
+        //             "answer": "传统节日是乡村文化的重要载体，具有多重意义：1) 强化社区凝聚力；2) 传承文化记忆；3) 调节农业生产节奏；4) 表达对自然的敬畏。节日活动往往与农事周期密切相关。"
+        //         },
+        //         {
+        //             "question": "如何学习传统手工艺？",
+        //             "answer": "学习传统手工艺的途径包括：1) 寻找传承人指导；2) 参加非遗培训班；3) 参观工艺博物馆；4) 实践操作体验。学习过程中要注重理解技艺背后的文化内涵，而不仅仅是技术模仿。"
+        //         }
+        //     ]
+        // };
+
+        // 创建粒子背景
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // 随机位置和动画延迟
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+
+                particlesContainer.appendChild(particle);
+            }
         }
-        messageDiv.textContent = text;
-        chatMessages.appendChild(messageDiv);
 
-        // 滚动到底部
-        chatMessages.scrollTop = chatMessages.scrollTop + messageDiv.offsetHeight + 30;
-    }
-
-    // 显示输入中指示器
-    function showTypingIndicator() {
-        const indicator = document.createElement('div');
-        indicator.className = 'typing-indicator';
-        indicator.id = 'typingIndicator';
-        indicator.textContent = 'AI正在思考...';
-        chatMessages.appendChild(indicator);
-        indicator.style.display = 'block';
-
-        chatMessages.scrollTop = chatMessages.scrollTop + indicator.offsetHeight;
-    }
-
-    // 隐藏输入中指示器
-    function hideTypingIndicator() {
-        const indicator = document.getElementById('typingIndicator');
-        if (indicator) {
-            indicator.remove();
+        // 显示思考动画（回答问题状态）
+        function showThinkingAnimation() {
+            thinkingAnimation.style.display = 'flex';
+            idleAnimation.style.display = 'none';
         }
-    }
 
-    // 模拟AI API调用
-    async function callAIAPI(userMessage) {
-        try {
-            // 在实际应用中，这里应该调用真实的AI服务API
-            // 以下为模拟实现
+        // 显示空闲动画（空闲/回答完毕状态）
+        function showIdleAnimation() {
+            thinkingAnimation.style.display = 'none';
+            idleAnimation.style.display = 'flex';
+        }
 
-            // 模拟API延迟
-            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 1200));
+        // 添加消息到聊天界面
+        function addMessage(text, isUser = false, isError = false) {
+            const messageDiv = document.createElement('div');
+            const timeStamp = new Date().toLocaleTimeString();
 
-            // 模拟API响应
-            const mockResponses = [
-                "这是一个很好的问题！关于乡村文化，我可以告诉您...",
-                "根据我的知识库，这个问题的答案是...",
-                "乡村文化博大精深，您提到的内容让我想到...",
-                "这个问题很有深度，让我为您详细解释...",
-                "在乡村文化中，这个主题非常重要..."
-            ];
+            if (isError) {
+                messageDiv.className = 'message error-message';
+            } else {
+                messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            }
 
-            const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+            const avatarDiv = document.createElement('img');
+            avatarDiv.className = `message-avatar ${isUser ? 'user-avatar' : 'bot-avatar'}`;
+            avatarDiv.src = isUser ? 'images/user-avatar.png' : 'images/bot-avatar.png';
+            avatarDiv.alt = isUser ? '用户头像' : 'AI助手头像';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+
+            const textDiv = document.createElement('div');
+            textDiv.textContent = text;
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'message-time';
+            timeDiv.textContent = timeStamp;
+
+            contentDiv.appendChild(textDiv);
+            contentDiv.appendChild(timeDiv);
+
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+
+            chatMessages.appendChild(messageDiv);
+
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // 显示输入中指示器
+        function showTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.id = 'typingIndicator';
+            indicator.innerHTML = `
+                <div class="message-avatar bot-avatar">
+                    <img src='images/bot-avatar.png' style='width: 40px; height: 40px; border-radius: 50%;'/>
+                </div>
+                <div>AI正在思考</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(indicator);
+            indicator.style.display = 'flex';
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // 隐藏输入中指示器
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        // 打字机效果显示消息
+        function typewriterMessage(text, element, speed = 30) {
+            return new Promise((resolve) => {
+                let i = 0;
+                element.innerHTML = '';
+
+                function typeWriter() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, speed);
+                    } else {
+                        resolve();
+                    }
+                }
+
+                typeWriter();
+            });
+        }
+
+        // 从知识库中查找答案
+        function findAnswerInKnowledgeBase(userMessage) {
+            const startTime = Date.now();
+
+            // 将用户消息转换为小写以便比较
+            const lowerUserMessage = userMessage.toLowerCase();
+
+            // 在知识库中查找匹配的问题
+            for (const item of knowledgeBase.questions) {
+                // 检查用户问题是否包含知识库中的关键词
+                const lowerQuestion = item.question.toLowerCase();
+
+                // 简单的关键词匹配 - 可以进一步优化
+                if (lowerUserMessage.includes(lowerQuestion.replace('什么是', '').replace('有哪些', '').trim()) ||
+                    lowerQuestion.includes(lowerUserMessage) ||
+                    calculateSimilarity(lowerUserMessage, lowerQuestion) > 0.6) {
+
+                    // 计算响应时间
+                    const endTime = Date.now();
+                    responseTime.textContent = `${((endTime - startTime) / 1000).toFixed(1)}s`;
+
+                    return {
+                        success: true,
+                        data: {
+                            answer: item.answer,
+                            confidence: 0.9
+                        }
+                    };
+                }
+            }
+
+            // 如果没有找到匹配的问题，使用默认回复
+            const endTime = Date.now();
+            responseTime.textContent = `${((endTime - startTime) / 1000).toFixed(1)}s`;
 
             return {
                 success: true,
                 data: {
-                    answer: randomResponse + " " + generateDetailedResponse(userMessage),
-                    confidence: 0.85 + Math.random() * 0.14
+                    answer: getDefaultResponse(userMessage),
+                    confidence: 0.3
                 }
             };
-
-        } catch (error) {
-            return {
-                success: false,
-                error: 'API调用失败: ' + error.message
-            };
-        }
-    }
-
-    // 生成详细回答（模拟）
-    function generateDetailedResponse(userMessage) {
-        const lowerMessage = userMessage.toLowerCase();
-        let detailedContent = "";
-
-        if (lowerMessage.includes('手工艺') || lowerMessage.includes('手工')) {
-            detailedContent = "传统手工艺如竹编、剪纸等，不仅体现了民间智慧，更是文化传承的重要方式。学习这些技艺需要耐心和专注，每一件作品都承载着匠人的心血。";
-        } else if (lowerMessage.includes('农耕') || lowerMessage.includes('农业')) {
-            detailedContent = "生态农业强调可持续发展，传统农耕智慧与现代科技结合，可以实现高效环保的农业生产。轮作制度、有机肥料等都是重要的实践方法。";
-        } else if (lowerMessage.includes('美食') || lowerMessage.includes('食物')) {
-            detailedContent = "乡村美食注重食材的本味，传统制作方法如发酵、腌制等不仅延长了食物的保存时间，更创造了独特的风味体验。";
-        } else if (lowerMessage.includes('文化') || lowerMessage.includes('传统')) {
-            detailedContent = "乡村文化是中华民族的根基，包含了丰富的民俗、艺术和生活方式。保护和传承这些文化对于维护文化多样性至关重要。";
-        } else {
-            detailedContent = "乡村文化涵盖面很广，包括建筑、饮食、服饰、节日等多个方面。每个地区都有其独特的文化特色，值得深入探索。";
         }
 
-        return detailedContent;
-    }
+        // 计算两个字符串的相似度（简单实现）
+        function calculateSimilarity(str1, str2) {
+            const longer = str1.length > str2.length ? str1 : str2;
+            const shorter = str1.length > str2.length ? str2 : str1;
 
-    // 获取AI回复（通过API）
-    async function getAIResponse(userMessage) {
-        showTypingIndicator();
+            if (longer.length === 0) return 1.0;
 
-        try {
-            const apiResponse = await callAIAPI(userMessage);
-
-            if (apiResponse.success) {
-                updateAPIStatus(true);
-                return apiResponse.data.answer;
-            } else {
-                updateAPIStatus(false);
-                throw new Error(apiResponse.error);
-            }
-
-        } catch (error) {
-            updateAPIStatus(false);
-            throw error;
-        } finally {
-            hideTypingIndicator();
+            return (longer.length - editDistance(longer, shorter)) / parseFloat(longer.length);
         }
-    }
 
-    // 更新API状态显示
-    function updateAPIStatus(isConnected) {
-        if (isConnected) {
-            apiStatus.textContent = 'API已连接';
-            apiStatus.className = 'api-status connected';
-        } else {
-            apiStatus.textContent = 'API连接失败';
-            apiStatus.className = 'api-status disconnected';
-        }
-    }
+        // 计算编辑距离
+        function editDistance(s1, s2) {
+            s1 = s1.toLowerCase();
+            s2 = s2.toLowerCase();
 
-    // 处理用户发送消息
-    async function handleSendMessage() {
-        const message = userInput.value.trim();
-        if (!message) return;
-
-        // 添加用户消息
-        addMessage(message, true);
-        userInput.value = '';
-
-        // 禁用发送按钮
-        sendButton.disabled = true;
-
-        try {
-            // 通过API获取AI回复
-            const response = await getAIResponse(message);
-            addMessage(response);
-
-        } catch (error) {
-            // 显示错误信息
-            addMessage('抱歉，暂时无法获取回答。请检查网络连接或稍后重试。错误: ' + error.message, false, true);
-        } finally {
-            // 重新启用发送按钮
-            sendButton.disabled = false;
-        }
-    }
-
-    // 事件监听
-    sendButton.addEventListener('click', handleSendMessage);
-
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleSendMessage();
-        }
-    });
-
-    // 初始化焦点
-    userInput.focus();
-
-    // 测试API连接
-    async function testAPIConnection() {
-        try {
-            const response = await fetch(API_CONFIG.endpoint, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
+            const costs = [];
+            for (let i = 0; i <= s1.length; i++) {
+                let lastValue = i;
+                for (let j = 0; j <= s2.length; j++) {
+                    if (i === 0) {
+                        costs[j] = j;
+                    } else {
+                        if (j > 0) {
+                            let newValue = costs[j - 1];
+                            if (s1.charAt(i - 1) !== s2.charAt(j - 1)) {
+                                newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+                            }
+                            costs[j - 1] = lastValue;
+                            lastValue = newValue;
+                        }
+                    }
                 }
-            });
-
-            if (response.ok) {
-                updateAPIStatus(true);
-            } else {
-                updateAPIStatus(false);
+                if (i > 0) costs[s2.length] = lastValue;
             }
-        } catch (error) {
-            updateAPIStatus(false);
+            return costs[s2.length];
         }
-    }
 
-    // 页面加载时测试连接
-    window.addEventListener('load', testAPIConnection);
-</script>
+        // 获取默认回复（当知识库中没有匹配问题时）
+        function getDefaultResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+
+            if (lowerMessage.includes('手工艺') || lowerMessage.includes('手工')) {
+                return "传统手工艺是乡村文化的重要组成部分，包括竹编、剪纸、刺绣等多种形式。如果您有具体问题，可以尝试询问某种特定手工艺的特点或制作方法。";
+            } else if (lowerMessage.includes('农耕') || lowerMessage.includes('农业')) {
+                return "传统农耕技术体现了古人与自然和谐共处的智慧，如轮作制度、有机肥料使用等。您可以询问具体的农耕技术或生态农业相关知识。";
+            } else if (lowerMessage.includes('美食') || lowerMessage.includes('食物')) {
+                return "乡村美食注重食材的本味和季节性，体现了'就地取材、因时而食'的饮食智慧。您可以询问某种特定乡村美食的制作方法或文化意义。";
+            } else if (lowerMessage.includes('文化') || lowerMessage.includes('传统')) {
+                return "乡村文化包含丰富的民俗、艺术和生活方式，是中华民族的文化根基。您可以询问具体的文化形式或保护传承方法。";
+            } else {
+                return "您好！我是乡韵智学AI助手，专注于乡村文化知识问答。我可以回答关于传统手工艺、农耕技术、民间艺术、乡村美食等方面的问题。请提出您的具体问题，我会尽力为您解答。";
+            }
+        }
+
+        // 获取AI回复（从本地知识库）
+        async function getAIResponse(userMessage) {
+            showTypingIndicator();
+            showThinkingAnimation();
+
+            try {
+                // 模拟API调用延迟
+                await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+
+                const response = findAnswerInKnowledgeBase(userMessage);
+                return response.data.answer;
+            } catch (error) {
+                throw error;
+            } finally {
+                hideTypingIndicator();
+            }
+        }
+
+        // 更新API状态显示
+        function updateAPIStatus(isConnected) {
+            if (isConnected) {
+                apiStatus.textContent = '知识库已加载';
+                apiStatus.className = 'api-status connected';
+            } else {
+                apiStatus.textContent = '知识库加载失败';
+                apiStatus.className = 'api-status disconnected';
+            }
+        }
+
+        // 处理用户发送消息
+        async function handleSendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // 添加用户消息
+            addMessage(message, true);
+            userInput.value = '';
+
+            // 禁用发送按钮
+            sendButton.disabled = true;
+
+            try {
+                // 从知识库获取AI回复
+                const response = await getAIResponse(message);
+
+                // 创建消息元素
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message bot-message';
+
+                const avatarDiv = document.createElement('img');
+                avatarDiv.src = 'images/bot-avatar.png';
+                avatarDiv.className = 'message-avatar bot-avatar';
+                avatarDiv.alt = 'AI助手头像';
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'message-content';
+
+                const textDiv = document.createElement('div');
+                textDiv.className = 'typewriter';
+
+                const timeDiv = document.createElement('div');
+                timeDiv.className = 'message-time';
+                timeDiv.textContent = new Date().toLocaleTimeString();
+
+                contentDiv.appendChild(textDiv);
+                contentDiv.appendChild(timeDiv);
+
+                messageDiv.appendChild(avatarDiv);
+                messageDiv.appendChild(contentDiv);
+
+                chatMessages.appendChild(messageDiv);
+
+                // 使用打字机效果显示回复
+                await typewriterMessage(response, textDiv);
+
+                // 滚动到底部
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            } catch (error) {
+                // 显示错误信息
+                addMessage('抱歉，暂时无法获取回答。错误: ' + error.message, false, true);
+            } finally {
+                // 重新启用发送按钮
+                sendButton.disabled = false;
+                // 显示空闲动画
+                showIdleAnimation();
+            }
+        }
+
+        // 清空对话
+        clearBtn.addEventListener('click', () => {
+            chatMessages.innerHTML = `
+                <div class="message bot-message">
+                    <div class="message-avatar bot-avatar">
+                        <img src='images/bot-avatar.png' style='width: 40px; height: 40px; border-radius: 50%;'/>
+                    </div>
+                    <div class="message-content">
+                        <div>对话已清空。请问有什么可以帮您的？</div>
+                        <div class="message-time">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 导出记录（模拟）
+        exportBtn.addEventListener('click', () => {
+            alert('导出功能正在开发中，即将推出！');
+        });
+
+        // 使用帮助
+        helpBtn.addEventListener('click', () => {
+            addMessage('您好！我是乡韵智学AI助手，基于本地知识库提供乡村文化知识问答。您可以询问关于传统手工艺、农耕技术、民间艺术、乡村美食、非遗文化保护等方面的问题。知识库已加载完成，随时为您服务！', false);
+        });
+
+        // 事件监听
+        sendButton.addEventListener('click', handleSendMessage);
+
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+
+        // 初始化焦点
+        userInput.focus();
+
+        // 页面加载时初始化
+        window.addEventListener('load', () => {
+            createParticles();
+            updateAPIStatus(true);
+        });
+    </script>
 </body>
+
 </html>
