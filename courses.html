@@ -448,12 +448,17 @@
 
         .level-3-items {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            /* 将 auto-fill 改为 auto-fit */
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.4s ease;
+            /* 添加 max-width 限制最大宽度 */
+            max-width: 1400px; /* 可根据需要调整 */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .level-3-items.active {
@@ -776,7 +781,7 @@
     // 三级课程数据结构
     const courseStructure = {
         farming: {
-            title: "农耕文明研学系列（自然与劳动融合）",
+            title: "侗族文化——建筑与数字融合",
             level2: {
                 farming1: {
                     title: "主题一：侗族文化主题",
@@ -810,7 +815,7 @@
             }
         },
         culture: {
-            title: "乡土文化研学系列（人文与传承融合）",
+            title: "苗族民俗——技艺与设计融合",
             level2: {
                 culture1: {
                     title: "主题二：苗族民俗主题",
@@ -845,7 +850,7 @@
         },
 
         feiyi: {
-            title: "非遗传承研学系列（技艺与智慧融合）",
+            title: "生态探秘——自然与教育融合",
             level2: {
                 culture1: {
                     title: "主题三：生态探秘主题",
@@ -880,7 +885,7 @@
         },
 
         ecology: {
-            title: "生态科考研学系列（科学与实践融合）",
+            title: "红色记忆——历史与情境融合",
             level2: {
                 ecology1: {
                     title: "主题四：红色记忆主题",
@@ -923,7 +928,7 @@
             }
         },
         modern: {
-            title: "现代乡村研学系列（创新与发展融合）",
+            title: "农耕智慧——传统与现代融合",
             level2: {
                 modern1: {
                     title: "主题五：农耕智慧",
